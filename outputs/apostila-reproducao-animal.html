@@ -5024,37 +5024,56 @@ IATF com P4+E2 funciona em anestro profundo
 .pg-memo-text{font-size:calc(15px * var(--font-scale));font-family:monospace;line-height:1.9;color:var(--text-primary)}
 </style>
 
-<p class="pg-subtitle">O tempo de gestação está relacionado a fatores maternos, genéticos e ambientais</p>
-
-
-<!-- CARDS -->
-<div class="pg-esp-grid" id="pg-esp-grid"></div>
-<div class="pg-detalhe-panel empty" id="pg-detalhe">Clique em uma espécie para ver detalhes.</div>
-
-<!-- BARRA VISUAL -->
-<div class="pg-bar-wrap">
-  <div class="pg-bar-label">Duração comparada (dias)</div>
-  <div id="pg-bars"></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:20px 0">
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#1565c0;line-height:1">360</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Asinino</div>
+    <div style="font-size:11px;color:var(--text-muted)">~12 meses</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#1565c0;line-height:1">336</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Equino</div>
+    <div style="font-size:11px;color:var(--text-muted)">~11 meses</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#1565c0;line-height:1">300</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Bubalino</div>
+    <div style="font-size:11px;color:var(--text-muted)">~10 meses</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#1565c0;line-height:1">285</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Bovino zebuíno</div>
+    <div style="font-size:11px;color:var(--text-muted)">~9,5 meses</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#1565c0;line-height:1">280</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Bovino taurino</div>
+    <div style="font-size:11px;color:var(--text-muted)">~9 meses</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#1D9E75;line-height:1">150</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Ovino / Caprino</div>
+    <div style="font-size:11px;color:var(--text-muted)">~5 meses</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#BA7517;line-height:1">114</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Suíno</div>
+    <div style="font-size:11px;color:var(--text-muted)">3m · 3s · 3d</div>
+  </div>
+  <div style="border-radius:10px;border:1px solid var(--border-light);padding:16px;text-align:center;background:var(--bg-card)">
+    <div style="font-size:32px;font-weight:800;color:#D4537E;line-height:1">63</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px">dias</div>
+    <div style="font-size:14px;font-weight:600">Cão / Gato</div>
+    <div style="font-size:11px;color:var(--text-muted)">~9 semanas</div>
+  </div>
 </div>
-
-<!-- TABELA -->
-<table class="pg-gest-table">
-  <tr>
-    <th>Espécie / Raça</th>
-    <th>Dias</th>
-    <th>Equivalente</th>
-    <th>Observação</th>
-  </tr>
-  <tr><td><strong>Equino</strong></td><td><span class="pg-dias-num">336</span></td><td>~11 meses</td><td>Influenciado pela estação do ano, sexo do potro e genética; fêmeas carregam ligeiramente mais</td></tr>
-  <tr><td><strong>Asinino (jumento)</strong></td><td><span class="pg-dias-num">360</span></td><td>~12 meses</td><td>Gestação mais longa entre os equídeos domésticos</td></tr>
-  <tr><td><strong>Bubalino (búfala)</strong></td><td><span class="pg-dias-num">300</span></td><td>~10 meses</td><td>Ligeiramente mais longa que os bovinos taurinos</td></tr>
-  <tr><td><strong>Bovino zebuíno</strong></td><td><span class="pg-dias-num">285</span></td><td>~9,5 meses</td><td>Nelore e cruzados zebuínos têm gestação ligeiramente mais longa que taurinos</td></tr>
-  <tr><td><strong>Bovino taurino</strong></td><td><span class="pg-dias-num">280</span></td><td>~9 meses</td><td>Holandês, Angus, Simental; gestações de múltiplos fetos tendem a ser mais curtas</td></tr>
-  <tr><td><strong>Ovino</strong></td><td><span class="pg-dias-num">150</span></td><td>~5 meses</td><td>Variação 147-154 dias; gestações gemelares ligeiramente mais curtas</td></tr>
-  <tr><td><strong>Caprino</strong></td><td><span class="pg-dias-num">150</span></td><td>~5 meses</td><td>Variação 147-154 dias; similar ao ovino</td></tr>
-  <tr><td><strong>Suíno</strong></td><td><span class="pg-dias-num">114</span></td><td>3m · 3s · 3d</td><td>Mnemônico: 3 meses, 3 semanas e 3 dias; ninhadas grandes tendem a nascer mais cedo</td></tr>
-  <tr><td><strong>Cão / Gato</strong></td><td><span class="pg-dias-num">63</span></td><td>~9 semanas</td><td>Cão: 58-68 dias · Gato: 52-74 dias; contagem a partir da ovulação (não da cópula)</td></tr>
-</table>
 
 <div class="pg-info-box">
   <strong>Fatores que influenciam a duração da gestação:</strong> genética da raça, número de fetos (gestações múltiplas tendem a ser mais curtas), sexo do feto, estação do ano (equinos), nutrição materna, idade da fêmea e condição corporal.
