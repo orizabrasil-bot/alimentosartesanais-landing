@@ -3187,7 +3187,7 @@ Sem pico de LH no macho  - padrão tônico contínuo
 <div class="ne-panel" id="panel-ext">
 
   <div class="ne-tabs" style="margin-bottom:18px">
-    <button class="ne-tab active" onclick="setSubTab('foto', this)">Fotoperíodismo</button>
+    <button class="ne-tab active" onclick="setSubTab('foto', this)">Sazonalidade</button>
     <button class="ne-tab" onclick="setSubTab('efmacho', this)">Efeito Macho</button>
     <button class="ne-tab" onclick="setSubTab('anestro', this)">Anestro Lactacional</button>
   </div>
@@ -3231,8 +3231,31 @@ Sem pico de LH no macho  - padrão tônico contínuo
       <strong>Aplicações práticas:</strong> Implante de melatonina (ovinos/caprinos) → simula dias curtos → antecipa estação 6–8 semanas · aplicar 30–40 dias antes. Luz artificial (éguas) → 14,5–16 h/dia → antecipa ciclicidade 6–10 semanas.
     </div>
 
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0">
+      <div style="border-radius:var(--radius);border:1px solid var(--border);padding:12px;text-align:center;background:var(--bg2)">
+        <div style="font-size:20px;margin-bottom:4px">☀️</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Dias longos</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Égua, Gata<br>Melatonina baixa ativa<br>Primavera / verão</div>
+      </div>
+      <div style="border-radius:var(--radius);border:1px solid var(--border);padding:12px;text-align:center;background:var(--bg2)">
+        <div style="font-size:20px;margin-bottom:4px">🌙</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Dias curtos</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Ovelha, Cabra, Búfala<br>Melatonina alta ativa<br>Outono / inverno</div>
+      </div>
+      <div style="border-radius:var(--radius);border:1px solid var(--border);padding:12px;text-align:center;background:var(--bg2)">
+        <div style="font-size:20px;margin-bottom:4px">🔄</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Não estacionais</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Vaca, Porca<br>Fotoperíodo não determinante<br>Ciclam o ano todo</div>
+      </div>
+      <div style="border-radius:var(--radius);border:1px solid var(--border);padding:12px;text-align:center;background:var(--bg2)">
+        <div style="font-size:20px;margin-bottom:4px">🐕</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Monoéstrica</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Cadela<br>Independente do fotoperíodo<br>1-2 ciclos/ano</div>
+      </div>
+    </div>
+
     <div class="ne-prova-box">
-      <strong>Pontos de prova:</strong> Melatonina estimula ovinos/caprinos (dias curtos) mas NÃO ativa equinos  - confundir isso é erro clássico. Gata = poliéstrica estacional de dias longos (igual à égua). Cadela = monoéstrica não estacional. Os fotorreceptores envolvidos não são cones/bastonetes  - são células ganglionares com melanopsina.
+      <strong>Pontos de prova:</strong> Melatonina estimula ovinos/caprinos (dias curtos) mas NÃO ativa equinos - confundir isso é erro clássico. Gata = poliéstrica estacional de dias longos (igual à égua). Cadela = monoéstrica não estacional.
     </div>
 
   </div>
@@ -3455,7 +3478,6 @@ IATF com P4+E2 funciona em anestro profundo
   <button class="ce-tab" onclick="ceSetTab('espécies',this)">Particularidades</button>
   <button class="ce-tab" onclick="ceSetTab('folicular',this)">Dinâmica folicular</button>
   <button class="ce-tab" onclick="ceSetTab('fluxo',this)">Fluxogramas</button>
-  <button class="ce-tab" onclick="ceSetTab('estação',this)">Sazonalidade</button>
   <button class="ce-tab" onclick="ceSetTab('sinais',this)">Sinais de cio</button>
 </div>
 
@@ -3786,36 +3808,6 @@ IATF com P4+E2 funciona em anestro profundo
 </div>
 
 <!-- SAZONALIDADE -->
-<div class="ce-panel" id="ce-panel-estação">
-  <p class="ce-hint">A melatonina é o sinal neuroendócrino do fotoperíodo</p>
-  <div class="ce-estação-grid">
-    <div class="ce-est-card">
-      <div class="ce-est-icon">&#9728;</div>
-      <div class="ce-est-title">Dias longos</div>
-      <div class="ce-est-body">Égua, Gata<br>Melatonina baixa → ativa reprodução<br>Primavera / verão</div>
-    </div>
-    <div class="ce-est-card">
-      <div class="ce-est-icon">&#9684;</div>
-      <div class="ce-est-title">Dias curtos</div>
-      <div class="ce-est-body">Ovelha, Cabra, Búfala<br>Melatonina alta → ativa reprodução<br>Outono / inverno</div>
-    </div>
-    <div class="ce-est-card">
-      <div class="ce-est-icon">&#9711;</div>
-      <div class="ce-est-title">Contínuas</div>
-      <div class="ce-est-body">Vaca, Porca<br>Fotoperíodo não determinante<br>Ciclam o ano todo</div>
-    </div>
-  </div>
-  <div class="ce-memo" style="margin-top:16px">
-    <div class="ce-memo-label">Mecanismo da melatonina</div>
-    <div class="ce-memo-text">
-      Fotoperíodo curto <span class="ce-arr">→</span> noite longa <span class="ce-arr">→</span> melatonina ↑ (glândula pineal)<br>
-      Dias-curtos (ovinos, búfala): melatonina ↑ <span class="ce-arr">→</span> GnRH pulsátil ↑ <span class="ce-arr">→</span> ciclicidade<br>
-      Dias-longos (égua, gata): melatonina ↓ <span class="ce-arr">→</span> GnRH pulsátil ↑ <span class="ce-arr">→</span> ciclicidade<br>
-      Implantes de melatonina: antecipam estação reprodutiva em ovinos e búfalas
-    </div>
-  </div>
-</div>
-
 <!-- SINAIS DE CIO -->
 <div class="ce-panel" id="ce-panel-sinais">
   <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px">Os sinais de cio variam muito entre espécies. Reconhecer essas diferenças é essencial para o manejo reprodutivo e para evitar erros de detecção.</p>
