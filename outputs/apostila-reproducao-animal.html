@@ -14851,49 +14851,49 @@ window.infSetSp = function(sp, el){
 
 var INFO = {
   hpg: {
-    hipotalamo: 'GnRH = decapeptídeo liberado em <strong>pulsos</strong> na eminência mediana → circulação porta-hipofisária → hipófise anterior. Liberação contínua = downregulation dos receptores = supressão do eixo (base da deslorelina).',
-    hipofise: 'Pulsos rápidos (60-90 min, fase folicular) → favorecem <strong>LH</strong>. Pulsos lentos (3-4h, fase lútea) → favorecem <strong>FSH</strong>. No final do diestro, P4 cai → FSH sobe → recruta folículos para o próximo ciclo.',
-    gonadas: '<strong>Fêmea:</strong> FSH → granulosa (E2) · LH → teca (andrógenos). Pós-ovulação: LH → corpo lúteo (P4). <strong>Macho:</strong> LH → Leydig (T) · FSH → Sertoli (inibina B).',
-    fb_neg: 'Esteroides gonadais (E2, P4, T) → ↓ pulsatilidade de GnRH + ↓ resposta hipofisária. Funciona como termostato: impede superativação do eixo.',
-    fb_pos: 'E2 alto e sustentado → inverte o efeito → estimula grande pulso de GnRH → pico de LH → ovulação. <strong>Só existe na fêmea.</strong>'
+    hipotalamo: 'O hipotálamo produz GnRH e o libera em pulsos. A pulsatilidade é obrigatória: se o GnRH for liberado de forma contínua, os receptores da hipófise se dessensibilizam e o eixo é suprimido. Esse princípio é a base dos implantes de deslorelina.',
+    hipofise: 'A hipófise responde ao ritmo dos pulsos de GnRH. Pulsos rápidos (60-90 min, fase folicular) favorecem o LH. Pulsos lentos (3-4h, fase lútea) favorecem o FSH. Quando a P4 começa a cair no final do diestro, o FSH sobe e recruta folículos para o próximo ciclo.',
+    gonadas: 'Na fêmea, o FSH age na granulosa (produz E2) e o LH age na teca (produz andrógenos). Após a ovulação, o LH mantém o corpo lúteo e a produção de P4. No macho, o LH age nas células de Leydig (testosterona) e o FSH nas células de Sertoli (suporte à espermatogênese e inibina B).',
+    fb_neg: 'Os hormônios gonadais (E2, P4, testosterona) agem sobre o hipotálamo e a hipófise reduzindo a liberação de GnRH e gonadotrofinas. É o freio natural do eixo, que impede a produção excessiva de hormônios.',
+    fb_pos: 'Quando o E2 atinge nível alto e se mantém assim por tempo suficiente, o efeito se inverte: em vez de frear, estimula um grande pico de GnRH que provoca o pico de LH e desencadeia a ovulação. Esse mecanismo só existe na fêmea.'
   },
   fol: {
-    recrutamento: 'FSH↑ recruta folículos antrais pequenos (quiescentes → dependentes de FSH). Todos crescem juntos competindo pelo estímulo.',
-    selecao: 'O com mais receptores de FSH cresce mais rápido → produz E2 + inibina → suprime FSH → mata os concorrentes. Adquire receptores de LH na granulosa → <strong>dominante</strong> (independe do FSH).',
-    destino: 'Com pico de LH → <strong>ovula</strong>. Sem pico → <strong>atresia</strong> (nova onda começa). Se há CL ativo (P4↑), o eixo está freado → sem pico → dominante regride. Só ovula após regressão do CL.',
-    fb_pos: 'E2 alto e sustentado do dominante → feedback positivo → pico de LH. Inibina B suprime só FSH → LH livre para subir. Mecanismo exclusivo da fêmea.',
-    cascata: 'Pico de LH → (1) COX-2 → PGs → vasodilatação (2) MMPs → degradam parede → estigma rompe (3) fecha gap junctions → ↓AMPc → ativa MPF → retoma meiose → oócito em metáfase II.',
-    pos_ovul: 'Folículo roto → <strong>corpo lúteo</strong> → P4 (feedback negativo). Com gestação: CL mantido. Sem gestação: PGF2α → luteólise → P4 cai → novo ciclo.',
-    ondas: 'Vaca: 2-3 ondas · Égua: 1-2 ondas · Ovelha/cabra: 3-4 ondas · Cadela: onda única, múltiplos folículos · Porca: 10-25 ovulações simultâneas.'
+    recrutamento: 'O aumento do FSH recruta um grupo de folículos antrais pequenos que estavam quiescentes. Todos passam a depender do FSH e começam a crescer juntos, competindo pelo estímulo disponível.',
+    selecao: 'O folículo com mais receptores de FSH cresce mais rápido, produz mais E2 e inibina, e com isso suprime o FSH circulante, prejudicando os concorrentes. Ao adquirir receptores de LH na granulosa, torna-se dominante e independente do FSH. Os subordinados regridem por atresia.',
+    destino: 'O dominante precisa de um pico de LH para ovular. Se esse pico ocorre, o folículo rompe e libera o oócito. Se não ocorre, ele regride e uma nova onda começa. Quando há um corpo lúteo ativo produzindo P4, o eixo fica freado e o pico não acontece, por isso os dominantes das ondas intermediárias sempre regridem.',
+    fb_pos: 'O E2 alto e sustentado produzido pelo dominante inverte o efeito sobre o hipotálamo: em vez de frear, estimula e gera o pico de LH. A inibina B suprime o FSH sem afetar o LH, deixando-o livre para subir.',
+    cascata: 'O pico de LH dispara uma cascata dentro do folículo: COX-2 produz prostaglandinas que amolecem a parede, colagenases (MMPs) degradam o colágeno até a ruptura no estigma, e o oócito retoma a meiose (sai de prófase I e chega à metáfase II), sendo ovulado nesse estágio.',
+    pos_ovul: 'Após a ovulação, o folículo roto se transforma em corpo lúteo, que produz progesterona. A P4 freia o eixo e impede nova ovulação. Se houver gestação, o CL é mantido. Se não, o endométrio produz PGF2α, o CL regride e o eixo é liberado para um novo ciclo.',
+    ondas: 'O número de ondas por ciclo varia: vaca tem 2-3 ondas, égua 1-2, ovelha e cabra 3-4. Na cadela ocorre uma onda única com múltiplos folículos ovulando. Na porca, 10 a 25 folículos amadurecem e ovulam simultaneamente.'
   },
   ov: {
-    lh: 'O dominante só responde ao pico de LH se já adquiriu receptores de LH na granulosa (competência ovulatória). LH → AMPc → cascata ovulatória.',
-    pgs: 'LH induz COX-2 → PGE₂ e PGF₂α locais → vasodilatação + contração da parede folicular. <strong>AINEs podem bloquear ovulação</strong> (inibem COX-2).',
-    prot: 'LH ativa MMPs (colagenases) → degradam colágeno da parede folicular → estigma (ponto avascular) se rompe → oócito liberado.',
-    meiose: 'Oócito bloqueado em prófase I (AMPc alto via gap junctions). Pico de LH → fecha gap junctions → AMPc cai → MPF ativa → meiose I completa → metáfase II → ovulado. Meiose II só completa com fecundação.'
+    lh: 'O folículo dominante só responde ao pico de LH depois que adquire receptores de LH na granulosa. Sem esses receptores, mesmo com pico adequado, a ovulação não acontece.',
+    pgs: 'O LH induz COX-2, que produz prostaglandinas locais no folículo. Elas causam vasodilatação e contração da parede, preparando-a para a ruptura. AINEs próximos ao cio podem bloquear a ovulação por inibirem a COX-2.',
+    prot: 'O LH ativa colagenases (MMPs) que degradam o colágeno da parede folicular. O estigma, ponto mais fraco e avascular, vai adelgaçando até romper e liberar o oócito.',
+    meiose: 'O oócito estava bloqueado em prófase I desde a vida fetal, mantido pelo AMPc fornecido pelas células da granulosa via gap junctions. O pico de LH fecha essas conexões, o AMPc cai, a meiose I é retomada e o oócito chega à metáfase II. Só completa a meiose II com a fecundação.'
   },
   macho: {
-    lh: 'LH → Leydig (interstício) → testosterona. T é concentrada no testículo pelas Sertoli (20-100× plasma) - essencial para espermatogênese.',
-    fsh: 'FSH → Sertoli (dentro dos túbulos) → nutrição das células germinativas + inibina B + barreira hematotesticular.',
-    t_fb: 'T → ↓ pulsos de GnRH (hipotálamo) + ↓ resposta ao GnRH (hipófise). T → DHT (5α-redutase) + E2 (aromatase). E2 no macho também faz FB negativo.',
-    inib: 'Inibina B (Sertoli) → inibe FSH seletivamente (não afeta LH). <strong>Inibina B baixa = dano ao epitélio seminífero</strong> (marcador clínico).',
-    dht: 'T → DHT (5α-redutase): ação androgênica periférica (próstata, pelos). T → E2 (aromatase, Sertoli): FB negativo adicional no eixo HPG.'
+    lh: 'O LH age nas células de Leydig (interstício testicular) e estimula a produção de testosterona a partir do colesterol. A T é concentrada no testículo pelas Sertoli, atingindo níveis 20 a 100 vezes maiores que no plasma, essenciais para a espermatogênese.',
+    fsh: 'O FSH age nas células de Sertoli, que nutrem e protegem as células germinativas em desenvolvimento. As Sertoli também produzem inibina B e mantêm a barreira hematotesticular.',
+    t_fb: 'A testosterona faz feedback negativo em dois níveis: no hipotálamo reduz a frequência dos pulsos de GnRH, e na hipófise reduz a resposta ao GnRH. Parte da T é convertida em DHT (5α-redutase) e em E2 (aromatase), que também contribui para o feedback.',
+    inib: 'A inibina B é produzida pelas Sertoli e inibe seletivamente o FSH na hipófise, sem afetar o LH. Clinicamente, inibina B baixa indica comprometimento do epitélio seminífero.',
+    dht: 'A testosterona é convertida em DHT pela 5α-redutase nos tecidos-alvo (próstata, pelos, laringe). Também é aromatizada em E2 pelas Sertoli e tecidos periféricos, e esse E2 participa do feedback negativo no macho.'
   },
   foto: {
-    via: 'Retina (melanopsina, não cones/bastonetes) → NSQ → medula → gânglio cervical superior → pineal → <strong>melatonina só no escuro</strong>. Duração do pulso = comprimento da noite = sinal da estação.',
-    eixo: '<strong>Dias curtos</strong> (ovinos, caprinos): melatonina↑ ativa eixo. <strong>Dias longos</strong> (égua, gata): melatonina↓ ativa eixo. Bovinos/suínos: sem influência relevante.'
+    via: 'Células ganglionares da retina (com melanopsina, não cones/bastonetes) captam a luz e enviam a informação ao NSQ, o relógio biológico. O NSQ controla a pineal, que produz melatonina exclusivamente no escuro. A duração do pulso de melatonina codifica o comprimento da noite.',
+    eixo: 'Em ovinos e caprinos (dias curtos), melatonina alta ativa o eixo. Em éguas e gatas (dias longos), melatonina baixa ativa o eixo. Bovinos e suínos são pouco influenciados pelo fotoperíodo.'
   },
   efm: {
-    fero: 'Feromônios do macho → órgão vomeronasal → hipotálamo → ↑GnRH → pico de LH em 12-48h. Isolamento prévio ≥3 semanas maximiza o efeito.',
-    ov1: '1ª ovulação: <strong>silenciosa</strong> (sem estro). CL de vida curta (5-6 d). Sem priming de P4 → receptores de ocitocina ativos → PGF2α precoce → luteólise.',
-    ov2: '2ª ovulação (~17-24 d): transição. Algum priming de P4 do CL curto anterior. Estro pode ou não estar presente.',
-    ov3: '3ª ovulação: <strong>ciclo fértil</strong>. Priming de P4 suficiente → PGF2α no tempo certo → CL normal → estro evidente. Sincronização em ~18-21 d.'
+    fero: 'Os feromônios do macho são captados pelo órgão vomeronasal das fêmeas e estimulam o hipotálamo, aumentando a pulsatilidade do GnRH. Em 12 a 48 horas ocorre um pico de LH e a primeira ovulação. O isolamento prévio de pelo menos 3 semanas maximiza o efeito.',
+    ov1: 'A primeira ovulação é silenciosa, sem sinais de cio. O CL formado tem vida curta (5-6 dias) porque a fêmea não tinha P4 prévia, o que leva à produção precoce de PGF2α e luteólise antecipada.',
+    ov2: 'A segunda ovulação ocorre 17 a 24 dias depois. O CL curto anterior já forneceu algum priming de P4. O estro pode ou não estar presente, e o CL pode já ter duração normal.',
+    ov3: 'Na terceira ovulação o priming de P4 já é suficiente para o ciclo funcionar normalmente: estro evidente, CL funcional e PGF2α no tempo certo. O lote sincroniza em 18 a 21 dias.'
   },
   an: {
-    succao: 'Sucção → β-endorfina → ↓ pulsatilidade de GnRH → LH basal → sem ovulação. Sem sucção (desmame), o mecanismo cede em 4-10 dias.',
-    ben: 'BEN pós-parto: leptina↓ + IGF-I↓ → sinalizam "sem energia para gestar" → reforça supressão de GnRH. Pior em primíparas e ECC baixo.',
-    lh: 'FSH menos afetado → folículos crescem (8-12 mm) mas <strong>não ovulam</strong> (LH insuficiente). Ovário não está inativo, só anovulatório.',
-    manejo: 'Desmame precoce → retorno em 4-10 d. Separação 48-72h → ~60% retornam. Flushing (ECC ≥3). IATF com P4+E2 → funciona em anestro profundo.'
+    succao: 'A sucção estimula a liberação de β-endorfina no hipotálamo, que inibe a pulsatilidade do GnRH e mantém o LH em níveis basais. Sem sucção (desmame), o mecanismo cede em poucos dias.',
+    ben: 'O balanço energético negativo pós-parto amplifica o anestro. Com leptina e IGF-I baixos, o hipotálamo recebe o sinal de que não há reserva energética suficiente para uma nova gestação.',
+    lh: 'O FSH é menos afetado que o LH, então os folículos continuam crescendo (até 8-12 mm), mas não completam a maturação e não ovulam porque os pulsos de LH são insuficientes.',
+    manejo: 'Desmame precoce ou separação de 48-72h promovem retorno ao cio. Melhoria nutricional (ECC ≥3 ao parto) reduz a duração do anestro. IATF com P4+E2 funciona mesmo em anestro profundo.'
   }
 };
 
