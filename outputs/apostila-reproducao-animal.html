@@ -2840,6 +2840,11 @@ Bulbo da glande: travamento copulatório (cão)
     min-height: 52px; color: var(--text);
   }
   .ne-info-panel.empty { color: var(--text3); font-style: italic; }
+  .ne-detail-step > summary { padding: 0; }
+  .ne-detail-step > summary::-webkit-details-marker { display: none; }
+  .ne-detail-step > summary .ne-card { transition: border-color .15s, background .15s; }
+  .ne-detail-step > summary:hover .ne-card { border-color: var(--border2); background: var(--bg2); }
+  .ne-detail-step[open] > summary .ne-card { border-color: var(--border2); background: var(--bg2); }
 
   .ne-hl { background: var(--warn-bg); border-radius: 3px; padding: 1px 4px; font-weight: 600; }
 
@@ -3013,67 +3018,63 @@ Feedback positivo: E2 ALTO + SUSTENTADO → pico de LH → ovulação (só fême
   <h3>Do folículo à ovulação</h3>
   <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">O crescimento folicular ocorre em ondas. A cada onda, FSH recruta um grupo de folículos, um se torna dominante, e os demais regridem. O dominante só ovula se receber o pico de LH. Clique em cada etapa para ver detalhes.</p>
 
-  <p class="ne-hint">Clique em cada etapa para ver detalhes</p>
-  <div class="ne-flow">
+  <p class="ne-hint">Clique em cada etapa para expandir os detalhes</p>
 
-    <div class="ne-step" onclick="show('fol','recrutamento')">
-      <div class="ne-spine"><div class="ne-dot d-blue"></div><div class="ne-spine-line"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">1. Recrutamento - FSH recruta um grupo de folículos</div>
-        <div class="ne-card-sub">O FSH sobe e recruta vários folículos antrais pequenos. Todos começam a crescer juntos, dependentes do FSH.</div>
-      </div>
-    </div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-blue" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">1. Recrutamento - FSH recruta um grupo de folículos</div><div class="ne-card-sub">O FSH sobe e recruta vários folículos antrais pequenos. Todos começam a crescer juntos, dependentes do FSH.</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O FSH sobe e recruta um grupo de folículos antrais pequenos que estavam em estado quiescente. Esses folículos fazem a transição de crescimento independente de gonadotrofinas para crescimento dependente de FSH. Todos começam a crescer juntos, competindo pelo estímulo disponível.</div>
+  </details>
 
-    <div class="ne-step" onclick="show('fol','selecao')">
-      <div class="ne-spine"><div class="ne-dot d-teal"></div><div class="ne-spine-line"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">2. Seleção e dominância</div>
-        <div class="ne-card-sub">O folículo com mais receptores de FSH cresce mais rápido, produz mais E2 e inibina, suprime o FSH e elimina os concorrentes. Adquire receptores de LH e torna-se independente do FSH.</div>
-      </div>
-    </div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-teal" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">2. Seleção e dominância</div><div class="ne-card-sub">O folículo com mais receptores de FSH cresce mais rápido, produz mais E2 e inibina, suprime o FSH e elimina os concorrentes. Adquire receptores de LH e torna-se independente do FSH.</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O folículo com mais receptores de FSH cresce mais rápido, produz mais E2 e inibina, e suprime o FSH circulante - eliminando os concorrentes (atresia). Quando adquire receptores de LH na granulosa, torna-se dominante e independente do FSH. Os subordinados, sem receptores de LH e com FSH insuficiente, regridem.</div>
+  </details>
 
-    <div class="ne-step" onclick="show('fol','destino')">
-      <div class="ne-spine"><div class="ne-dot d-green"></div><div class="ne-spine-line"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">3. Destino - ovulação ou atresia</div>
-        <div class="ne-card-sub">O dominante precisa de um pico de LH para ovular. Se esse pico ocorre, ele rompe e libera o oócito. Se não ocorre, ele regride (atresia) e uma nova onda começa. Obs: se houver um CL ativo do ciclo anterior (P4 alta), o eixo fica freado e o pico não acontece.</div>
-      </div>
-    </div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-green" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">3. Destino - ovulação ou atresia</div><div class="ne-card-sub">O dominante precisa de um pico de LH para ovular. Se esse pico ocorre, ele rompe e libera o oócito. Se não ocorre, ele regride (atresia) e uma nova onda começa.</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O dominante precisa de um pico de LH para ovular. Se esse pico ocorre, ele rompe e libera o oócito. Se não ocorre, ele regride (atresia) e uma nova onda folicular começa. <strong>Obs:</strong> quando há um CL ativo do ciclo anterior produzindo P4, o eixo fica freado e o pico não acontece - por isso os dominantes das ondas intermediárias sempre regridem. Só o dominante da última onda (após a regressão do CL) consegue ovular.</div>
+  </details>
 
-    <div class="ne-step" onclick="show('fol','fb_pos')">
-      <div class="ne-spine"><div class="ne-dot d-coral"></div><div class="ne-spine-line"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">4. O que dispara o pico de LH</div>
-        <div class="ne-card-sub">O E2 produzido pelo dominante, quando atinge nível alto e sustentado, inverte o efeito sobre o hipotálamo: em vez de frear, estimula (feedback positivo) e gera o pico de LH. A inibina B suprime só o FSH, deixando o LH livre para subir.</div>
-      </div>
-    </div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-coral" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">4. O que dispara o pico de LH</div><div class="ne-card-sub">O E2 produzido pelo dominante, quando atinge nível alto e sustentado, inverte o efeito sobre o hipotálamo: em vez de frear, estimula (feedback positivo) e gera o pico de LH.</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O E2 produzido pelo dominante, quando atinge nível alto e sustentado, inverte seu efeito sobre o hipotálamo: em vez de frear (feedback negativo), ele estimula (feedback positivo) e gera o pico de LH. Ao mesmo tempo, a inibina B suprime seletivamente o FSH na hipófise sem afetar o LH, deixando-o livre para subir. Esse mecanismo só existe na fêmea.</div>
+  </details>
 
-    <div class="ne-step" onclick="show('fol','cascata')">
-      <div class="ne-spine"><div class="ne-dot d-amber"></div><div class="ne-spine-line"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">5. Cascata da ovulação</div>
-        <div class="ne-card-sub">Pico de LH → COX-2 → prostaglandinas (vasodilatação) → colagenases/MMPs degradam a parede → estigma rompe → oócito liberado. O LH também retoma a meiose do oócito (prófase I → metáfase II).</div>
-      </div>
-    </div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-amber" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">5. Cascata da ovulação</div><div class="ne-card-sub">Pico de LH → COX-2 → prostaglandinas → colagenases/MMPs → estigma rompe → oócito liberado. O LH também retoma a meiose do oócito.</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O pico de LH se liga aos receptores na granulosa do dominante e dispara uma cascata: (1) COX-2 produz prostaglandinas locais que causam vasodilatação e amolecem a parede folicular. (2) Colagenases (MMPs) degradam o colágeno da parede até a ruptura no estigma (ponto avascular). (3) O oócito, bloqueado em prófase I desde a vida fetal, retoma a meiose (o LH fecha as gap junctions → cai o AMPc → ativa o MPF) e chega à metáfase II - sendo ovulado nesse estágio.</div>
+  </details>
 
-    <div class="ne-step" onclick="show('fol','pos_ovul')">
-      <div class="ne-spine"><div class="ne-dot d-purple"></div><div class="ne-spine-line"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">6. Pós-ovulação - formação do corpo lúteo</div>
-        <div class="ne-card-sub">O folículo roto se transforma em corpo lúteo (CL), que produz progesterona (P4). A P4 freia o eixo (feedback negativo), impedindo nova ovulação enquanto o CL estiver ativo.</div>
-      </div>
-    </div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-purple" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">6. Pós-ovulação - formação do corpo lúteo</div><div class="ne-card-sub">O folículo roto se transforma em corpo lúteo (CL), que produz progesterona (P4). A P4 freia o eixo (feedback negativo).</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O folículo roto se transforma no corpo lúteo (CL), que produz progesterona (P4). A P4 freia o eixo HPG (feedback negativo): reduz a pulsatilidade de GnRH e impede nova ovulação enquanto o CL estiver ativo. Se houver gestação, o CL é mantido. Se não, o endométrio produz PGF2α, o CL regride, a P4 cai e o eixo é liberado para um novo ciclo.</div>
+  </details>
 
-    <div class="ne-step" onclick="show('fol','ondas')">
-      <div class="ne-spine"><div class="ne-dot d-pink"></div></div>
-      <div class="ne-card">
-        <div class="ne-card-title">Ondas por espécie</div>
-        <div class="ne-card-sub">Vaca: 2-3 ondas por ciclo. Égua: 1-2 ondas. Ovelha/cabra: 3-4 ondas. Cadela: onda única com múltiplos folículos. Porca: múltiplos folículos ovulam simultaneamente.</div>
-      </div>
-    </div>
-
-  </div>
-  <div class="ne-info-panel empty" id="info-fol">Clique em uma etapa para ver detalhes.</div>
+  <details class="ne-detail-step" style="margin-bottom:6px">
+    <summary style="display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none">
+      <div class="ne-spine" style="flex-direction:row"><div class="ne-dot d-pink" style="margin-top:0"></div></div>
+      <div class="ne-card" style="margin-bottom:0"><div class="ne-card-title">Ondas por espécie</div><div class="ne-card-sub">Vaca: 2-3 ondas. Égua: 1-2 ondas. Ovelha/cabra: 3-4 ondas. Cadela: onda única com múltiplos folículos.</div></div>
+    </summary>
+    <div class="ne-info-panel" style="margin:4px 0 8px 30px">O número de ondas foliculares por ciclo varia: na vaca, predominam ciclos de 2 ou 3 ondas. Na égua, tipicamente 1 onda principal com possível onda secundária. Na ovelha e cabra, 3 a 4 ondas. Na cadela, onda única com múltiplos folículos crescendo e ovulando simultaneamente. Na porca, múltiplos folículos amadurecem em cada onda (10 a 25 ovulações).</div>
+  </details>
 
   <div class="ne-prova-box">
     <strong>Pontos de prova:</strong> LH age na TECA, FSH age na GRANULOSA - inverter é erro clássico. AINEs próximos ao cio podem bloquear a ovulação (inibem COX-2 → sem prostaglandinas → sem ruptura). Oócito canino é ovulado ainda em prófase I - leva 2-3 dias para maturar após a ovulação.
@@ -4295,7 +4296,7 @@ IATF com P4+E2 funciona em anestro profundo
   id: 'implantacao',
   num: 8,
   title: 'Implantação Embrionária',
-  icon: '#i-pregnant',
+  icon: '#i-embryo',
   content: `
 <style>
   .imp-header { margin-bottom: 16px; }
@@ -4355,7 +4356,6 @@ IATF com P4+E2 funciona em anestro profundo
 </style>
 
 <div class="imp-header">
-  <p class="imp-label">5</p>
   <h3 class="imp-title">Implantação Embrionária</h3>
 </div>
 <div class="imp-tabs">
