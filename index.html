@@ -1340,6 +1340,43 @@
       .faq-item summary { font-size: 0.95rem; padding: 18px 20px; }
       .faq-item p { padding: 0 20px 18px; }
     }
+    /* ════════════════════════════════════════════════════
+       STICKY CTA MOBILE
+       ════════════════════════════════════════════════════ */
+    .sticky-cta {
+      position: fixed; bottom: -80px; left: 0; right: 0; z-index: 99;
+      background: rgba(245, 237, 224, 0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+      padding: 12px 20px;
+      transition: bottom 0.4s var(--ease);
+      display: none;
+    }
+    .sticky-cta.sticky-visible { bottom: 0; }
+    .sticky-cta-inner {
+      max-width: 480px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .sticky-cta-price {
+      font-family: var(--heading-font); font-size: 1.1rem; font-weight: 700;
+      color: var(--accent); white-space: nowrap;
+    }
+    .sticky-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      font-family: var(--body-font); font-size: 0.88rem; font-weight: 600;
+      padding: 12px 24px; border-radius: 10px; border: none;
+      text-decoration: none; white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(181, 86, 58, 0.2);
+    }
+    @media (max-width: 960px) {
+      .sticky-cta { display: block; }
+    }
+    @media (min-width: 961px) {
+      .sticky-cta { display: none !important; }
+    }
+
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -1377,7 +1414,7 @@
         <span class="nav-urgency-badge">OFERTA ESPECIAL</span>
         <span class="nav-urgency-text">De R$148 por apenas R$57 — preço promocional</span>
       </div>
-      <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="nav-cta" target="_blank" rel="noopener noreferrer">Quero Meu Guia</a>
+      <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="nav-cta" rel="noopener noreferrer">Quero Meu Guia</a>
     </nav>
 
     <!-- HERO -->
@@ -1405,7 +1442,7 @@
             <span class="hero-tag">Entre outros</span>
           </div>
           <div class="hero-actions" id="heroActions">
-            <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               Quero Cobrar o Que Meu Produto Vale
             </a>
@@ -1461,27 +1498,9 @@
           </div>
           <div class="pain-item reveal reveal-d2">
             <div class="pain-icon-wrap">
-              <svg class="pain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <span class="pain-text">Já pensou em desistir porque vender só para amigos e familiares não paga as contas</span>
-          </div>
-          <div class="pain-item reveal reveal-d1">
-            <div class="pain-icon-wrap">
               <svg class="pain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             </div>
-            <span class="pain-text">Não sabe como chegar em loja gourmet, restaurante ou empório</span>
-          </div>
-          <div class="pain-item reveal reveal-d2">
-            <div class="pain-icon-wrap">
-              <svg class="pain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </div>
-            <span class="pain-text">Posta no Instagram, faz stories, mas as vendas não aparecem</span>
-          </div>
-          <div class="pain-item reveal reveal-d3">
-            <div class="pain-icon-wrap">
-              <svg class="pain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-            </div>
-            <span class="pain-text">Tem medo de errar no rótulo e tomar multa dos órgãos competentes</span>
+            <span class="pain-text">Não sabe como chegar em loja gourmet, restaurante ou empório — e fica preso vendendo só pra amigos</span>
           </div>
         </div>
 
@@ -1740,7 +1759,7 @@
         </div>
 
         <div style="margin-top:36px">
-          <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="background:#B5563A;color:#FAF5EB;font-size:1rem;padding:18px 36px">
+          <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" rel="noopener noreferrer" style="background:#B5563A;color:#FAF5EB;font-size:1rem;padding:18px 36px">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Quero Cobrar o Que Meu Produto Vale
           </a>
@@ -1755,7 +1774,7 @@
         <p class="cta-desc">Você pode continuar cobrando barato por um produto que merece mais. Ou pode ler este guia numa tarde e mudar o jeito que o cliente enxerga o que você faz.</p>
         <p class="cta-desc" style="margin-top:-24px;font-size:0.9rem">Ebook + 3 bônus. Acesso imediato. Lê no celular. Garantia de 7 dias.</p>
         <div class="cta-price">R$ 57</div>
-        <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           Quero Cobrar o Que Meu Produto Vale
         </a>
@@ -1769,52 +1788,42 @@
         <div class="section-eyebrow reveal" style="justify-content:center"><span class="num">?</span> Perguntas frequentes</div>
         <div class="faq-list">
           <div class="faq-item reveal">
-            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Preciso de CNPJ pra aplicar o que está no guia?</div>
-            <div class="faq-a">Não. A maioria das estratégias funciona mesmo sem CNPJ. O guia também explica quando e como formalizar quando fizer sentido pro seu negócio.</div>
-          </div>
-          <div class="faq-item reveal">
-            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Consigo ler no celular?</div>
-            <div class="faq-a">Sim. O ebook é um PDF que abre em qualquer celular. Não precisa instalar nada.</div>
-          </div>
-          <div class="faq-item reveal">
-            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O guia de rótulo está atualizado?</div>
-            <div class="faq-a">Sim. Ele traz todas as informações obrigatórias exigidas pela legislação vigente. Você consulta, confere o que precisa constar no seu rótulo e evita multas e problemas com fiscalização.</div>
-          </div>
-          <div class="faq-item reveal">
             <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E se eu não gostar?</div>
             <div class="faq-a">Você tem 7 dias pra pedir reembolso. Sem justificativa, sem burocracia. Devolvemos o valor total.</div>
-          </div>
-          <div class="faq-item reveal">
-            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Como recebo o material?</div>
-            <div class="faq-a">Assim que o pagamento for confirmado, você recebe um email com o link pra baixar tudo. No Pix, chega em menos de 2 minutos.</div>
-          </div>
-          <div class="faq-item reveal">
-            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Serve pra quem está começando do zero?</div>
-            <div class="faq-a">Sim. O guia foi feito pra quem já produz e quer cobrar mais, mas também pra quem está montando o primeiro produto e quer começar já com a estratégia certa.</div>
           </div>
           <div class="faq-item reveal">
             <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Funciona pro meu tipo de produto?</div>
             <div class="faq-a">Sim. As estratégias se aplicam a qualquer alimento artesanal: geleias, molhos, queijos, cafés gourmet, doces, biscoitos, bebidas, fermentados, compotas, conservas, temperos e mais. Se você produz artesanalmente e quer cobrar mais, este guia é pra você.</div>
           </div>
           <div class="faq-item reveal">
-            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Já comprei outros cursos e não funcionou. Por que este seria diferente?</div>
-            <div class="faq-a">Porque quem escreveu é produtor artesanal há 12 anos, não marketeiro digital. Gabriel vive o mercado, erra, conserta e vende todo dia. O conteúdo é baseado em experiência real — dados de mercado, estratégias testadas na própria marca, e lições que custaram dinheiro pra aprender.</div>
+            <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Como recebo e onde leio?</div>
+            <div class="faq-a">Assim que o pagamento for confirmado, você recebe um email com o link pra baixar. É um PDF que abre em qualquer celular. No Pix, chega em menos de 2 minutos.</div>
           </div>
           <div class="faq-item reveal">
             <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">R$57 é caro pra um ebook?</div>
-            <div class="faq-a">Pense assim: se você cobra R$15 a menos por pote do que deveria, em 50 vendas são R$750 perdidos. O guia ensina a corrigir isso. Ele se paga na primeira semana — e o retorno continua em cada venda depois.</div>
+            <div class="faq-a">Se você cobra R$15 a menos por pote do que deveria, em 50 vendas são R$750 perdidos. O guia se paga na primeira semana.</div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- STICKY CTA MOBILE -->
+    <div class="sticky-cta" id="stickyCta">
+      <div class="sticky-cta-inner">
+        <div class="sticky-cta-price"><s style="color:var(--text-3);font-size:0.75rem">R$148</s> <strong>R$ 57</strong></div>
+        <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="sticky-cta-btn" rel="noopener noreferrer">
+          Quero Meu Guia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
         <div class="footer-left">&copy; 2026 Gabriel Petelinkar Pereira</div>
         <ul class="footer-links">
-          <li><a href="https://www.alimentosartesanais.com.br" target="_blank">alimentosartesanais.com.br</a></li>
-          <li><a href="https://instagram.com/gabrielpetelinkar" target="_blank">Instagram</a></li>
+          <li style="color:var(--text-3);font-size:0.85rem">alimentosartesanais.com.br</li>
         </ul>
       </div>
     </footer>
@@ -1886,6 +1895,34 @@
     })();
 
     // Countdown removed — using honest urgency instead
+
+    // UTM TRACKING — Captura UTMs e injeta como sck/src nos links do checkout
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      const sck = params.get('utm_campaign') || params.get('sck') || '';
+      const src = params.get('utm_source') || params.get('src') || '';
+      if (sck || src) {
+        document.querySelectorAll('a[href*="hotmart.com"]').forEach(link => {
+          const url = new URL(link.href);
+          if (sck) url.searchParams.set('sck', sck);
+          if (src) url.searchParams.set('src', src);
+          link.href = url.toString();
+        });
+      }
+    })();
+
+    // STICKY CTA MOBILE — Aparece após scroll do hero
+    (() => {
+      const sticky = document.getElementById('stickyCta');
+      if (!sticky) return;
+      const hero = document.querySelector('.hero');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          sticky.classList.toggle('sticky-visible', !e.isIntersecting);
+        });
+      }, { threshold: 0 });
+      if (hero) obs.observe(hero);
+    })();
   </script>
 
 </body>
