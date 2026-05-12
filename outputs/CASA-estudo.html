@@ -254,6 +254,76 @@ h3{font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:600;margin-bottom:10px}
   </div>
 </div>
 
+
+<!-- SLIDE: ANALOGIA DRONE/CORREDOR -->
+<div class="slide" id="s-analogy">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num"></span></div>
+  <h2>Entendendo as <span class="teal">velocidades</span> do CASA</h2>
+  <p class="sub">Imagine que vocês estão filmando um corredor de 100 metros a partir de um drone</p>
+
+  <div style="display:flex;gap:30px;align-items:stretch;margin-top:10px">
+    
+    <!-- COLUNA ESQUERDA: Analogia em cards -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+      
+      <div class="card" style="border-left:4px solid var(--teal)">
+        <h3 style="color:var(--teal);margin-bottom:4px">VCL — Velocidade Curvilínea</h3>
+        <p class="body">O GPS registrando <strong>cada passo</strong> do corredor, com todas as curvas e desvios. É a distância REAL percorrida. Para o espermatozoide, é a maior das três velocidades.</p>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--gold)">
+        <h3 style="color:var(--gold);margin-bottom:4px">VAP — Velocidade do Caminho Médio</h3>
+        <p class="body">O GPS <strong>suavizado</strong>, sem os micro-tremores. O software "alisa" a trajetória e calcula a velocidade desse caminho médio. Fica entre VCL e VSL.</p>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--sky)">
+        <h3 style="color:var(--sky);margin-bottom:4px">VSL — Velocidade em Linha Reta</h3>
+        <p class="body">Uma <strong>linha reta</strong> da saída até onde chegou. Se o corredor deu muitas curvas, essa velocidade será muito menor que a VCL.</p>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--violet)">
+        <h3 style="color:var(--violet);margin-bottom:4px">ALH e BCF</h3>
+        <p class="body"><strong>ALH</strong> = largura da faixa que o corredor usa para se balançar. <strong>BCF</strong> = quantas vezes por segundo a trajetória cruza o caminho médio.</p>
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA: Espaço para imagens -->
+    <div style="flex:0 0 400px;display:flex;flex-direction:column;gap:12px">
+      <div style="background:var(--card);border:2px dashed var(--border);border-radius:12px;flex:1;display:flex;align-items:center;justify-content:center;min-height:200px">
+        <div style="text-align:center;color:var(--subtle);font-size:.9rem">
+          <div style="font-size:2.5rem;margin-bottom:8px;opacity:.3">🏃</div>
+          Imagem: pista de atletismo com<br>3 trajetórias sobrepostas<br><br>
+          <span style="color:var(--teal)">━━ VCL (zigue-zague)</span><br>
+          <span style="color:var(--gold)">━━ VAP (suavizada)</span><br>
+          <span style="color:var(--sky)">━━ VSL (reta)</span>
+        </div>
+      </div>
+      <div style="background:var(--card);border:2px dashed var(--border);border-radius:12px;flex:0 0 150px;display:flex;align-items:center;justify-content:center">
+        <div style="text-align:center;color:var(--subtle);font-size:.9rem">
+          <div style="font-size:2rem;margin-bottom:4px;opacity:.3">📐</div>
+          Imagem: esquema de ALH<br>(amplitude lateral)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;border-left:3px solid var(--lime);padding:10px 16px;background:rgba(132,204,22,.04);border-radius:0 8px 8px 0">
+    <strong style="color:var(--lime)">LIN = VSL ÷ VCL</strong> → se foi 100% reto, LIN = 100%. Em garanhões: 25-30%.
+    <strong style="color:var(--lime);margin-left:20px">STR = VSL ÷ VAP</strong>
+    <strong style="color:var(--lime);margin-left:20px">WOB = VAP ÷ VCL</strong>
+  </div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Vou usar uma analogia para facilitar a compreensão dos parâmetros. Imaginem que vocês estão filmando um corredor de 100 metros a partir de um drone. Eu consigo medir três coisas muito diferentes sobre ele:<br><br>
+    <strong>VCL — Velocidade Curvilínea:</strong> É a distância REAL que ele percorreu — com todas as curvas, desvios e zigue-zagues do caminho. É o GPS registrando cada passo. Para um espermatozoide que bate a cabeça lateralmente enquanto nada, essa é a maior das três velocidades.<br><br>
+    <strong>VAP — Velocidade do Caminho Médio:</strong> O GPS suavizado — sem os micro-tremores. O software "alisa" a trajetória curvilínea e calcula a velocidade desse caminho médio. Fica entre VCL e VSL.<br><br>
+    <strong>VSL — Velocidade em Linha Reta:</strong> Se eu traçar uma linha reta do ponto de saída até onde ele chegou no final — qual seria a velocidade nessa linha imaginária? É a distância em linha reta dividida pelo tempo total. Se o corredor deu muitas curvas, essa velocidade será muito menor que a VCL.<br><br>
+    E daí derivam as razões: LIN = VSL/VCL — se o corredor foi 100% em linha reta, LIN = 100%. Se ele deu muitas curvas, LIN fica baixo — como 25-30% que vemos nos garanhões. STR = VSL/VAP — quão reta é a rota suavizada. WOB = VAP/VCL — o quanto a rota média oscila em relação à trajetória real.<br><br>
+    E o ALH? É a largura do corredor que ele usa para se balançar. Um garanhão com ALH alto bate muito a cabeça — consome energia, pode indicar hiperativação. BCF é quantas vezes por segundo a trajetória curvilínea cruza a trajetória média — o ritmo do batimento.
+  </div>
+</div>
+
 <!-- SLIDE 5: PARÂMETROS CINEMÁTICOS — TRAJETÓRIAS -->
 <div class="slide" id="s5">
   <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">05 / 25</span></div>
