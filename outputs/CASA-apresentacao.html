@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CASA — Computer-Assisted Sperm Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Montserrat:wght@400;600;700;800&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&family=Lato:wght@400;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0B1622;--bg2:#101E2E;--bg3:#162236;
+  --text:#E8EDF3;--muted:#7A8EA3;--subtle:#4A5E73;
+  --teal:#00C9A7;--gold:#F0B429;--coral:#FF6B6B;--sky:#74B9FF;--violet:#A78BFA;--lime:#84CC16;
+  --border:#1E3044;--card:#131F30;
+}
+body{font-family:'Inter','Segoe UI','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* ═══ SLIDE SYSTEM ═══ */
+.slide{min-height:100vh;display:none;flex-direction:column;justify-content:center;padding:clamp(30px,5vw,80px);position:relative;overflow:hidden}
+.slide.active{display:flex}
+.slide::before{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,transparent 60%,rgba(0,201,167,.02));pointer-events:none}
+
+/* Header bar */
+.s-header{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:16px 30px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.s-section{color:var(--teal)}
+.s-num{color:var(--subtle)}
+.s-part{color:var(--gold)}
+
+/* Typography */
+h1{font-size:clamp(3.5rem,6vw,5.5rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:16px}
+h2{font-size:clamp(2rem,3.5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:14px}
+h3{font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:600;margin-bottom:10px}
+.sub{font-size:clamp(1.1rem,1.7vw,1.4rem);color:var(--muted);max-width:700px;line-height:1.6;margin-bottom:24px}
+
+/* Accent text */
+.teal{color:var(--teal)}.gold{color:var(--gold)}.coral{color:var(--coral)}.sky{color:var(--sky)}.violet{color:var(--violet)}.lime{color:var(--lime)}
+
+/* Topic lists */
+.topics{list-style:none;display:flex;flex-direction:column;gap:12px;max-width:800px}
+.topics li{font-size:clamp(1.05rem,1.6vw,1.3rem);padding-left:22px;position:relative;line-height:1.55;color:var(--text)}
+.topics li::before{content:'›';position:absolute;left:0;color:var(--teal);font-weight:800;font-size:1.2em}
+.topics li strong{color:var(--teal)}
+.topics li em{color:var(--muted);font-style:normal;font-size:.9em}
+
+/* Grid layouts */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:16px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin:16px 0}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 22px;position:relative;overflow:hidden}
+.card-bar{position:absolute;top:0;left:0;width:3px;height:100%;border-radius:3px 0 0 3px}
+.card .label{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.card h3{margin-bottom:6px}
+.card p,.card .body{font-size:1.05rem;color:var(--muted);line-height:1.55}
+
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:1.2rem;margin:14px 0}
+.tbl th{padding:10px 14px;text-align:left;font-weight:700;color:var(--teal);border-bottom:2px solid var(--teal);font-size:1.1rem;text-transform:uppercase;letter-spacing:.06em}
+.tbl td{padding:9px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:hover td{background:rgba(0,201,167,.03)}
+.tbl .param{font-weight:700;color:var(--gold);white-space:nowrap}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl{display:flex;gap:14px;padding:10px 0;padding-left:18px;border-left:2px solid var(--border);position:relative}
+.tl::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--teal);position:absolute;left:-5px;top:15px}
+.tl-year{font-weight:800;font-size:1.4rem;color:var(--gold);min-width:55px;flex-shrink:0}
+.tl-text{font-size:1.1rem;color:var(--muted);line-height:1.5}
+.tl-text strong{color:var(--text)}
+
+/* Highlight box */
+.hl{border-left:3px solid var(--teal);padding:14px 18px;background:rgba(0,201,167,.04);border-radius:0 8px 8px 0;margin:14px 0;font-size:1.1rem;line-height:1.6}
+.hl-warn{border-left-color:var(--gold);background:rgba(240,180,41,.04)}
+.hl-danger{border-left-color:var(--coral);background:rgba(255,107,107,.04)}
+
+/* Big numbers */
+.big{font-size:clamp(3.5rem,8vw,6rem);font-weight:900;line-height:1;letter-spacing:-.03em}
+.big-label{font-size:1.2rem;color:var(--muted);margin-top:6px}
+
+/* VS comparison */
+.vs{display:flex;align-items:center;gap:20px;justify-content:center;margin:20px 0}
+.vs-item{text-align:center;flex:1}
+.vs-val{font-size:clamp(2.5rem,5vw,4rem);font-weight:900}
+.vs-label{font-size:.85rem;color:var(--muted);margin-top:4px}
+.vs-div{font-size:1.4rem;color:var(--subtle);font-weight:800}
+
+/* Trajectory visualization */
+.traj-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;position:relative;overflow:hidden}
+.traj-title{font-size:1.1rem;font-weight:700;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.traj-svg{width:100%;height:220px}
+
+/* Speaker notes */
+.notes{font-size:1.2rem;background:linear-gradient(135deg,#0D1520,#111D2D);border:1px solid #1A2D44;border-radius:8px;padding:18px 22px;margin-top:28px;font-size:1.2rem;color:#8BA0B8;line-height:1.75}
+.notes-label{font-size:.8rem;font-weight:700;color:#4A6480;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+
+/* Reference tag */
+.ref{font-size:.72rem;color:var(--subtle);margin-top:12px;line-height:1.5}
+
+/* Nav */
+.nav{position:fixed;bottom:0;left:0;right:0;background:#0A1220;border-top:1px solid var(--border);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;font-size:.78rem;color:var(--subtle)}
+.nav .pos{color:var(--teal);font-weight:700}
+.nav .keys{color:var(--subtle)}
+
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--teal);z-index:200;transition:width .3s ease}
+
+/* Responsive */
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}.vs{flex-direction:column;gap:10px}.slide{padding:24px 18px}}
+@media print{.notes{font-size:1.2rem;page-break-inside:avoid}.slide{page-break-after:always;min-height:auto;padding:30px}.nav,.progress{display:none}}
+
+/* Ocultar notas na versão de apresentação */
+.notes { display: none !important; }
+
+/* Modo Diluição */
+.dilution-overlay {
+  position: fixed; top:0; left:0; right:0; bottom:0;
+  background: #000; z-index: 500; display: none;
+  cursor: pointer;
+}
+.dilution-overlay.active { display: block; }
+
+
+/* Modo Edição */
+.edit-btn {
+  position: fixed; top: 12px; right: 12px; z-index: 600;
+  background: #1E3044; border: 1px solid #2A4060; color: #7A8EA3;
+  padding: 6px 14px; border-radius: 6px; cursor: pointer;
+  font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; font-family: inherit;
+  transition: all .2s;
+}
+.edit-btn:hover { background: #2A4060; color: #E8EDF3; }
+.edit-btn.active { background: #00C9A7; color: #0B1622; border-color: #00C9A7; }
+body.editing .slide * { cursor: text; }
+body.editing .slide h1, body.editing .slide h2, body.editing .slide h3,
+body.editing .slide p, body.editing .slide li, body.editing .slide td,
+body.editing .slide .body, body.editing .slide .label,
+body.editing .slide .tl-text, body.editing .slide .tl-year {
+  outline: 1px dashed rgba(0,201,167,.2);
+  outline-offset: 2px;
+}
+body.editing .slide *:focus {
+  outline: 2px solid #00C9A7;
+  outline-offset: 2px;
+}
+
+
+/* Toolbar de Edição */
+.edit-toolbar {
+  position: fixed; top: 50px; right: 12px; z-index: 610;
+  background: #131F30; border: 1px solid #2A4060; border-radius: 10px;
+  padding: 12px; display: none; flex-direction: column; gap: 10px;
+  width: 200px; box-shadow: 0 8px 30px rgba(0,0,0,.5);
+}
+body.editing .edit-toolbar { display: flex; }
+
+.tb-label { font-size: .65rem; font-weight: 700; color: #4A5E73; text-transform: uppercase; letter-spacing: .1em; }
+
+.tb-row { display: flex; gap: 6px; align-items: center; }
+
+.tb-btn {
+  background: #1E3044; border: 1px solid #2A4060; color: #E8EDF3;
+  padding: 4px 8px; border-radius: 4px; cursor: pointer;
+  font-size: .8rem; font-family: inherit; min-width: 28px; text-align: center;
+  transition: all .15s;
+}
+.tb-btn:hover { background: #2A4060; }
+.tb-btn.active { background: #00C9A7; color: #0B1622; border-color: #00C9A7; }
+
+.tb-colors { display: flex; gap: 4px; flex-wrap: wrap; }
+.tb-color {
+  width: 22px; height: 22px; border-radius: 4px; cursor: pointer;
+  border: 2px solid transparent; transition: border-color .15s;
+}
+.tb-color:hover { border-color: #E8EDF3; }
+
+.tb-select {
+  background: #1E3044; border: 1px solid #2A4060; color: #E8EDF3;
+  padding: 4px 6px; border-radius: 4px; font-size: .75rem;
+  font-family: inherit; width: 100%; cursor: pointer;
+}
+
+.tb-size-display {
+  font-size: .85rem; color: #00C9A7; font-weight: 700;
+  min-width: 35px; text-align: center;
+}
+
+
+/* Botões de exclusão */
+body.editing .slide { position: relative; }
+body.editing .del-slide {
+  position: absolute; top: 8px; left: 8px; z-index: 50;
+  background: #3D1111; border: 1px solid #7A2020; color: #FF6B6B;
+  padding: 4px 10px; border-radius: 4px; cursor: pointer;
+  font-size: .7rem; font-weight: 700; font-family: inherit;
+  display: block;
+}
+body:not(.editing) .del-slide { display: none; }
+body.editing [contenteditable="true"]:hover {
+  outline: 2px solid rgba(0,201,167,.4) !important;
+  outline-offset: 2px;
+}
+body.editing [contenteditable="true"]:focus {
+  outline: 2px solid #00C9A7 !important;
+}
+
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 1 — REVISÃO DE LITERATURA (~20 min)
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE 1: CAPA -->
+<button class="edit-btn" id="editBtn" onclick="event.stopPropagation();toggleEdit()">✏ Editar</button>
+
+<div class="edit-toolbar" id="editToolbar">
+  <div class="tb-label">Tamanho da Fonte</div>
+  <div class="tb-row">
+    <button class="tb-btn" onmousedown="event.stopPropagation();event.preventDefault();changeSize(-2)">A-</button>
+    <span class="tb-size-display" id="sizeDisplay">—</span>
+    <button class="tb-btn" onmousedown="event.stopPropagation();event.preventDefault();changeSize(2)">A+</button>
+    <button class="tb-btn" onmousedown="event.stopPropagation();event.preventDefault();changeSize(4)" style="font-weight:900">A++</button>
+  </div>
+
+  <div class="tb-label" style="margin-top:4px">Cor do Texto</div>
+  <div class="tb-colors">
+    <div class="tb-color" style="background:#E8EDF3" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#E8EDF3')"></div>
+    <div class="tb-color" style="background:#00C9A7" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#00C9A7')"></div>
+    <div class="tb-color" style="background:#F0B429" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#F0B429')"></div>
+    <div class="tb-color" style="background:#FF6B6B" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#FF6B6B')"></div>
+    <div class="tb-color" style="background:#74B9FF" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#74B9FF')"></div>
+    <div class="tb-color" style="background:#A78BFA" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#A78BFA')"></div>
+    <div class="tb-color" style="background:#84CC16" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#84CC16')"></div>
+    <div class="tb-color" style="background:#7A8EA3" onmousedown="event.stopPropagation();event.preventDefault();changeColor('#7A8EA3')"></div>
+  </div>
+
+  <div class="tb-label" style="margin-top:4px">Cor de Fundo</div>
+  <div class="tb-colors">
+    <div class="tb-color" style="background:#0B1622" onmousedown="event.stopPropagation();event.preventDefault();changeBg('#0B1622')"></div>
+    <div class="tb-color" style="background:#131F30" onmousedown="event.stopPropagation();event.preventDefault();changeBg('#131F30')"></div>
+    <div class="tb-color" style="background:#1E3044" onmousedown="event.stopPropagation();event.preventDefault();changeBg('#1E3044')"></div>
+    <div class="tb-color" style="background:#000000" onmousedown="event.stopPropagation();event.preventDefault();changeBg('#000000')"></div>
+    <div class="tb-color" style="background:#0D2818" onmousedown="event.stopPropagation();event.preventDefault();changeBg('#0D2818')"></div>
+    <div class="tb-color" style="background:#1A0D28" onmousedown="event.stopPropagation();event.preventDefault();changeBg('#1A0D28')"></div>
+  </div>
+
+  <div class="tb-label" style="margin-top:4px">Fonte</div>
+  <select class="tb-select" onchange="changeFont(this.value)">
+    <option value="'Inter','Segoe UI','Helvetica Neue',sans-serif">Inter (padrão)</option>
+    <option value="'Poppins',sans-serif">Poppins</option>
+    <option value="'Montserrat',sans-serif">Montserrat</option>
+    <option value="'Roboto',sans-serif">Roboto</option>
+    <option value="'Open Sans',sans-serif">Open Sans</option>
+    <option value="'Lato',sans-serif">Lato</option>
+    <option value="Georgia,serif">Georgia (serif)</option>
+    <option value="'Playfair Display',serif">Playfair Display</option>
+  </select>
+
+  <div class="tb-label" style="margin-top:4px">Negrito / Itálico</div>
+  <div class="tb-row">
+    <button class="tb-btn" onmousedown="event.stopPropagation();event.preventDefault();toggleBold()" style="font-weight:900">B</button>
+    <button class="tb-btn" onmousedown="event.stopPropagation();event.preventDefault();toggleItalic()" style="font-style:italic">I</button>
+    <button class="tb-btn" onmousedown="event.stopPropagation();event.preventDefault();toggleUnderline()" style="text-decoration:underline">U</button>
+  </div>
+
+  <div class="tb-label" style="margin-top:4px">Excluir</div>
+  <div class="tb-row">
+    <button class="tb-btn" style="flex:1;background:#3D1111;border-color:#7A2020;color:#FF6B6B" onmousedown="event.stopPropagation();event.preventDefault();deleteElement()">🗑 Elemento</button>
+  </div>
+
+  <div style="border-top:1px solid #2A4060;padding-top:8px;margin-top:4px">
+    <button class="tb-btn" style="width:100%;background:#2D1A0A;border-color:#5A3000;color:#F0B429" onmousedown="event.stopPropagation();event.preventDefault();resetEdits()">↺ Resetar tudo</button>
+  </div>
+</div>
+<div class="dilution-overlay" id="dilution"></div>
+<div class="slide" id="s1">
+  <div class="s-header"><span class="s-part">FMVZ-UNESP Botucatu</span><span class="s-num">01 / 25</span></div>
+  <h1 style="font-size:clamp(4rem,8vw,7rem)"><span class="teal">CASA</span></h1>
+  <h2 style="font-weight:400;color:var(--muted);font-size:clamp(1rem,2vw,1.5rem)">Computer-Assisted Sperm Analysis</h2>
+  <p class="sub" style="margin-top:16px">Análise computadorizada de sêmen: fundamentos, parâmetros cinéticos, subpopulações espermáticas e perspectivas na reprodução equina</p>
+  <div style="margin-top:40px">
+    <p style="font-size:1.4rem;font-weight:600">Iara Macêdo Petelinkar · Letícia dos Santos Rebelo</p>
+    <p style="font-size:1.1rem;color:var(--muted);margin-top:4px">Discentes — Programa de Pós-Graduação em Biotecnologia Animal<br>Disciplina: Vivência Prática Aplicada à Andrologia de Grandes Animais<br>FMVZ-UNESP Botucatu</p>
+  </div>
+  <div class="ref" style="margin-top:30px">Baseado em: Amann & Waberski (2014) · Theriogenology 81:5-17<br>Gacem et al. (2021) · Front Vet Sci 8:651477</div>
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Boa noite a todos. Somos a Iara Petelinkar e a Letícia Rebelo, discentes do Programa de Pós-Graduação em Biotecnologia Animal da UNESP Botucatu. Esta apresentação é para a disciplina de Vivência Prática Aplicada à Andrologia de Grandes Animais.<br><br>
+    Hoje vou apresentar sobre o sistema CASA — Computer-Assisted Sperm Analysis — que é a tecnologia de análise computadorizada de sêmen. A apresentação está estruturada em duas partes complementares.<br><br>
+    Na primeira parte, com duração de aproximadamente 20 minutos, trago uma revisão de literatura fundamentada principalmente na revisão clássica de Amann e Waberski publicada na Theriogenology em 2014 — que permanece como referência fundamental na área — complementada com publicações recentes de alto impacto que atualizam o panorama da tecnologia.<br><br>
+    Na segunda parte, também com 20 minutos, apresento em detalhes o artigo original de Gacem e colaboradores, publicado na Frontiers in Veterinary Science em 2021, que trouxe uma abordagem inovadora ao estudar a estrutura de subpopulações de motilidade espermática em garanhões e jumentos utilizando taxa de captura de 250 frames por segundo.<br><br>
+    Antes de começar, quero contextualizar a relevância deste tema para nossa linha de pesquisa: no CERAN trabalhamos com avaliação de qualidade seminal em garanhões — seja em protocolos de criopreservação, estudos de senescência reprodutiva ou no nosso projeto FAPESP sobre síndrome metabólica equina. O CASA é uma ferramenta central em todos esses projetos, e compreender suas capacidades e limitações é fundamental para a qualidade dos nossos dados.
+  </div>
+</div>
+
+<!-- SLIDE 2: ESTRUTURA -->
+<div class="slide" id="s2">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">02 / 25</span></div>
+  <h2>Estrutura da Apresentação</h2>
+  <div class="g2">
+    <div class="card">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="label teal">Parte 1 — Revisão (20 min)</div>
+      <ul class="topics">
+        <li>Definição e fundamentos do CASA</li>
+        <li>Evolução histórica e tecnológica</li>
+        <li>Parâmetros cinéticos — definição e interpretação</li>
+        <li>Visualização das trajetórias espermáticas</li>
+        <li>Fatores de variação nos resultados</li>
+        <li>CASA × fertilidade: uma relação complexa</li>
+        <li>Subpopulações espermáticas</li>
+        <li>Perspectivas futuras e integração com IA</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">Parte 2 — Artigo (20 min)</div>
+      <ul class="topics">
+        <li>Gacem et al. (2021) — Frontiers in Veterinary Science</li>
+        <li>Introdução e justificativa</li>
+        <li>Objetivos</li>
+        <li>Material e métodos</li>
+        <li>Resultados — espécie e raça</li>
+        <li>Subpopulações identificadas</li>
+        <li>Discussão e pontos críticos</li>
+        <li>Conclusões e implicações</li>
+      </ul>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Antes de entrar no conteúdo propriamente dito, quero mostrar a estrutura completa da apresentação para que possam acompanhar o raciocínio.<br><br>
+    A Parte 1 cobre a revisão de literatura em 8 tópicos interconectados. Começo definindo o que é CASA e como a tecnologia funciona. Em seguida, traço a evolução histórica desde as primeiras observações de Leeuwenhoek em 1677 até os sistemas modernos com inteligência artificial. Depois, entro no coração da tecnologia: os parâmetros cinéticos — VCL, VSL, VAP, LIN, STR, WOB, ALH e BCF — com suas definições científicas, interpretações biológicas e representações visuais. Abordo os fatores que afetam os resultados — e esse é um ponto crucial que muitas vezes é subestimado na literatura. Discuto a relação complexa entre dados de CASA e fertilidade real. Apresento o conceito de subpopulações espermáticas, que é o paradigma atual da área. E fecho com perspectivas futuras, incluindo a integração com inteligência artificial e dispositivos portáteis.<br><br>
+    A Parte 2 segue rigorosamente a estrutura científica: introdução, objetivos, material e métodos, resultados, discussão e conclusão. O artigo de Gacem é particularmente relevante porque foi o primeiro a usar 250 fps para comparar subpopulações entre espécie equina e asinina, incluindo comparação entre raças de cavalos — Espanhol e Árabe.<br><br>
+    Vamos começar.
+  </div>
+</div>
+
+<!-- SLIDE 3: DEFINIÇÃO -->
+<div class="slide" id="s3">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">03 / 25</span></div>
+  <h2>O que é <span class="teal">CASA</span>?</h2>
+  <p class="sub">Sistema que integra microscopia, captura de imagem em alta velocidade e processamento computacional para análise objetiva da cinética espermática</p>
+
+  <div class="g4">
+    <div class="card"><div class="card-bar" style="background:var(--teal)"></div>
+      <div class="label teal">1 · Captura</div>
+      <h3>Microscópio + Câmera</h3>
+      <p class="body">Imagens sequenciais capturadas em câmara de contagem rasa (10-20 μm) sobre platina aquecida (37°C)</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--sky)"></div>
+      <div class="label sky">2 · Detecção</div>
+      <h3>Identificação de objetos</h3>
+      <p class="body">Software detecta cada cabeça espermática por contraste de pixels e calcula o centroide em cada frame</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">3 · Rastreamento</div>
+      <h3>Trajetória individual</h3>
+      <p class="body">Centróides conectados frame a frame → trajetória real de cada espermatozoide individual (≥30 frames)</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--violet)"></div>
+      <div class="label violet">4 · Análise</div>
+      <h3>Parâmetros cinéticos</h3>
+      <p class="body">Cálculo de velocidades, linearidade, oscilação e frequência para cada célula e para a população</p>
+    </div>
+  </div>
+
+  
+  <!-- ESPAÇO PARA IMAGEM DO EQUIPAMENTO -->
+  <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:16px;text-align:center;margin-top:12px;max-width:400px">
+    <div style="font-size:1.1rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em">Imagem: Foto do setup CASA<br>(microscópio + câmera + monitor + câmara de contagem)</div>
+  </div>
+
+<div class="hl" style="margin-top:16px">
+    <strong>Mais de 12 sistemas comercializados globalmente</strong> — cada um com hardware e software proprietários. Resultados entre sistemas <strong>não são diretamente comparáveis</strong> sem validação cruzada.
+  </div>
+
+  <div class="ref">Amann & Waberski, Theriogenology 2014 · Mortimer, Hum Reprod Update 1997 · van der Horst, Anim Reprod Sci 2020</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    O CASA — Computer-Assisted Sperm Analysis — não é um único aparelho, mas sim uma categoria de tecnologia que integra três componentes: microscopia óptica, captura de imagem em alta velocidade e processamento computacional.<br><br>
+    O funcionamento pode ser compreendido em 4 etapas sequenciais:<br><br>
+    <strong>Etapa 1 — Captura:</strong> Uma amostra de sêmen diluído é colocada numa câmara de contagem rasa — tipicamente 10 ou 20 micrômetros de profundidade — sobre uma platina aquecida a 37°C. Uma câmera de vídeo acoplada ao microscópio captura imagens sequenciais a taxas que variam de 25 a 250 frames por segundo, dependendo do sistema.<br><br>
+    <strong>Etapa 2 — Detecção:</strong> O software proprietário identifica cada espermatozoide pela diferença de intensidade de pixels em relação ao fundo — geralmente por contraste de fase negativo. Para cada célula detectada, calcula o centroide — o centro geométrico da cabeça espermática — em cada frame.<br><br>
+    <strong>Etapa 3 — Rastreamento:</strong> O algoritmo conecta os centróides de cada célula entre frames consecutivos, gerando a trajetória real de cada espermatozoide individual. Os sistemas modernos requerem um mínimo de 30 frames consecutivos para gerar uma trajetória confiável. É neste ponto que a taxa de frames se torna crítica: com 25 fps, a resolução temporal é de 40 milissegundos entre pontos; com 250 fps, cai para 4 milissegundos — uma diferença de 10 vezes na resolução.<br><br>
+    <strong>Etapa 4 — Análise:</strong> A partir de cada trajetória, o software calcula um conjunto de parâmetros cinéticos — velocidades, índices de progressividade, amplitude de oscilação e frequência de batimento — para cada célula individual. Em seguida, gera estatísticas populacionais: médias, medianas, distribuições. Sistemas mais avançados permitem análise de subpopulações por clustering.<br><br>
+    Um ponto fundamental que precisa ser enfatizado desde o início: existem mais de 12 sistemas CASA comercializados globalmente — Hamilton-Thorne IVOS, SpermVision, ISAS, SCA, entre outros. Cada um tem hardware, software e algoritmos proprietários diferentes. Isso significa que os resultados de um sistema NÃO são automaticamente comparáveis com outro. Mortimer, em 1997, já alertava para esse problema, e 27 anos depois ele persiste. É por isso que a padronização metodológica e o relato completo das condições experimentais são absolutamente essenciais em qualquer publicação que utilize CASA.
+  </div>
+</div>
+
+<!-- SLIDE 4: EVOLUÇÃO HISTÓRICA -->
+<div class="slide" id="s4">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">04 / 20</span></div>
+  <h2>Evolução Histórica do CASA</h2>
+
+  <div class="g2">
+    <!-- COLUNA ESQUERDA: Timeline -->
+    <div>
+      <div class="timeline">
+        <div class="tl"><span class="tl-year">1677</span><span class="tl-text"><strong>Leeuwenhoek</strong>: primeira observação de espermatozoides</span></div>
+        <div class="tl"><span class="tl-year">1974</span><span class="tl-text"><strong>Primeiro CASA</strong>: PDP-11, &lt;30 sptz, 4-8 frames</span></div>
+        <div class="tl"><span class="tl-year">1985</span><span class="tl-text"><strong>CellSoft</strong>: primeiro comercial automatizado</span></div>
+        <div class="tl"><span class="tl-year">1986</span><span class="tl-text"><strong>HTM-2000</strong>: desenvolvido para GARANHÃO</span></div>
+        <div class="tl"><span class="tl-year">2014</span><span class="tl-text"><strong>Amann & Waberski</strong>: revisão clássica, >12 sistemas</span></div>
+        <div class="tl"><span class="tl-year">2020+</span><span class="tl-text"><strong>250 fps · IA · Portáteis · CASA 3D</strong></span></div>
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA: Espaço para imagens -->
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:20px;text-align:center;flex:1;display:flex;align-items:center;justify-content:center;min-height:140px">
+        <div>
+          <div style="font-size:2rem;margin-bottom:8px;opacity:.3">🔬</div>
+          <div style="font-size:1.1rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em">Imagem: Microscópio de Leeuwenhoek<br>ou protótipo CASA 1974</div>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:20px;text-align:center;flex:1;display:flex;align-items:center;justify-content:center;min-height:140px">
+        <div>
+          <div style="font-size:2rem;margin-bottom:8px;opacity:.3">💻</div>
+          <div style="font-size:1.1rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em">Imagem: Sistema CASA moderno<br>(ISAS v1.2 ou Hamilton-Thorne)</div>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:20px;text-align:center;flex:1;display:flex;align-items:center;justify-content:center;min-height:140px">
+        <div>
+          <div style="font-size:2rem;margin-bottom:8px;opacity:.3">📱</div>
+          <div style="font-size:1.1rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em">Imagem: CASA portátil<br>(iSperm ou Ongo)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ref">Amann & Waberski, Theriogenology 2014 · Amann, Reprod Domest Anim 2009 · Gallagher et al. 2018</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    A trajetória histórica do CASA acompanha a evolução da própria espermatologia e da tecnologia computacional.<br><br>
+    1677: Leeuwenhoek observou espermatozoides pela primeira vez — descreveu "animálculos" à Royal Society. Já notou que "alguns nadavam mais rápido".<br><br>
+    1974: primeiro protótipo na Colorado State University — computador PDP-11 que ocupava um rack de 76 cm, analisava menos de 30 espermatozoides em 4-8 frames.<br><br>
+    1985: CellSoft, primeiro sistema comercial. Tecnologia de rastreamento adaptada da corrida espacial.<br><br>
+    1986: HTM-2000 — marco porque foi desenvolvido ESPECIFICAMENTE para garanhão. A espécie equina sempre esteve no centro do CASA.<br><br>
+    2014: Amann e Waberski publicaram a revisão clássica — mais de 12 sistemas disponíveis, padronização como preocupação central.<br><br>
+    2020+: ISAS v1.2 com 250 fps, portáteis validados (iSperm, Ongo), IA com deep learning (YOLOv8+DeepSORT), CASA 3D por holografia digital. A tecnologia está se tornando mais acessível e precisa simultaneamente.
+  </div>
+</div>
+
+<!-- SLIDE 5: PARÂMETROS CINEMÁTICOS — TRAJETÓRIAS -->
+<div class="slide" id="s5">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">05 / 25</span></div>
+  <h2>Trajetórias Espermáticas e Parâmetros</h2>
+  <p class="sub">Cada espermatozoide gera uma trajetória individual a partir da qual se derivam todos os parâmetros cinéticos</p>
+
+  <div class="g2">
+    <div>
+      <!-- SVG trajetória esquemática -->
+      <div class="traj-box">
+        <div class="traj-title">Representação esquemática das trajetórias</div>
+        <svg class="traj-svg" viewBox="0 0 400 140" style="width:100%;height:220px">
+          <!-- VCL - curvilínea (verde) -->
+          <path d="M 20 70 C 40 30, 60 110, 80 50 C 100 20, 120 100, 140 60 C 160 30, 180 90, 200 55 C 220 30, 240 80, 260 50 C 280 30, 300 70, 320 45 C 340 30, 360 60, 380 40" fill="none" stroke="#00C9A7" stroke-width="3" stroke-dasharray="4,2" opacity=".8"/>
+          <text x="385" y="40" fill="#00C9A7" font-size="13" font-weight="700">VCL</text>
+
+          <!-- VAP - média (dourado) -->
+          <path d="M 20 70 C 60 55, 100 65, 140 58 C 180 52, 220 56, 260 50 C 300 46, 340 48, 380 42" fill="none" stroke="#F0B429" stroke-width="3"/>
+          <text x="385" y="52" fill="#F0B429" font-size="13" font-weight="700">VAP</text>
+
+          <!-- VSL - reta (azul) -->
+          <line x1="20" y1="70" x2="380" y2="42" stroke="#74B9FF" stroke-width="3" stroke-dasharray="8,4"/>
+          <text x="385" y="62" fill="#74B9FF" font-size="13" font-weight="700">VSL</text>
+
+          <!-- ALH -->
+          <line x1="140" y1="58" x2="140" y2="30" stroke="#A78BFA" stroke-width="2.5" stroke-dasharray="3,2"/>
+          <line x1="140" y1="58" x2="140" y2="78" stroke="#A78BFA" stroke-width="2.5" stroke-dasharray="3,2"/>
+          <text x="145" y="28" fill="#A78BFA" font-size="12" font-weight="600">ALH</text>
+
+          <!-- Legenda -->
+          <circle cx="20" cy="70" r="5" fill="#FF6B6B"/>
+          <text x="10" y="85" fill="#7A8EA3" font-size="11">início</text>
+          <circle cx="380" cy="42" r="5" fill="#84CC16"/>
+          <text x="370" y="28" fill="#7A8EA3" font-size="11">fim</text>
+        </svg>
+      </div>
+
+      <!-- ESPAÇO PARA IMAGEM REAL DE TRAJETÓRIAS -->
+      <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:16px;text-align:center;margin-top:10px">
+        <div style="font-size:1.1rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em">Substituir SVG por: diagrama científico real de VCL/VSL/VAP<br>ou imagem do drone filmando corredor com 3 trajetórias sobrepostas</div>
+      </div>
+
+
+      <div class="hl" style="margin-top:14px">
+        <strong>VCL</strong> = trajetória real (curvilínea)<br>
+        <strong>VAP</strong> = trajetória suavizada (média)<br>
+        <strong>VSL</strong> = distância em linha reta (início → fim)
+      </div>
+    </div>
+    <div>
+      <table class="tbl">
+        <thead><tr><th>Parâmetro</th><th>Definição</th><th>Unidade</th></tr></thead>
+        <tbody>
+          <tr><td class="param">VCL</td><td>Velocidade Curvilínea — caminho real percorrido</td><td>μm/s</td></tr>
+          <tr><td class="param">VSL</td><td>Velocidade em Linha Reta — ponto A → B</td><td>μm/s</td></tr>
+          <tr><td class="param">VAP</td><td>Velocidade Média do Percurso — trajetória suavizada</td><td>μm/s</td></tr>
+          <tr><td class="param" style="color:var(--lime)">LIN</td><td>Linearidade = VSL ÷ VCL</td><td>%</td></tr>
+          <tr><td class="param" style="color:var(--lime)">STR</td><td>Retilinearidade = VSL ÷ VAP</td><td>%</td></tr>
+          <tr><td class="param" style="color:var(--lime)">WOB</td><td>Wobble = VAP ÷ VCL</td><td>%</td></tr>
+          <tr><td class="param" style="color:var(--violet)">ALH</td><td>Amplitude de Deslocamento Lateral</td><td>μm</td></tr>
+          <tr><td class="param" style="color:var(--violet)">BCF</td><td>Frequência de Batimento Cruzado</td><td>Hz</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ref">Mortimer, Hum Reprod Update 1997 · Amann & Waberski 2014 · Gallagher et al. 2018</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Este slide apresenta a base conceitual de toda a análise CASA: as trajetórias espermáticas e os parâmetros derivados delas.<br><br>
+    Vou usar uma analogia que facilita a compreensão. Imaginem que vocês estão filmando um corredor de 100 metros a partir de um drone. Eu consigo medir três coisas muito diferentes sobre ele:<br><br>
+    <strong>VCL — Velocidade Curvilínea:</strong> É a distância REAL que ele percorreu — com todas as curvas, desvios e zigue-zagues do caminho. É o GPS registrando cada passo. Para um espermatozoide que bate a cabeça lateralmente enquanto nada, essa é a maior das três velocidades.<br><br>
+    <strong>VSL — Velocidade em Linha Reta:</strong> Se eu traçar uma linha reta do ponto de saída até onde ele chegou no final — qual seria a velocidade nessa linha imaginária? É a distância em linha reta dividida pelo tempo total. Se o corredor deu muitas curvas, essa velocidade será muito menor que a VCL.<br><br>
+    <strong>VAP — Velocidade do Caminho Médio:</strong> O GPS suavizado — sem os micro-tremores. O software "alisa" a trajetória curvilínea e calcula a velocidade desse caminho médio. Fica entre VCL e VSL.<br><br>
+    E daí derivam as razões:<br><br>
+    <strong>LIN = VSL/VCL:</strong> Se o corredor foi 100% em linha reta, LIN = 100%. Se ele deu muitas curvas, LIN fica baixo — como 25-30% que vemos nos garanhões.<br>
+    <strong>STR = VSL/VAP:</strong> Quão reta é a rota suavizada.<br>
+    <strong>WOB = VAP/VCL:</strong> O quanto a rota média oscila em relação à trajetória real.<br><br>
+    E o <strong>ALH</strong>? É a largura do corredor que ele usa para se balançar. Um garanhão com ALH alto bate muito a cabeça — consome energia, pode indicar hiperativação. <strong>BCF</strong> é quantas vezes por segundo a trajetória curvilínea cruza a trajetória média — o ritmo do batimento.<br><br>
+    Uma observação metodológica importante: os valores absolutos de VCL, VAP e consequentemente LIN e WOB dependem diretamente da taxa de frames. Com fps baixo, as oscilações entre frames são "achatadas" pelo software e VCL é subestimada, inflando artificialmente LIN e WOB. Esse é um dos motivos pelos quais o artigo de Gacem utilizou 250 fps — para capturar a trajetória real com máxima fidelidade.
+  </div>
+</div>
+
+
+
+
+<!-- SLIDE 6: PADRÕES DE TRAJETÓRIA -->
+<div class="slide" id="s6">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">06 / 25</span></div>
+  <h2>Padrões de Trajetória Espermática</h2>
+  <p class="sub">Três padrões cinéticos fundamentais observados pelo CASA</p>
+
+  <div class="g3">
+    <div class="card">
+      <div class="card-bar" style="background:var(--lime)"></div>
+      <div class="label lime">Progressivo linear</div>
+      <svg viewBox="0 0 200 80" style="width:100%;height:70px;margin:8px 0">
+        <path d="M 10 60 C 30 55, 50 58, 70 52 C 90 48, 110 50, 130 45 C 150 42, 170 44, 190 38" fill="none" stroke="#84CC16" stroke-width="3"/>
+        <path d="M 10 60 C 25 48, 45 65, 65 45 C 85 38, 95 55, 115 42 C 135 35, 145 48, 165 38 C 175 32, 185 40, 195 30" fill="none" stroke="#84CC16" stroke-width="2" stroke-dasharray="3,2" opacity=".5"/>
+      </svg>
+      <h3 style="color:var(--lime)">Alta VCL · Alta VSL · Alta LIN</h3>
+      <p class="body">Deslocamento rápido com trajetória retilínea. Padrão associado ao transporte no trato reprodutivo feminino. Subpopulação SP2 no artigo de Gacem et al.</p>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">Progressivo não-linear</div>
+      <svg viewBox="0 0 200 80" style="width:100%;height:70px;margin:8px 0">
+        <path d="M 10 50 C 20 25, 35 70, 50 30 C 65 10, 75 65, 95 35 C 110 15, 125 60, 140 30 C 155 10, 170 55, 190 25" fill="none" stroke="#F0B429" stroke-width="3"/>
+        <line x1="10" y1="50" x2="190" y2="25" stroke="#F0B429" stroke-width="2" stroke-dasharray="5,3" opacity=".4"/>
+      </svg>
+      <h3 style="color:var(--gold)">Alta VCL · Baixa VSL · Baixa LIN</h3>
+      <p class="body">Alta velocidade com oscilação ampla. Padrão típico de hiperativação ou espermatozoides com alta BCF e ALH. Subpopulação SP3.</p>
+    </div>
+    <div class="card">
+      <div class="card-bar" style="background:var(--muted)"></div>
+      <div class="label" style="color:var(--muted)">Lento / errático</div>
+      <svg viewBox="0 0 200 80" style="width:100%;height:70px;margin:8px 0">
+        <path d="M 40 40 C 50 35, 55 50, 60 38 C 65 30, 72 48, 78 35 C 82 42, 90 32, 95 45 C 100 38, 108 48, 112 40" fill="none" stroke="#7A8EA3" stroke-width="3"/>
+      </svg>
+      <h3>Baixa VCL · Baixa VSL · Baixa LIN</h3>
+      <p class="body">Deslocamento mínimo, trajetória irregular. Espermatozoides com motilidade residual ou em processo de morte celular. Subpopulação SP1.</p>
+    </div>
+  </div>
+
+  <div class="hl">
+    <strong>Relevância biológica:</strong> A proporção de cada padrão no ejaculado pode refletir a capacidade funcional do sêmen. Espermatozoides progressivos lineares são os candidatos à fertilização; não-lineares rápidos podem representar estado de hiperativação; lentos podem indicar dano celular.
+  </div>
+
+  
+  <!-- ESPAÇO PARA IMAGENS REAIS DE TRAJETÓRIAS DO CASA -->
+  <div class="g3" style="margin-top:12px">
+    <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center">
+      <div style="font-size:.85rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.08em">Screenshot: trajetória linear<br>do software CASA</div>
+    </div>
+    <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center">
+      <div style="font-size:.85rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.08em">Screenshot: trajetória hiperativada<br>do software CASA</div>
+    </div>
+    <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center">
+      <div style="font-size:.85rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.08em">Screenshot: trajetória lenta/errática<br>do software CASA</div>
+    </div>
+  </div>
+
+<div class="ref">Mortimer & Mortimer, Asian J Androl 2013 · Quintero-Moreno et al., Theriogenology 2003 · van der Horst, Anim Reprod Sci 2020</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Este slide é fundamental para a compreensão visual dos dados que veremos na segunda parte da apresentação.<br><br>
+    Observem as três representações de trajetória. À esquerda, o padrão <strong>progressivo linear</strong>: o espermatozoide avança rapidamente em linha relativamente reta. A trajetória curvilínea (linha mais fina) oscila pouco ao redor da trajetória média. Este é o padrão que associamos à capacidade de transporte no trato reprodutivo feminino — o espermatozoide que efetivamente atravessa o muco cervical e percorre o oviduto. No artigo de Gacem, essa é a subpopulação SP2 — a dominante, representando 38-42% do ejaculado.<br><br>
+    No centro, o padrão <strong>progressivo não-linear</strong>: alta velocidade curvilínea, mas com oscilação ampla da cabeça. A VCL é alta porque o caminho percorrido é longo — mas a VSL é baixa porque em linha reta o avanço é modesto. Este padrão pode representar dois estados fisiológicos diferentes: hiperativação espermática — que é um evento fisiológico necessário para a penetração da zona pelúcida — ou simplesmente um padrão de nado errático. A distinção entre hiperativação verdadeira e nado errático requer critérios adicionais como ALH alto combinado com VCL alta e LIN baixa, conforme definido por Mortimer e Mortimer em 2013. No artigo de Gacem, essa é a SP3.<br><br>
+    À direita, o padrão <strong>lento/errático</strong>: deslocamento mínimo, trajetória irregular. São espermatozoides com motilidade residual — podem estar em processo de morte celular, com dano mitocondrial ou de membrana. No artigo, é a SP1 — a subpopulação mais lenta e menos linear.<br><br>
+    A relevância biológica está na proporção: um ejaculado com 42% de SP2 (progressiva linear), 31% de SP3 (rápida não-linear) e 27% de SP1 (lenta) tem um perfil funcional muito diferente de um ejaculado com 15% de SP2, 25% de SP3 e 60% de SP1 — embora ambos possam ter a mesma "motilidade progressiva" quando avaliada de forma convencional. É exatamente por isso que a análise de subpopulações traz informação que a média não revela.
+  </div>
+</div>
+
+<!-- SLIDE 7: FATORES DE VARIAÇÃO -->
+<div class="slide" id="s7">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">07 / 25</span></div>
+  <h2>Fatores de Variação nos Resultados</h2>
+  <p class="sub">Dados CASA são laboratório-específicos — padronização e relato completo são obrigatórios</p>
+
+  <div class="g3">
+    <div class="card"><div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">Taxa de Frames (fps)</div>
+      <p class="body">25 fps subestima VCL em até 40%. Ponto assintótico: ~212 fps para VCL (Valverde et al., 2019). Mínimo aceitável: 60 fps para motilidade; 250 fps para cinética precisa.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--teal)"></div>
+      <div class="label teal">Câmara de Contagem</div>
+      <p class="body">Profundidade (10 vs 20 μm), tipo (capilar vs drop). Câmaras mais profundas = mais movimento vertical = alteração de TODOS os parâmetros. Spermtrack® 10 μm é padrão para equinos.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--sky)"></div>
+      <div class="label sky">Diluidor e Meio</div>
+      <p class="body">Leite desnatado, INRA96, BotuSemen — cada um altera comportamento cinético. Nenhum reproduz as condições do trato reprodutivo feminino (Amann & Waberski, 2014).</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--coral)"></div>
+      <div class="label coral">Temperatura</div>
+      <p class="body">Platina a 37°C obrigatória. Variações térmicas alteram diretamente VCL e motilidade progressiva. Intervalo coleta→análise padronizado.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--violet)"></div>
+      <div class="label violet">Concentração</div>
+      <p class="body">Amostras concentradas → erro de rastreamento (tracking errors). Recomendado: 40-50 × 10⁶ sptz/mL para garanhões (Gacem et al., 2020).</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--lime)"></div>
+      <div class="label lime">Software e Operador</div>
+      <p class="body">Thresholds de área, cutoff de VAP (≥10 μm/s), conectividade, número de frames. Validação e padronização obrigatórias por laboratório.</p>
+    </div>
+  </div>
+
+  <div class="hl-danger">
+    <strong>Mensagem-chave:</strong> Dois laboratórios usando o MESMO modelo de CASA podem obter resultados diferentes se as configurações não forem idênticas. Resultados entre sistemas diferentes são incomparáveis sem validação cruzada.
+  </div>
+
+  <div class="ref">Amann & Waberski 2014 · Mortimer 2000 · Valverde et al. 2019 · Bompart et al. 2019 · Gacem et al. 2020</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Este é possivelmente o slide mais importante de toda a revisão, porque aborda um problema que muitos pesquisadores subestimam: a variabilidade técnica dos resultados CASA.<br><br>
+    <strong>Taxa de frames:</strong> Valverde e colaboradores, em 2019, demonstraram de forma elegante em varrões que a VCL é o parâmetro mais sensível ao frame rate, atingindo um ponto assintótico — ou seja, se estabilizando — apenas em torno de 212 fps. Abaixo disso, a VCL é progressivamente subestimada porque o software "perde" as oscilações rápidas da cabeça entre frames. Com 25 fps, essa subestimação pode chegar a 40%. Para motilidade simples (total e progressiva), 100 fps já é suficiente; mas para cinética precisa — especialmente VCL, ALH e BCF — são necessários no mínimo 212-250 fps. Bompart e colaboradores confirmaram achado semelhante em touros em 2019.<br><br>
+    <strong>Câmara de contagem:</strong> A profundidade da câmara determina o espaço vertical disponível para o espermatozoide. Uma câmara de 10 μm restringe mais o movimento vertical; uma de 20 μm dá mais liberdade. Isso afeta todos os parâmetros porque o CASA mede em 2D, mas o espermatozoide se move em 3D. Para equinos, a Spermtrack de 10 μm é o padrão utilizado pelo grupo de Barcelona.<br><br>
+    <strong>Diluidor:</strong> Cada diluidor altera a viscosidade, osmolaridade e composição do meio, afetando diretamente o comportamento cinético. Leite desnatado, INRA96, BotuSemen — cada um gera resultados diferentes para a mesma amostra. Como observam Amann e Waberski, nenhum diluidor reproduz as condições reais do trato reprodutivo feminino.<br><br>
+    <strong>Temperatura:</strong> A platina deve estar rigorosamente a 37°C. Uma queda de 2-3°C já é suficiente para reduzir significativamente a motilidade e as velocidades medidas.<br><br>
+    <strong>Concentração:</strong> Amostras muito concentradas geram tracking errors — o software confunde espermatozoides que se cruzam ou se aproximam. Para garanhões, o ideal é diluir a 40-50 milhões por mL antes da análise.<br><br>
+    <strong>Software e operador:</strong> Os thresholds de detecção (área mínima e máxima de pixels), o cutoff de VAP para classificar como "móvel" (geralmente ≥10 μm/s), a conectividade dos centroides e o número mínimo de frames rastreados — tudo isso varia conforme a configuração e afeta os resultados.<br><br>
+    A mensagem final é inescapável: dados de CASA são laboratório-específicos. Quando lemos um artigo com dados de CASA, a primeira coisa a verificar é: qual sistema, qual fps, qual câmara, qual diluidor, qual concentração, quais configurações de software. Sem essa informação, os números são essencialmente não-interpretáveis.
+  </div>
+</div>
+
+<!-- SLIDE 8: CASA × FERTILIDADE -->
+<div class="slide" id="s8">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">08 / 25</span></div>
+  <h2>CASA × Fertilidade</h2>
+  <p class="sub">Uma relação complexa e frequentemente superestimada</p>
+
+  <div class="hl-warn" style="font-size:1.2rem;padding:18px 22px">
+    <em>"It is inappropriate to continue to perpetuate the myth that evaluation of sperm motion can accurately predict the fertilizing potential of sperm in a given semen sample when used for AI."</em>
+    <br><span style="color:var(--gold);font-weight:700">— Amann & Waberski, Theriogenology, 2014</span>
+  </div>
+
+  <div class="g2" style="margin-top:16px">
+    <div>
+      <h3 style="color:var(--coral)">Limitações na predição</h3>
+      <ul class="topics">
+        <li>Análise em <strong>condições estáticas</strong> (2D, câmara, meio artificial) ≠ trato reprodutivo</li>
+        <li>A fêmea <strong>seleciona ativamente</strong> espermatozoides in vivo</li>
+        <li>Fatores da fêmea, manejo e técnico explicam <strong>mais variação</strong> que qualidade do sêmen</li>
+        <li>Em suínos: macho e sêmen explicam <strong>&lt;7%</strong> da variação na taxa de parição</li>
+        <li>CASA <strong>superestima concentração</strong> por identificar debris como células</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="color:var(--lime)">Valor real do CASA</h3>
+      <ul class="topics">
+        <li><strong>Controle de qualidade</strong> objetivo e reprodutível</li>
+        <li><strong>Descarte</strong> de amostras com parâmetros insatisfatórios</li>
+        <li>Em garanhões: PM ≥45% no resfriado = alta recuperação embrionária</li>
+        <li>Identificação de <strong>fenótipos extremos</strong> (oligo/astenozoospermia)</li>
+        <li>Pesquisa: análise de <strong>subpopulações</strong> e efeitos de tratamentos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ref">Amann & Waberski 2014 · Holt & Van Look, Fertil Steril 2004 · Broekhuijse et al., Theriogenology 2012</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Este slide aborda um tema que frequentemente gera debate em bancas e congressos: a relação entre os parâmetros CASA e a fertilidade real.<br><br>
+    A citação de Amann e Waberski é deliberadamente provocativa e categórica: é inapropriado perpetuar o mito de que a avaliação de motilidade pode predizer com precisão o potencial fértil. Essa afirmação, embora pareça radical, é sustentada por décadas de evidências.<br><br>
+    <strong>Por que a predição é limitada?</strong><br><br>
+    Primeiro, a análise CASA é feita em condições completamente artificiais: câmara rasa de 10-20 μm (o espermatozoide se move em 3D no trato), meio de diluição que não reproduz o fluido do oviduto, temperatura controlada mas estática. O ambiente real do trato reprodutivo feminino é radicalmente diferente — com gradientes químicos, seleção mecânica pelo muco cervical, interações com o epitélio oviductal.<br><br>
+    Segundo, a fêmea não é um recipiente passivo. Ela seleciona ATIVAMENTE espermatozoides ao longo do trato — modificando atributos celulares, eliminando células defeituosas, reservando subpopulações no reservatório istmo-oviductal. O espermatozoide que performa bem no CASA pode não ser o selecionado in vivo.<br><br>
+    Terceiro — e isso é particularmente revelador — estudos em suínos demonstraram que o sêmen e o macho explicam MENOS DE 7% da variação total na taxa de parição. Os outros 93% vêm da fêmea, do manejo, do técnico de IA e de fatores ambientais. Broekhuijse e colaboradores, em 2012, confirmaram isso com dados de milhares de inseminações.<br><br>
+    <strong>Então qual é o valor real do CASA?</strong><br><br>
+    Primeiro, controle de qualidade: o CASA é incomparável para avaliação objetiva e reprodutível. Ele elimina o viés do observador que contamina a avaliação subjetiva visual.<br><br>
+    Segundo, descarte de amostras ruins: PM abaixo de 40% no sêmen fresco de garanhão está associada a queda de fertilidade. PM acima de 45% no sêmen resfriado está associada a alta taxa de recuperação embrionária. Esses limiares são úteis para decisão clínica.<br><br>
+    Terceiro, identificação de fenótipos extremos: astenozoospermia total, oligozoospermia severa — nesses casos, o CASA é diagnóstico.<br><br>
+    Quarto, pesquisa: a análise de subpopulações, efeitos de criopreservação, suplementação antioxidante — o CASA é a ferramenta de escolha para comparar tratamentos e protocolos.<br><br>
+    Para uma banca de doutorado, é essencial demonstrar esse pensamento crítico: reconhecer o poder da ferramenta sem superestimar suas capacidades preditivas.
+  </div>
+</div>
+
+<!-- SLIDE 9: SUBPOPULAÇÕES -->
+<div class="slide" id="s9">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">09 / 25</span></div>
+  <h2>Subpopulações Espermáticas</h2>
+  <p class="sub">O paradigma atual: o ejaculado não é homogêneo — médias mascaram diversidade funcional</p>
+
+  <div class="g2">
+    <div>
+      <h3 style="color:var(--teal)">Conceito</h3>
+      <ul class="topics">
+        <li>Ejaculado contém <strong>diferentes tipos funcionais</strong> de espermatozoides</li>
+        <li>Cada tipo com padrão cinético <strong>distinto e mensurável</strong></li>
+        <li>Média/mediana populacionais <strong>mascaram</strong> essa heterogeneidade</li>
+        <li>Diferentes subpopulações podem ter <strong>diferentes papéis biológicos</strong></li>
+      </ul>
+
+      <h3 style="color:var(--gold);margin-top:16px">Metodologia</h3>
+      <ul class="topics">
+        <li><strong>PCA</strong> — redução de 8 parâmetros a 2-3 componentes independentes</li>
+        <li><strong>Cluster analysis</strong> (Ward + K-means) → agrupamento por similaridade</li>
+        <li>Pioneiro: <strong>Quintero-Moreno et al. (2003)</strong> em garanhões</li>
+        <li>Consenso atual: 2-4 subpopulações na maioria das espécies</li>
+      </ul>
+    </div>
+    <div>
+      <div class="card" style="border-color:var(--teal)">
+        <div class="label teal">Interpretação dos componentes principais</div>
+        <table class="tbl">
+          <thead><tr><th>PC</th><th>Variáveis</th><th>Interpretação</th></tr></thead>
+          <tbody>
+            <tr><td class="param">PC1</td><td>VCL, VSL, VAP</td><td>Velocidade geral</td></tr>
+            <tr><td class="param">PC2</td><td>LIN, STR, WOB</td><td>Progressividade</td></tr>
+            <tr><td class="param">PC3</td><td>BCF, ALH</td><td>Oscilação / batimento</td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="margin-top:12px">Três dimensões biológicas independentes que estruturam a diversidade cinética do ejaculado.</p>
+      </div>
+      <div class="hl" style="margin-top:14px">
+        <strong>Implicação prática:</strong> Dois ejaculados com a mesma motilidade progressiva podem ter distribuições de subpopulações completamente diferentes — e potenciais férteis distintos.
+      </div>
+    </div>
+  </div>
+
+  <div class="ref">Quintero-Moreno et al., Theriogenology 2003 · Valverde et al. 2019-2021 · Gacem et al. 2021</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    O conceito de subpopulações espermáticas é o paradigma que transformou a análise CASA nas últimas duas décadas — e é o tema central do artigo que discutiremos na segunda parte.<br><br>
+    O ponto de partida é simples mas profundo: o ejaculado não é uma população homogênea de células equivalentes. Dentro de um mesmo ejaculado de um único garanhão, coexistem espermatozoides com padrões de movimento fundamentalmente diferentes — rápidos e lineares, rápidos e oscilantes, lentos e erráticos. Quando calculamos a média de VCL ou motilidade progressiva, mascaramos completamente essa heterogeneidade funcional.<br><br>
+    O trabalho pioneiro de Quintero-Moreno e colaboradores, publicado na Theriogenology em 2003, foi o primeiro a demonstrar formalmente a existência de subpopulações com motilidade específica em ejaculados de garanhões. Eles usaram análise multivariada — VARCLUS seguido de ANOVA — para identificar 5 clusters cinéticos distintos em 2649 observações espermáticas.<br><br>
+    A metodologia atual, refinada ao longo dos anos, segue dois passos: primeiro, PCA para redução de dimensionalidade — os 8 parâmetros cinéticos são condensados em 2-3 componentes principais independentes. PC1 geralmente carrega velocidades (VCL, VSL, VAP), PC2 carrega progressividade (LIN, STR, WOB) e PC3 carrega oscilação (BCF, ALH). Segundo, análise de cluster — Ward hierárquico seguido de K-means — para agrupar espermatozoides com padrões semelhantes.<br><br>
+    O consenso atual aponta para 2-4 subpopulações na maioria das espécies domésticas, embora esse número dependa criticamente da taxa de frames utilizada — como veremos no artigo de Gacem.<br><br>
+    A implicação prática é poderosa: dois ejaculados podem ter exatamente a mesma motilidade progressiva de 65%, mas distribuições de subpopulações completamente diferentes. Um pode ter 45% de SP2 (rápida linear — a "favorita" para fertilização) e o outro apenas 20% de SP2. A média não distingue esses dois ejaculados — a análise de subpopulações sim. Essa é a razão pela qual Amann e Waberski já em 2014 recomendavam que o software CASA deveria permitir agrupamento por atributos, não apenas reportar médias.
+  </div>
+</div>
+
+<!-- SLIDE 10: PERSPECTIVAS FUTURAS -->
+<div class="slide" id="s10">
+  <div class="s-header"><span class="s-section">Revisão de Literatura</span><span class="s-num">10 / 25</span></div>
+  <h2>Perspectivas Futuras</h2>
+  <p class="sub">Integração com inteligência artificial, dispositivos portáteis e análise tridimensional</p>
+
+  <div class="g3">
+    <div class="card"><div class="card-bar" style="background:var(--teal)"></div>
+      <div class="label teal">IA e Deep Learning</div>
+      <p class="body"><strong>YOLOv8 + DeepSORT</strong> para detecção e tracking em tempo real. Redes neurais substituem detecção por área de pixels. Classificação automática de subpopulações sem supervisão humana (Zhang et al., 2024).</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">Dispositivos Portáteis</div>
+      <p class="body"><strong>iSperm</strong> (iPad-based, CCC 0.87-0.92 vs desktop). <strong>Ongo Vision</strong> (standalone). Validados para campo em equinos, bovinos, suínos, ovinos. Telemedicina reprodutiva.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--violet)"></div>
+      <div class="label violet">CASA 3D e Holografia</div>
+      <p class="body"><strong>DHM</strong> (Digital Holographic Microscopy): parâmetros 3D em sptz vivos sem marcação. Reconstrução de trajetória + flagelo. Elimina limitação do 2D (van der Horst, 2020).</p>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-top:12px">
+    <div class="card"><div class="card-bar" style="background:var(--sky)"></div>
+      <div class="label sky">Integração com Ômicas</div>
+      <p class="body">Proteômica e metabolômica do plasma seminal integradas com dados cinéticos para identificar biomarcadores de fertilidade. CASA como fenótipo funcional + ômicas como genótipo molecular.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--lime)"></div>
+      <div class="label lime">Big Data e Padronização</div>
+      <p class="body">Análise de grandes bancos com tendências temporais, efeitos de raça/sazonalidade. WHO 6ª ed (2021) como referência para padronização. Necessidade de consenso inter-laboratorial.</p>
+    </div>
+  </div>
+
+  <div class="ref">Zhang et al. 2024 · van der Horst 2020 · Mojo AISA, Front Cell Dev Biol 2023 · iSperm validation, PMC 2020 · WHO 2021</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Para fechar a revisão, vamos olhar para onde o CASA está indo — e o cenário é fascinante.<br><br>
+    <strong>Inteligência artificial:</strong> Sistemas baseados em deep learning estão revolucionando o CASA. Zhang e colaboradores em 2024 demonstraram a viabilidade de YOLOv8 combinado com DeepSORT para detecção e rastreamento multi-objeto de espermatozoides em tempo real — sem necessidade de câmaras de contagem especiais. O sistema AISA (Automated Intelligent Sperm Analyzer), publicado na Frontiers em 2023, usa redes neurais que substituem completamente a detecção baseada em área de pixels — eliminando artefatos ópticos que confundem os sistemas convencionais. A classificação automática de subpopulações sem supervisão humana já é uma realidade em laboratórios de pesquisa avançados.<br><br>
+    <strong>Dispositivos portáteis:</strong> O iSperm, baseado em iPad, foi validado para múltiplas espécies com coeficientes de concordância de 0.87-0.92 versus CASA desktop. O Ongo Vision é um dispositivo standalone que gera resultados comparáveis ao SCA/Microptic. Esses dispositivos viabilizam a espermatologia a campo e a telemedicina reprodutiva — o veterinário analisa no campo e envia dados para o especialista na universidade.<br><br>
+    <strong>CASA 3D:</strong> A holografia digital — DHM, Digital Holographic Microscopy — permite obter parâmetros 3D de espermatozoides vivos sem marcação fluorescente. Publicações em Scientific Reports (2022) e APL Photonics (2023) demonstraram reconstrução 3D de trajetória incluindo movimento flagelar. O sistema FAST de van der Horst (2020) também converte coordenadas X-Y do CASA-2D em tracks 3D. Isso elimina a limitação fundamental de analisar um movimento tridimensional em apenas dois eixos.<br><br>
+    <strong>Integração com ômicas:</strong> O futuro não é o CASA sozinho, mas o CASA integrado com proteômica e metabolômica. O conceito é usar o CASA como fenotipagem funcional e as ômicas como genotipagem molecular — cruzando os dados para identificar biomarcadores de fertilidade no plasma seminal. Isso representa uma mudança de paradigma: de "quanto ele nada" para "o que determina como ele nada".<br><br>
+    <strong>Big Data:</strong> A análise de grandes bancos de dados — milhares de ejaculados ao longo de anos — permitirá identificar tendências temporais, efeitos de raça, sazonalidade e interações complexas que estudos individuais não capturam.
+  </div>
+</div>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 2 — ARTIGO ORIGINAL (20 min)
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE 12: TRANSIÇÃO -->
+<div class="slide" id="s12">
+  <div class="s-header"><span class="s-part">PARTE 2 · ARTIGO ORIGINAL</span><span class="s-num">12 / 25</span></div>
+  <div style="margin-bottom:20px"><span style="font-size:1.1rem;font-weight:700;color:var(--gold);letter-spacing:.15em">PARTE 2</span></div>
+  <h1 style="font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.3">A New Approach of Sperm Motility<br>Subpopulation Structure<br>in <span class="gold">Donkey</span> and <span class="teal">Horse</span></h1>
+  <p style="color:var(--muted);font-size:1.2rem;margin-top:16px">Gacem S, Valverde A, Catalán J, Yánez Ortiz I, Soler C & Miró J</p>
+  <p style="color:var(--subtle);font-size:.88rem;margin-top:4px">Frontiers in Veterinary Science · Volume 8 · 2021 · doi: 10.3389/fvets.2021.651477</p>
+  <p style="color:var(--muted);font-size:1.1rem;margin-top:20px">Equine Reproduction Service — Autonomous University of Barcelona<br>Universitat de València · Costa Rica Institute of Technology</p>
+  <p style="font-size:1.2rem;color:var(--gold);margin-top:14px;font-weight:600">Keywords: equids · sperm motility · subpopulations · sperm kinematics · CASA-Mot</p>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Entramos agora na segunda parte: a apresentação detalhada do artigo original.<br><br>
+    O artigo intitulado "A New Approach of Sperm Motility Subpopulation Structure in Donkey and Horse" foi publicado na Frontiers in Veterinary Science em maio de 2021. O primeiro autor é Sabrina Gacem, e o autor sênior é Jordi Miró — ambos do Serviço de Reprodução Equina da Universidade Autônoma de Barcelona. Anthony Valverde, da Costa Rica, contribuiu com a análise estatística multivariada, e Carles Soler, da Universidade de Valência, é um dos desenvolvedores do sistema ISAS utilizado no estudo.<br><br>
+    Este artigo é particularmente relevante por três motivos: primeiro, é o primeiro estudo a utilizar 250 fps para comparar sistematicamente a cinética de jumentos e cavalos. Segundo, inclui comparação entre raças de cavalos — Espanhol e Árabe — o que raramente é feito na literatura. E terceiro, demonstra como a alta taxa de frames muda fundamentalmente a identificação de subpopulações espermáticas — encontrando 3 subpopulações consistentes onde estudos anteriores com fps menores encontravam 4 a 6.<br><br>
+    Vou apresentar seguindo a estrutura científica clássica: introdução, objetivos, material e métodos, resultados, discussão e conclusão.
+  </div>
+</div>
+
+<!-- SLIDE 13: INTRODUÇÃO E OBJETIVOS -->
+<div class="slide" id="s13">
+  <div class="s-header"><span class="s-section">Introdução · Objetivos</span><span class="s-num">13 / 25</span></div>
+  <h2>Contextualização e Objetivos</h2>
+
+  <div class="g2">
+    <div>
+      <h3 style="color:var(--gold)">Justificativa</h3>
+      <ul class="topics">
+        <li>Equídeos: ancestral comum <strong>~4 milhões de anos</strong></li>
+        <li>Hibridação interespecífica viável → <strong>mulas e bardotos</strong></li>
+        <li>Seleção artificial moldou <strong>cinética espermática</strong> diferentemente</li>
+        <li>Estudos anteriores: <strong>16-25 fps</strong> — taxa subótima que distorce trajetórias</li>
+        <li>Nenhum estudo comparou subpopulações <strong>jumento vs cavalo a 250 fps</strong></li>
+      </ul>
+    </div>
+    <div>
+      <div class="card" style="border-color:var(--teal)">
+        <div class="label teal">Objetivos</div>
+        <ul class="topics">
+          <li>Caracterizar parâmetros cinéticos com <strong>250 fps</strong></li>
+          <li>Definir <strong>estrutura de subpopulações</strong> em cavalos e jumentos</li>
+          <li>Comparar cinética entre <strong>espécies</strong> (jumento vs cavalo)</li>
+          <li>Comparar cinética entre <strong>raças</strong> (Espanhol vs Árabe)</li>
+        </ul>
+      </div>
+      <div class="hl" style="margin-top:14px">
+        <strong>Hipótese implícita:</strong> A alta taxa de frames revelará diferenças cinéticas espécie e raça-específicas não detectáveis com sistemas convencionais.
+      </div>
+    </div>
+  </div>
+
+  <div class="ref">Gacem et al., Front Vet Sci 2021 · Valverde et al. 2019 · Gacem et al. 2020</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Na introdução, os autores constroem 5 argumentos que justificam o estudo:<br><br>
+    <strong>1. Proximidade filogenética:</strong> Cavalos e jumentos pertencem ao gênero Equus e compartilham ancestral comum de aproximadamente 4 milhões de anos. São geneticamente tão próximos que produzem híbridos viáveis — mulas (garanhão × jumenta) e bardotos (jumento × égua) — embora estéreis na grande maioria dos casos. Apesar dessa proximidade, a cinética espermática difere significativamente entre as espécies.<br><br>
+    <strong>2. Seleção artificial:</strong> A domesticação do cavalo e do jumento ocorreu há cerca de 5000 anos, mas com pressões de seleção muito diferentes. O cavalo sofreu seleção intensiva para desempenho atlético, morfologia e temperamento. O jumento sofreu seleção menos intensa, mantendo características mais próximas do tipo selvagem. Os autores argumentam que essa divergência de seleção pode ter impactado a espermatogênese e, consequentemente, a cinética espermática.<br><br>
+    <strong>3. Limitação de fps:</strong> A maioria dos estudos anteriores sobre subpopulações em garanhões utilizou taxas de 16 a 25 fps — o que, como vimos na revisão, subestima gravemente VCL e pode fragmentar artificialmente subpopulações. O próprio grupo de Gacem demonstrou em 2020 que o frame rate é o fator que mais influencia os valores cinéticos em garanhões.<br><br>
+    <strong>4. Lacuna na literatura:</strong> Não existia até então comparação de subpopulações entre jumento e cavalo utilizando alta taxa de frames. A literatura sobre cinética de jumento é particularmente escassa.<br><br>
+    <strong>5. Diferenças entre raças:</strong> Os autores incluíram duas raças de cavalos com histórias genéticas distintas — o Puro Raça Espanhol (PRE), resultado de cruzamentos europeus/orientais, e o Árabe, uma das raças mais puras geneticamente — para testar se a variação interraça é biologicamente significativa.<br><br>
+    Os 4 objetivos são claros e focados: caracterizar com 250 fps, definir subpopulações, comparar espécies e comparar raças. A hipótese implícita — embora não explicitamente declarada — é que a alta resolução temporal revelará diferenças não detectáveis com sistemas convencionais.
+  </div>
+</div>
+
+<!-- SLIDE 14: METODOLOGIA -->
+<div class="slide" id="s14">
+  <div class="s-header"><span class="s-section">Material e Métodos</span><span class="s-num">14 / 25</span></div>
+  <h2>Delineamento Experimental</h2>
+
+  <div class="g3">
+    <div class="card"><div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">Animais</div>
+      <h3>57 ejaculados frescos</h3>
+      <p class="body">26 garanhões Espanhóis (PRE)<br>16 garanhões Árabes<br>10 jumentos Catalães<br><br>Idade: 6-15 anos<br>Fertilidade comprovada<br>3 coletas/semana durante o ano</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--teal)"></div>
+      <div class="label teal">Protocolo CASA</div>
+      <h3>ISAS® v1.2</h3>
+      <p class="body">Câmera: Proiser HS640m<br>Câmara: Spermtrack® 10 μm<br>Objetivo: 10× fase-contraste negativo<br>Platina: 37°C<br><strong style="color:var(--teal)">250 frames/segundo</strong><br>10 campos não consecutivos<br>≥ 500 sptz/ejaculado</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--violet)"></div>
+      <div class="label violet">Análise Estatística</div>
+      <h3>PCA + Clustering</h3>
+      <p class="body">Normalidade: Shapiro-Wilk<br>Homogeneidade: Levene<br>PCA: critério Kaiser (eigenvalue >1)<br>Clustering: Ward + K-means (2 passos)<br>Comparações: GLM + Bonferroni<br>Significância: P &lt; 0,05</p>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-top:12px">
+    <div class="hl">
+      <strong>Preparo da amostra:</strong> Diluição a 40 × 10⁶ sptz/mL em leite desnatado (4,9% glicose). Cutoff: VAP ≥ 10 μm/s para motilidade. Área: 4-75 μm². Conectividade: 6.
+    </div>
+    <div class="hl" style="border-left-color:var(--gold)">
+      <strong>Validação prévia:</strong> A combinação 250 fps + Spermtrack 10 μm foi validada pelo mesmo grupo em dois artigos independentes (Gacem et al., 2020; Catalán et al., 2020).
+    </div>
+  </div>
+
+  <div class="ref">Gacem et al. 2021 · Gacem et al. 2020 · Catalán et al. 2020</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    O delineamento experimental merece atenção detalhada porque a qualidade metodológica é um dos pontos fortes deste artigo.<br><br>
+    <strong>Animais:</strong> Foram utilizados 57 ejaculados frescos provenientes de três grupos: 26 ejaculados de 13 garanhões Puro Raça Espanhol, 16 ejaculados de 8 garanhões Árabes e 10 ejaculados de 5 jumentos Catalães, mais ejaculados extras totalizando 57. Todos os animais tinham entre 6 e 15 anos de idade e fertilidade previamente comprovada. Isso é importante porque elimina o viés de incluir animais subférteis que poderiam distorcer os padrões de motilidade. As coletas eram realizadas 3 vezes por semana ao longo do ano, garantindo que os animais estavam em regime estável de produção seminal.<br><br>
+    <strong>Sistema CASA:</strong> O sistema utilizado foi o ISAS versão 1.2, fabricado pela Proiser em Valência, Espanha. A câmera é a Proiser HS640m, uma câmera de alta velocidade dedicada. A câmara de contagem é a Spermtrack de 10 micrômetros de profundidade. O objetivo é de 10× com contraste de fase negativo. A platina aquecida mantém 37°C constantes.<br><br>
+    O ponto diferencial: <strong>250 frames por segundo</strong>. Isso significa que o intervalo entre frames é de apenas 4 milissegundos — permitindo capturar as oscilações mais rápidas da cabeça espermática. Compare com 25 fps (40 ms entre frames) ou 60 fps (16,7 ms) — a resolução temporal é 4 a 10 vezes maior.<br><br>
+    Foram analisados 10 campos não consecutivos por ejaculado, com mínimo de 500 espermatozoides. Essa amostragem garante representatividade da população espermática.<br><br>
+    <strong>Preparo da amostra:</strong> Diluição padronizada a 40 milhões/mL em leite desnatado com 4,9% de glicose. Cutoff de VAP ≥ 10 μm/s para classificar como móvel — espermatozoides com VAP abaixo disso são classificados como imóveis. Área de detecção entre 4 e 75 μm² — isso exclui debris menores que 4 μm² e aglomerados maiores que 75 μm².<br><br>
+    <strong>Estatística:</strong> Os dados foram primeiro testados para normalidade (Shapiro-Wilk) e homogeneidade de variâncias (Levene). A PCA utilizou o critério de Kaiser — apenas componentes com eigenvalue >1 foram retidos. O clustering foi feito em dois passos: primeiro Ward hierárquico para determinar o número ótimo de clusters, depois K-means para atribuir cada espermatozoide a uma subpopulação. Comparações entre grupos por GLM com correção de Bonferroni para múltiplas comparações. Significância em P < 0,05.<br><br>
+    <strong>Ponto metodológico crucial:</strong> A combinação específica de 250 fps com Spermtrack 10 μm foi validada previamente pelo mesmo grupo em dois artigos de 2020 — Gacem et al. para jumentos e Catalán et al. para garanhões — garantindo que as condições técnicas foram otimizadas ANTES do estudo principal. Isso demonstra rigor metodológico.
+  </div>
+</div>
+
+<!-- SLIDE 15: RESULTADOS — ESPÉCIE -->
+<div class="slide" id="s15">
+  <div class="s-header"><span class="s-section">Resultados</span><span class="s-num">15 / 25</span></div>
+  <h2>Jumento vs Cavalo</h2>
+  <p class="sub">Comparação cinética entre espécies — todos os parâmetros avaliados a 250 fps</p>
+
+  <table class="tbl">
+    <thead><tr><th>Parâmetro</th><th>Árabe</th><th>Espanhol</th><th>Cavalo (total)</th><th>Jumento</th><th>P</th></tr></thead>
+    <tbody>
+      <tr><td class="param">VCL (μm/s)</td><td>214,5 ± 79,3</td><td>232,5 ± 89,6</td><td>225,0 ± 85,9</td><td style="color:var(--teal);font-weight:700">230,1 ± 91,5</td><td>&lt;0,05</td></tr>
+      <tr><td class="param">VSL (μm/s)</td><td>60,1 ± 37,1</td><td>59,2 ± 34,8</td><td>59,6 ± 35,8</td><td style="color:var(--teal);font-weight:700">78,1 ± 48,0</td><td>&lt;0,05</td></tr>
+      <tr><td class="param">VAP (μm/s)</td><td>161,6 ± 66,0</td><td>167,0 ± 68,9</td><td>164,7 ± 67,6</td><td style="color:var(--teal);font-weight:700">172,6 ± 63,1</td><td>&lt;0,05</td></tr>
+      <tr><td class="param" style="color:var(--lime)">LIN (%)</td><td>27,0 ± 12,0</td><td>25,2 ± 11,2</td><td>25,9 ± 11,6</td><td style="color:var(--teal);font-weight:700">33,8 ± 19,2</td><td>&lt;0,05</td></tr>
+      <tr><td class="param" style="color:var(--lime)">STR (%)</td><td>36,4 ± 15,5</td><td>35,5 ± 15,4</td><td>35,9 ± 15,5</td><td style="color:var(--teal);font-weight:700">42,8 ± 19,7</td><td>&lt;0,05</td></tr>
+      <tr><td class="param" style="color:var(--violet)">ALH (μm)</td><td>1,18 ± 0,28</td><td>1,20 ± 0,03</td><td>1,25 ± 0,30</td><td style="color:var(--teal);font-weight:700">1,41 ± 0,34</td><td>&lt;0,05</td></tr>
+      <tr><td class="param" style="color:var(--violet)">BCF (Hz)</td><td>37,0 ± 15,7</td><td>39,3 ± 14,9</td><td>38,3 ± 15,3</td><td>33,9 ± 18,8</td><td>ns</td></tr>
+    </tbody>
+  </table>
+
+  
+  <!-- ESPAÇO PARA IMAGENS DAS ESPÉCIES -->
+  <div class="g2" style="margin-top:12px">
+    <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center">
+      <div style="font-size:.85rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.08em">Foto: Garanhão (PRE ou Árabe)<br>com identificação da raça</div>
+    </div>
+    <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:14px;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center">
+      <div style="font-size:.85rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.08em">Foto: Jumento Catalão<br>com identificação</div>
+    </div>
+  </div>
+
+<div class="hl" style="margin-top:14px">
+    <strong>Achado principal:</strong> O espermatozoide do jumento é significativamente mais rápido <strong>E</strong> mais linear que o do cavalo. Todos os parâmetros maiores no jumento, exceto BCF (sem diferença significativa).
+  </div>
+
+  <div class="ref">Tabela adaptada de Gacem et al. 2021, Tabela 1 (mean ± SEM)</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Entrando nos resultados — e este é o slide com os dados brutos da comparação entre espécies.<br><br>
+    Observem a tabela com atenção. As colunas mostram Árabe, Espanhol, cavalo total e jumento. Os valores são média ± erro padrão da média.<br><br>
+    O resultado mais marcante está na coluna do jumento — destacada em teal. O espermatozoide do jumento foi significativamente superior ao do cavalo em praticamente TODOS os parâmetros cinéticos.<br><br>
+    <strong>VCL:</strong> 230 μm/s no jumento versus 225 no cavalo. A diferença em VCL parece discreta — apenas 5 μm/s — mas lembrem-se que VCL depende fortemente do fps e da espécie. O que chama atenção são os outros parâmetros.<br><br>
+    <strong>VSL:</strong> Aqui a diferença é grande — 78 μm/s no jumento contra 60 no cavalo. Isso é uma diferença de 30% na velocidade em linha reta. O jumento avança mais em distância efetiva.<br><br>
+    <strong>LIN:</strong> 34% no jumento versus 26% no cavalo. Oito pontos percentuais de diferença em linearidade é biologicamente significativo — significa que o jumento nada de forma substancialmente mais retilínea.<br><br>
+    <strong>STR:</strong> 43% versus 36%. Mesma tendência — o jumento é mais direto em sua trajetória.<br><br>
+    <strong>ALH:</strong> 1,41 μm no jumento versus 1,25 no cavalo. Interessantemente, o jumento tem maior amplitude de deslocamento lateral, mas mesmo assim mantém linearidade superior. Isso sugere um padrão de nado com batimento flagelar mais amplo porém mais eficiente em termos de progressão.<br><br>
+    <strong>BCF:</strong> Único parâmetro sem diferença significativa — 34 Hz no jumento versus 38 Hz no cavalo. A frequência de batimento cruzado é semelhante entre as espécies.<br><br>
+    A mensagem é clara: o espermatozoide do jumento combina velocidade com direção de forma mais eficiente que o do cavalo. Isso tem implicações práticas diretas: protocolos de criopreservação e avaliação seminal desenvolvidos para cavalos podem não ser diretamente aplicáveis a jumentos, e vice-versa.
+  </div>
+</div>
+
+<!-- SLIDE 16: RESULTADOS — RAÇAS -->
+<div class="slide" id="s16">
+  <div class="s-header"><span class="s-section">Resultados</span><span class="s-num">16 / 25</span></div>
+  <h2>Espanhol vs Árabe</h2>
+
+  <div class="g2">
+    <div class="card" style="border-color:var(--teal)">
+      <div class="card-bar" style="background:var(--teal)"></div>
+      <div class="label teal">Puro Raça Espanhol (PRE)</div>
+      <ul class="topics">
+        <li>Maior <strong>VAP</strong> (167 vs 162 μm/s)</li>
+        <li>Maior <strong>VCL</strong> (233 vs 215 μm/s)</li>
+        <li>Maior <strong>BCF</strong> (39 vs 37 Hz)</li>
+        <li style="margin-top:8px"><strong style="color:var(--teal);font-size:1.1em">→ Espermatozoide mais RÁPIDO</strong></li>
+      </ul>
+      <p class="body" style="margin-top:12px"><em>"Warmblood" — resultado de hibridização entre linhagens europeias e orientais desde o séc. XV. Maior heterogeneidade genética.</em></p>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <div class="card-bar" style="background:var(--gold)"></div>
+      <div class="label gold">Puro Sangue Árabe</div>
+      <ul class="topics">
+        <li>Tendência a maior <strong>LIN</strong></li>
+        <li>Tendência a maior <strong>WOB</strong></li>
+        <li>STR semelhante</li>
+        <li style="margin-top:8px"><strong style="color:var(--gold);font-size:1.1em">→ Espermatozoide mais LINEAR</strong></li>
+      </ul>
+      <p class="body" style="margin-top:12px"><em>Uma das raças mais puras geneticamente. DNA mitocondrial muito uniforme. Mínima hibridização ao longo dos séculos.</em></p>
+    </div>
+  </div>
+
+  <div class="hl-warn" style="margin-top:16px">
+    <strong>Interpretação evolutiva:</strong> A domesticação e seleção artificial atuaram de forma diferente sobre a cinética espermática em cada raça. A variação <strong>interraça</strong> pode ser ≥ variação <strong>interespecífica</strong>.
+  </div>
+
+  <div class="ref">Gacem et al. 2021 · Glazewska, Livest Sci 2010 · Royo et al., J Hered 2005</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    A comparação entre raças de cavalos trouxe resultados igualmente interessantes.<br><br>
+    O Puro Raça Espanhol apresentou maiores velocidades absolutas — VAP, VCL e BCF superiores aos do Árabe. O espermatozoide do PRE é fundamentalmente mais rápido.<br><br>
+    Já o Árabe mostrou tendência a maior linearidade — LIN e WOB ligeiramente superiores, embora a diferença não tenha atingido significância estatística em todos os parâmetros. O espermatozoide do Árabe é mais constante na direção.<br><br>
+    Os autores interpretam essas diferenças à luz da história genética de cada raça:<br><br>
+    O <strong>Árabe</strong> é reconhecido como uma das raças equinas mais ancestrais. Estudos de DNA mitocondrial — como os de Glazewska em 2010 e Royo em 2005 — demonstram grande uniformidade genética, indicando pouca hibridização ao longo dos séculos. A linhagem se manteve relativamente pura, especialmente nas populações do Oriente Médio. Essa homogeneidade genética pode se refletir numa cinética espermática mais uniforme e linear.<br><br>
+    O <strong>Espanhol</strong>, por outro lado, é descrito como o primeiro "warmblood" europeu — resultado de cruzamentos entre cavalos nativos da Península Ibérica e linhagens orientais introduzidas ao longo de séculos de comércio e conquista. Essa hibridização teria introduzido maior variabilidade genética — e potencialmente afetado a cinética espermática, produzindo espermatozoides mais rápidos porém mais heterogêneos em seus padrões de movimento.<br><br>
+    Um achado particularmente provocativo: os autores sugerem que a variação entre raças pode ser tão grande ou maior que a variação entre espécies. Isso tem implicações metodológicas diretas: estudos que agrupam "cavalos" como um único grupo sem considerar a raça podem estar mascarando variações biologicamente significativas.
+  </div>
+</div>
+
+<!-- SLIDE 17: 3 SUBPOPULAÇÕES -->
+<div class="slide" id="s17">
+  <div class="s-header"><span class="s-section">Resultados</span><span class="s-num">17 / 25</span></div>
+  <h2>Subpopulações Identificadas</h2>
+  <p class="sub">Análise de clusters revelou 3 subpopulações distintas em ambas as espécies</p>
+
+  <div class="g3">
+    <div class="card" style="border-top:3px solid var(--muted)">
+      <div class="label" style="color:var(--muted)">SP1 · Lenta e não-linear</div>
+      <div class="big" style="font-size:2.5rem;color:var(--muted)">28-34%</div>
+      <div class="big-label">do ejaculado</div>
+      <table class="tbl" style="margin-top:12px;font-size:.8rem">
+        <tr><td class="param">VCL</td><td>Baixa</td></tr>
+        <tr><td class="param" style="color:var(--lime)">LIN</td><td>Baixa</td></tr>
+        <tr><td class="param" style="color:var(--violet)">BCF</td><td>Baixo</td></tr>
+      </table>
+      <p class="body" style="margin-top:10px">Espermatozoides com motilidade residual. Deslocamento mínimo e trajetória errática.</p>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--teal);background:rgba(0,201,167,.04)">
+      <div class="label teal">SP2 · Rápida e linear <span style="background:var(--teal);color:var(--bg);padding:2px 8px;border-radius:4px;font-size:.8rem;margin-left:6px">DOMINANTE</span></div>
+      <div class="big" style="font-size:2.5rem;color:var(--teal)">38-42%</div>
+      <div class="big-label">do ejaculado</div>
+      <table class="tbl" style="margin-top:12px;font-size:.8rem">
+        <tr><td class="param">VCL</td><td>Alta</td></tr>
+        <tr><td class="param" style="color:var(--lime)">LIN</td><td>Alta</td></tr>
+        <tr><td class="param" style="color:var(--lime)">STR</td><td>Alta</td></tr>
+        <tr><td class="param">VSL</td><td>Alta</td></tr>
+      </table>
+      <p class="body" style="margin-top:10px">Maior interesse biológico para fertilização. Combina velocidade com direção.</p>
+    </div>
+
+    <div class="card" style="border-top:3px solid var(--coral)">
+      <div class="label coral">SP3 · Muito rápida, não-linear</div>
+      <div class="big" style="font-size:2.5rem;color:var(--coral)">24-33%</div>
+      <div class="big-label">do ejaculado</div>
+      <table class="tbl" style="margin-top:12px;font-size:.8rem">
+        <tr><td class="param">VCL</td><td>Muito alta</td></tr>
+        <tr><td class="param" style="color:var(--lime)">LIN</td><td>Baixa</td></tr>
+        <tr><td class="param" style="color:var(--violet)">BCF</td><td>Alto</td></tr>
+        <tr><td class="param" style="color:var(--violet)">ALH</td><td>Alto</td></tr>
+      </table>
+      <p class="body" style="margin-top:10px">Alta velocidade com padrão oscilatório. Possível hiperativação ou nado errático rápido.</p>
+    </div>
+  </div>
+
+  
+  <!-- ESPAÇO PARA FIGURA 1 DO ARTIGO (trajetórias das 3 subpopulações) -->
+  <div style="background:var(--card);border:1px dashed var(--border);border-radius:10px;padding:16px;text-align:center;margin-top:12px">
+    <div style="font-size:1.1rem;color:var(--subtle);text-transform:uppercase;letter-spacing:.1em">Inserir: Figura 1 de Gacem et al. 2021<br>Trajetórias das 3 subpopulações (SP1, SP2, SP3) em jumento e cavalo</div>
+  </div>
+
+<div class="hl" style="margin-top:14px">
+    <strong>Ponto-chave:</strong> SP2 do jumento: LIN = <strong>50,3%</strong> vs SP2 do cavalo: LIN = <strong>36,6%</strong> — mesmo dentro da mesma subpopulação, o jumento é fundamentalmente mais linear.
+  </div>
+
+  <div class="ref">Gacem et al. 2021, Tabelas 3 e 4</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Este slide apresenta o resultado central do artigo: a identificação de 3 subpopulações espermáticas distintas em ambas as espécies.<br><br>
+    <strong>SP1 — Lenta e não-linear:</strong> Representa 28% no cavalo e 27-34% no jumento. São os espermatozoides com os menores valores de TODOS os parâmetros cinéticos — VCL baixa, VSL baixa, LIN baixa, BCF baixo. Biologicamente, são células com motilidade residual — podem estar em estágio avançado de deterioração mitocondrial, com dano de membrana, ou simplesmente em estágio final de seu ciclo de vida funcional. Clinicamente, é a subpopulação de menor interesse para fertilização.<br><br>
+    <strong>SP2 — Rápida e linear:</strong> A subpopulação DOMINANTE — 38% no cavalo e 42% no jumento. Apresenta os maiores valores de LIN, STR e VSL, combinados com VCL alta. É o perfil cinético ideal para transporte no trato reprodutivo: velocidade suficiente para atravessar barreiras anatômicas combinada com direção para alcançar o oócito. Biologicamente, esta é a subpopulação de maior interesse para a fertilização.<br><br>
+    <strong>SP3 — Muito rápida e não-linear:</strong> Representa 34% no cavalo e 31% no jumento. Tem a VCL mais alta de todas — acima de 280 μm/s no cavalo e 420 μm/s no jumento —, mas com LIN baixa e ALH e BCF altos. Esse padrão de alta velocidade com alta oscilação pode representar dois estados fisiológicos: hiperativação espermática genuína — que é um evento necessário para a penetração da zona pelúcida — ou simplesmente um nado errático rápido sem valor funcional. A distinção requer marcadores adicionais.<br><br>
+    Um dado particularmente revelador: mesmo comparando a MESMA subpopulação (SP2) entre espécies, a linearidade do jumento é superior — LIN de 50,3% versus 36,6% no cavalo. Isso confirma que a diferença de linearidade é intrínseca à espécie, não apenas um efeito da proporção das subpopulações.<br><br>
+    <strong>Comparação com estudos anteriores:</strong> Estudos com 16-25 fps identificaram 4 a 6 subpopulações. Com 250 fps, apenas 3 foram encontradas — porém com maior consistência biológica. Os autores argumentam que fps insuficiente gera ruído que fragmenta artificialmente subpopulações em clusters que não têm significado biológico real. A alta resolução temporal "limpa" esse ruído e revela a estrutura verdadeira.
+  </div>
+</div>
+
+<!-- SLIDE 18: DISCUSSÃO -->
+<div class="slide" id="s18">
+  <div class="s-header"><span class="s-section">Discussão</span><span class="s-num">18 / 25</span></div>
+  <h2>Pontos Críticos da Discussão</h2>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+    <div class="card"><div class="card-bar" style="background:var(--gold)"></div>
+      <h3 style="color:var(--gold)">Frame rate define a estrutura de subpopulações</h3>
+      <p class="body">16-25 fps → 4-6 subpopulações (ruído). 250 fps → 3 subpopulações com consistência biológica. Ponto assintótico de VCL atingido apenas em ~212 fps (Valverde et al., 2019).</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--teal)"></div>
+      <h3 style="color:var(--teal)">Jumento ≠ Cavalo na cinética espermática</h3>
+      <p class="body">Sptz do jumento é mais rápido E mais linear. Implicação direta: protocolos de criopreservação de cavalo podem NÃO ser adequados para jumento.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--violet)"></div>
+      <h3 style="color:var(--violet)">Seleção artificial moldou diferenças interraça</h3>
+      <p class="body">PRE mais rápido (hibridização europeia/oriental). Árabe mais linear (pureza genética). Variação interraça ≥ variação interespecífica em alguns parâmetros.</p>
+    </div>
+    <div class="card"><div class="card-bar" style="background:var(--coral)"></div>
+      <h3 style="color:var(--coral)">Limitação: apenas sêmen fresco</h3>
+      <p class="body">Estrutura de subpopulações muda após criopreservação. Diretamente relevante para centrais de IA e protocolos de congelamento espécie/raça-específicos.</p>
+    </div>
+  </div>
+
+  <div class="ref">Gacem et al. 2021 · Valverde et al. 2019 · Quintero-Moreno et al. 2003</div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Na discussão, quatro pontos merecem destaque crítico:<br><br>
+    <strong>1. O frame rate define a estrutura de subpopulações:</strong> Este é talvez o achado metodológico mais impactante. Estudos anteriores com 16-25 fps encontraram 4 a 6 subpopulações. Com 250 fps, os autores encontraram apenas 3. A explicação é que fps insuficiente introduz ruído nas trajetórias — as oscilações entre frames são subestimadas ou distorcidas — e o clustering estatístico interpreta esse ruído como clusters biológicos distintos quando na verdade são artefatos. É uma analogia com resolução de imagem: uma foto de 1 megapixel mostra detalhes que não existem (pixelização) — uma foto de 100 megapixels mostra a realidade. Valverde e colaboradores demonstraram que o ponto assintótico de VCL — onde ela se estabiliza — é atingido apenas em ~212 fps. Abaixo disso, os dados cinéticos são fundamentalmente comprometidos.<br><br>
+    <strong>2. Jumento é diferente do cavalo:</strong> Essa diferença espécie-específica tem implicação prática direta. Centrais de reprodução de asininos que utilizam protocolos desenvolvidos para cavalos podem estar subotimizando seus resultados. Diluentes, curvas de refrigeração, crioprotectores — tudo pode precisar de ajuste para acomodar a cinética diferente do espermatozoide asinino.<br><br>
+    <strong>3. Raça importa:</strong> A divergência PRE vs Árabe reflete séculos de seleção artificial diferenciada. Os autores citam que o Árabe manteve DNA mitocondrial muito uniforme — evidência de pureza genética — enquanto o PRE é resultado de hibridização documentada desde o século XV. Essa divergência genética se manifesta na cinética espermática. O implicação é clara: estudos que agrupam "cavalos" sem especificar raça podem estar introduzindo variável de confusão significativa.<br><br>
+    <strong>4. Limitação metodológica honesta:</strong> Os autores reconhecem que avaliaram apenas sêmen fresco. A estrutura de subpopulações MUDA após criopreservação — a proporção de SP2 (a dominante) tende a diminuir e a de SP1 (lenta) tende a aumentar. Para nosso grupo no CERAN, que trabalha com criopreservação, isso é diretamente relevante: precisamos incluir análise de subpopulações nos nossos estudos comparativos pré e pós-criopreservação para capturar essa mudança na distribuição.
+  </div>
+</div>
+
+<!-- SLIDE 19: CONCLUSÕES ARTIGO -->
+<div class="slide" id="s19">
+  <div class="s-header"><span class="s-section">Conclusões</span><span class="s-num">19 / 25</span></div>
+  <h2>Conclusões — Gacem et al., 2021</h2>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+    <div class="hl" style="border-left-color:var(--teal)">
+      <strong>✔</strong>&nbsp; 250 fps revelam trajetórias mais precisas e <strong>3 subpopulações consistentes</strong> — vs 4-6 com fps inferiores
+    </div>
+    <div class="hl" style="border-left-color:var(--gold)">
+      <strong>✔</strong>&nbsp; Espermatozoide de jumento é mais <strong>rápido E mais linear</strong> que o de cavalo — diferença espécie-específica
+    </div>
+    <div class="hl" style="border-left-color:var(--lime)">
+      <strong>✔</strong>&nbsp; PRE mais <strong>rápido</strong> · Árabe mais <strong>linear</strong> — seleção artificial gerou divergência cinética
+    </div>
+    <div class="hl" style="border-left-color:var(--violet)">
+      <strong>✔</strong>&nbsp; <strong>SP2 dominante</strong> em ambas espécies (38-42%) — rápida, linear, alto BCF — biologicamente a mais relevante
+    </div>
+    <div class="hl" style="border-left-color:var(--sky)">
+      <strong>✔</strong>&nbsp; Estrutura de subpopulações é similar entre espécies — <strong>variação interraça ≥ interespecífica</strong>
+    </div>
+    <div class="hl" style="border-left-color:var(--coral)">
+      <strong>✔</strong>&nbsp; Estudos futuros devem considerar <strong>efeito da raça</strong> e padronizar fps ≥ 250 Hz para cinética
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Sintetizando as conclusões do artigo em 6 pontos:<br><br>
+    Primeiro: a utilização de 250 fps revelou trajetórias mais precisas e uma estrutura de 3 subpopulações com maior consistência biológica do que os 4-6 clusters encontrados por estudos anteriores com fps inferiores. A resolução temporal não é um detalhe técnico — ela muda fundamentalmente os resultados.<br><br>
+    Segundo: o espermatozoide do jumento é significativamente mais rápido E mais linear que o do cavalo. Essa diferença espécie-específica é clinicamente relevante para o manejo reprodutivo de equídeos.<br><br>
+    Terceiro: entre raças, o PRE é mais rápido e o Árabe mais linear — refletindo a divergência genética causada por séculos de seleção artificial diferenciada.<br><br>
+    Quarto: a SP2 é a subpopulação dominante em ambas as espécies, representando 38-42% do ejaculado, com perfil cinético de alta velocidade e alta linearidade — biologicamente a mais relevante para fertilização.<br><br>
+    Quinto: a estrutura geral de subpopulações é surpreendentemente similar entre espécie equina e asinina — 3 subpopulações com proporções comparáveis. A variação entre raças pode ser tão importante quanto a variação entre espécies.<br><br>
+    Sexto: a recomendação para estudos futuros é dupla — considerar o efeito da raça como variável nas análises CASA, e padronizar a taxa de frames em pelo menos 250 Hz para cinética precisa.
+  </div>
+</div>
+
+<!-- SLIDE 20: ENCERRAMENTO -->
+<div class="slide" id="s20">
+  <div class="s-header"><span class="s-part">FMVZ-UNESP Botucatu</span><span class="s-num">20 / 25</span></div>
+  <h1 style="color:var(--teal)">Obrigada!</h1>
+  <h2 style="font-weight:400;color:var(--muted);font-size:1.3rem;margin-top:8px">Dúvidas e discussão</h2>
+
+  <div style="margin-top:30px">
+    <h3 style="color:var(--subtle);font-size:1.1rem;margin-bottom:10px">Referências Principais</h3>
+    <p style="font-size:1.2rem;color:var(--muted);line-height:1.8">
+      Amann RP, Waberski D. <em>Theriogenology</em>. 2014;81:5-17.<br>
+      Gacem S, et al. <em>Front Vet Sci</em>. 2021;8:651477.<br>
+      Mortimer ST. <em>Hum Reprod Update</em>. 1997;3:403-439.<br>
+      van der Horst G. <em>Anim Reprod Sci</em>. 2020;220:106350.<br>
+      Valverde A, et al. <em>Reprod Domest Anim</em>. 2019;54:S14-S18.<br>
+      Quintero-Moreno A, et al. <em>Theriogenology</em>. 2003;59:1973-1990.
+    </p>
+  </div>
+
+  <div style="margin-top:24px">
+    <p style="font-size:1.4rem;font-weight:600">Iara Macêdo Petelinkar · Letícia dos Santos Rebelo</p>
+    <p style="font-size:1.1rem;color:var(--muted);margin-top:4px">Discentes — Programa de Pós-Graduação em Biotecnologia Animal<br>Disciplina: Vivência Prática Aplicada à Andrologia de Grandes Animais<br>FMVZ-UNESP Botucatu</p>
+  </div>
+
+  <div class="notes">
+    <div class="notes-label">Anotações do Apresentador</div>
+    Muito obrigada pela atenção!<br><br>
+    Resumindo o que percorremos: na primeira parte, vimos como o CASA evoluiu desde Leeuwenhoek até sistemas com inteligência artificial. Compreendemos os 8 parâmetros cinéticos — VCL, VSL, VAP, LIN, STR, WOB, ALH e BCF — e como eles se relacionam com o movimento real do espermatozoide. Discutimos os fatores que afetam os resultados e a relação complexa entre CASA e fertilidade. E vimos como o paradigma de subpopulações mudou a forma como interpretamos dados de motilidade.<br><br>
+    Na segunda parte, o artigo de Gacem e colaboradores demonstrou que o uso de 250 fps revela uma estrutura de 3 subpopulações consistentes, que o espermatozoide do jumento é mais rápido e linear que o do cavalo, e que diferenças entre raças são biologicamente significativas.<br><br>
+    As referências estão no slide. O artigo do Gacem está disponível em acesso aberto na Frontiers in Veterinary Science.<br><br>
+    Estou à disposição para perguntas e discussão. Obrigada!
+  </div>
+</div>
+
+<!-- JAVASCRIPT DE NAVEGAÇÃO -->
+<script>
+(function(){
+  var slides=document.querySelectorAll('.slide'),cur=0,total=slides.length;
+  var prog=document.getElementById('progress');
+  slides[0].classList.add('active');
+
+  function go(n){
+    if(n<0||n>=total)return;
+    slides[cur].classList.remove('active');
+    cur=n;
+    slides[cur].classList.add('active');
+    prog.style.width=((cur+1)/total*100)+'%';
+    // Update all slide numbers
+    document.querySelectorAll('.s-num').forEach(function(el){
+      var sn=el.closest('.slide');
+      var idx=Array.from(slides).indexOf(sn)+1;
+      el.textContent=String(idx).padStart(2,'0')+' / '+total;
+    });
+  }
+
+  document.addEventListener('keydown',function(e){
+    if(document.body.classList.contains('editing'))return;
+    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(cur+1)}
+    if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}
+    if(e.key==='Home'){e.preventDefault();go(0)}
+    if(e.key==='End'){e.preventDefault();go(total-1)}
+    if(e.key==='Escape'){
+      var isOverview=slides[0].style.display==='flex'&&slides[1].style.display==='flex';
+      if(!isOverview){
+        slides.forEach(function(s){s.style.display='flex';s.style.minHeight='40vh';s.style.border='2px solid #1E3044';s.style.margin='8px';s.style.borderRadius='10px';s.style.cursor='pointer'});
+        slides[cur].style.borderColor='#00C9A7';
+        slides.forEach(function(s,i){s.onclick=function(){
+          slides.forEach(function(x){x.style.display='';x.style.minHeight='';x.style.border='';x.style.margin='';x.style.borderRadius='';x.style.cursor='';x.onclick=null;x.classList.remove('active')});
+          go(i);
+        }});
+      }else{
+        slides.forEach(function(s){s.style.display='';s.style.minHeight='';s.style.border='';s.style.margin='';s.style.borderRadius='';s.style.cursor='';s.onclick=null;s.classList.remove('active')});
+        go(cur);
+      }
+    }
+  });
+
+  // Click navigation (desabilitado em modo edição)
+  document.addEventListener('click',function(e){
+    if(document.body.classList.contains('editing'))return;
+    if(e.target.closest('.notes')||e.target.closest('a')||e.target.closest('.edit-toolbar')||e.target.closest('.edit-btn'))return;
+    var isOverview=slides[0].style.display==='flex'&&slides[1].style.display==='flex';
+    if(isOverview)return;
+    var x=e.clientX/window.innerWidth;
+    if(x>.6)go(cur+1);
+    else if(x<.4)go(cur-1);
+  });
+
+  prog.style.width=(1/total*100)+'%';
+
+  // Diluição: B ou . escurece a tela
+  var dil=document.getElementById('dilution');
+  document.addEventListener('keydown',function(e){
+    if(document.body.classList.contains('editing'))return;
+    if(e.key==='b'||e.key==='B'||e.key==='.'){
+      dil.classList.toggle('active');
+      e.preventDefault();
+    }
+  });
+  dil.addEventListener('click',function(){dil.classList.remove('active')});
+
+
+  // Modo edição
+  window.toggleEdit = function() {
+    var btn = document.getElementById('editBtn');
+    var body = document.body;
+    var editing = body.classList.toggle('editing');
+    btn.classList.toggle('active');
+    btn.textContent = editing ? '✔ Salvar' : '✏ Editar';
+    
+    document.querySelectorAll('.slide h1, .slide h2, .slide h3, .slide p, .slide li, .slide td, .slide .body, .slide .label, .slide .tl-text, .slide .tl-year, .slide .sub, .slide span, .slide div').forEach(function(el) {
+      if (!el.classList.contains('slide') && !el.classList.contains('s-header') && !el.classList.contains('del-slide') && !el.classList.contains('edit-toolbar') && !el.classList.contains('dilution-overlay'))
+        el.contentEditable = editing;
+    });
+    
+    // Adicionar/remover botão de excluir slide
+    document.querySelectorAll('.slide').forEach(function(s) {
+      var existing = s.querySelector('.del-slide');
+      if (editing && !existing) {
+        var btn = document.createElement('button');
+        btn.className = 'del-slide';
+        btn.textContent = '✕ Excluir slide';
+        btn.onclick = function() { deleteSlide(btn); };
+        s.appendChild(btn);
+      } else if (!editing && existing) {
+        existing.remove();
+      }
+    });
+    
+    if (!editing) {
+      var slides = document.querySelectorAll('.slide');
+      slides.forEach(function(s, i) {
+        localStorage.setItem('casa-slide-' + i, s.innerHTML);
+      });
+      btn.textContent = '✏ Editar (salvo!)';
+      setTimeout(function() { btn.textContent = '✏ Editar'; }, 2000);
+    }
+  };
+  
+  // Funções da toolbar
+  function getSelection2() {
+    var sel = window.getSelection();
+    if (sel.rangeCount > 0 && sel.toString().length > 0) return sel;
+    // Se nada selecionado, pegar o elemento focado
+    var focused = document.activeElement;
+    if (focused && focused.contentEditable === 'true') return focused;
+    return null;
+  }
+
+  window.changeSize = function(delta) {
+    var el = document.activeElement;
+    if (!el || el.contentEditable !== 'true') return;
+    var current = parseFloat(window.getComputedStyle(el).fontSize);
+    var newSize = Math.max(8, Math.min(120, current + delta));
+    el.style.fontSize = newSize + 'px';
+    document.getElementById('sizeDisplay').textContent = Math.round(newSize) + 'px';
+  };
+
+  window.changeColor = function(color) {
+    var sel = window.getSelection();
+    if (sel.toString().length > 0) {
+      document.execCommand('foreColor', false, color);
+    } else if (lastEditedEl) {
+      lastEditedEl.style.color = color;
+    }
+  };
+
+  window.changeBg = function(color) {
+    var el = document.activeElement;
+    if (el) {
+      var slide = el.closest('.slide');
+      if (slide) slide.style.background = color;
+    }
+  };
+
+  window.changeFont = function(font) {
+    if (lastEditedEl) {
+      lastEditedEl.style.fontFamily = font;
+    } else {
+      var cur = document.querySelector('.slide.active');
+      if (cur) cur.style.fontFamily = font;
+    }
+  };
+
+  window.toggleBold = function() { document.execCommand('bold'); };
+  window.toggleItalic = function() { document.execCommand('italic'); };
+  window.toggleUnderline = function() { document.execCommand('underline'); };
+
+  // Excluir elemento selecionado (Delete ou Backspace no elemento vazio)
+  window.deleteElement = function() {
+    var el = document.activeElement;
+    if (el && el.contentEditable === 'true' && el.closest('.slide')) {
+      if (confirm('Excluir este elemento?')) {
+        el.remove();
+      }
+    }
+  };
+
+  // Excluir slide inteiro
+  window.deleteSlide = function(btn) {
+    var slide = btn.closest('.slide');
+    if (slide && confirm('Excluir este slide inteiro?')) {
+      slide.remove();
+      // Recalcular slides
+      var allSlides = document.querySelectorAll('.slide');
+      if (allSlides.length > 0) {
+        allSlides[0].classList.add('active');
+      }
+    }
+  };
+
+  window.resetEdits = function() {
+    if (confirm('Resetar TODAS as edições? Isso não pode ser desfeito.')) {
+      var keys = Object.keys(localStorage).filter(function(k) { return k.startsWith('casa-slide-'); });
+      keys.forEach(function(k) { localStorage.removeItem(k); });
+      location.reload();
+    }
+  };
+
+
+
+  // Restaurar edições salvas
+  var slides = document.querySelectorAll('.slide');
+  slides.forEach(function(s, i) {
+    var saved = localStorage.getItem('casa-slide-' + i);
+    if (saved) s.innerHTML = saved;
+  });
+
+
+  // Drag & drop de imagem na capa
+  var capaImg = document.getElementById('capa-img');
+  if (capaImg) {
+    capaImg.addEventListener('dragover', function(e) { e.preventDefault(); capaImg.style.borderColor = '#00C9A7'; });
+    capaImg.addEventListener('dragleave', function() { capaImg.style.borderColor = ''; });
+    capaImg.addEventListener('drop', function(e) {
+      e.preventDefault();
+      capaImg.style.borderColor = '';
+      var file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          capaImg.innerHTML = '<img src="' + ev.target.result + '" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:12px">';
+          capaImg.style.border = 'none';
+          capaImg.style.background = 'transparent';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    // Click para upload também
+    capaImg.addEventListener('click', function() {
+      if (!document.body.classList.contains('editing')) return;
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = function() {
+        var file = input.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function(ev) {
+            capaImg.innerHTML = '<img src="' + ev.target.result + '" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:12px">';
+            capaImg.style.border = 'none';
+            capaImg.style.background = 'transparent';
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    });
+  }
+
+})();
+</script>
+
+
+</body>
+</html>
