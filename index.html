@@ -142,8 +142,8 @@
        HERO
        ════════════════════════════════════════════════════ */
     .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 160px 0 120px; position: relative; overflow: hidden;
+      min-height: 70vh; display: flex; align-items: center;
+      padding: 50px 0 40px; position: relative; overflow: hidden;
     }
     .hero-horizon {
       position: absolute; top: 56%; left: 0; right: 0; height: 1px;
@@ -325,7 +325,7 @@
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 700; color: var(--text-0);
       letter-spacing: -0.03em; line-height: 1.1;
-      margin-bottom: 40px; max-width: 600px;
+      margin-bottom: 20px; max-width: 600px;
     }
     .section-title em { font-style: normal; color: var(--text-2); font-weight: 500; }
 
@@ -349,7 +349,7 @@
     .result-card--hero {
       grid-column: 1 / -1;
       background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-base) 60%);
-      display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center;
+      display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;
       border-color: rgba(181, 86, 58, 0.1);
     }
     .result-metric {
@@ -469,7 +469,7 @@
     /* ════════════════════════════════════════════════════
        QUOTE
        ════════════════════════════════════════════════════ */
-    .quote-section { padding: 80px 0; text-align: center; position: relative; }
+    .quote-section { padding: 50px 0; text-align: center; position: relative; }
     .quote-section::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(181, 86, 58, 0.08) 0%, transparent 70%);
@@ -1029,7 +1029,7 @@
        ════════════════════════════════════════════════════ */
     .mecanismo-box {
       background: #FFFFFF; border: 1px solid rgba(184,146,46,0.12);
-      border-radius: 20px; padding: 40px 36px; margin-bottom: 48px;
+      border-radius: 20px; padding: 40px 36px; margin-bottom: 24px;
       max-width: 760px;
     }
     .mecanismo-box p {
@@ -1039,7 +1039,7 @@
     .mecanismo-box strong { color: #3D2B1F; font-weight: 600; }
     .mecanismo-lead {
       font-size: 1.05rem; color: var(--text-1); line-height: 1.75;
-      max-width: 680px; margin-bottom: 48px;
+      max-width: 680px; margin-bottom: 24px;
     }
     .mecanismo-lead strong { color: var(--text-0); font-weight: 600; }
     .section--light .mecanismo-lead { color: #4A3728; }
@@ -1075,7 +1075,7 @@
        ════════════════════════════════════════════════════ */
     .entregavel-sub {
       font-size: 1.05rem; color: var(--text-1); line-height: 1.75;
-      max-width: 680px; margin-bottom: 48px;
+      max-width: 680px; margin-bottom: 24px;
     }
     .entregavel-sub strong { color: var(--text-0); }
     .entregavel-list { display: grid; gap: 20px; max-width: 780px; }
@@ -1278,7 +1278,7 @@
        CREDIBILIDADE — Grid com foto
        ════════════════════════════════════════════════════ */
     .credibilidade-grid {
-      display: grid; grid-template-columns: 260px 1fr; gap: 48px;
+      display: grid; grid-template-columns: 260px 1fr; gap: 24px;
       align-items: start;
     }
     .credibilidade-foto {
@@ -1509,62 +1509,36 @@
     </section>
 
     <!-- PARA QUEM É / NÃO É -->
-    <section class="section audience-section" id="para-quem">
-      <div class="container">
-        <div class="section-eyebrow reveal" style="justify-content:center"><span class="num">→</span> Clareza</div>
-        <h2 class="section-title reveal" style="max-width:100%;text-align:center">Este guia é pra você <em>se...</em></h2>
-
-        <div class="audience-grid">
-          <div class="audience-card audience-card--yes reveal">
-            <h3>Este guia é pra você se:</h3>
-            <ul>
-              <li>Produz alimento artesanal (geleia, molho, queijo, doce, café, biscoito, bebida, fermentado)</li>
-              <li>Sabe que seu produto é bom mas não consegue cobrar o que vale</li>
-              <li>Quer chegar em empórios, restaurantes e lojas sem se desvalorizar</li>
-              <li>Está cansado de competir por preço com industrializado</li>
-              <li>Quer profissionalizar a apresentação do produto sem gastar uma fortuna</li>
-            </ul>
-          </div>
-          <div class="audience-card audience-card--no reveal reveal-d1">
-            <h3>Este guia NÃO é pra você se:</h3>
-            <ul>
-              <li>Produz em escala industrial e quer parecer artesanal</li>
-              <li>Não tem intenção de mudar nada na apresentação do produto</li>
-              <li>Acha que preço baixo é a única forma de competir</li>
-              <li>Procura receitas — aqui o foco é estratégia de negócio, não culinária</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- MECANISMO — 3 Lacunas -->
     <section class="section section--light" id="mecanismo">
       <div class="container">
         <div class="section-eyebrow reveal"><span class="num">02</span> O diagnóstico</div>
         <h2 class="section-title reveal">Por que seu produto vale 3x mais <em>e o cliente não enxerga isso.</em></h2>
 
-        <div class="mecanismo-box reveal">
-          <p>Seu produto já é melhor que 90% do que está na prateleira. O problema é que <strong>o cliente não tem como saber disso antes de provar.</strong></p>
-          <p>Ele olha o seu pote e o pote do concorrente. Os dois têm rótulo parecido, embalagem parecida, nome parecido. A única diferença visível é o preço, e ele leva o mais barato.</p>
-          <p><strong>Isso acontece por causa de três problemas que travam o preço do seu produto:</strong></p>
-        </div>
+        <p class="reveal" style="text-align:center;font-size:1rem;color:var(--text-2);max-width:600px;margin:0 auto 28px;line-height:1.7">Seu produto já é melhor que 90% do que está na prateleira. O problema? <strong>O cliente não tem como saber disso antes de provar.</strong></p>
 
-        <div class="lacuna-grid">
-          <div class="lacuna-card reveal">
-            <div class="lacuna-number">Problema 1</div>
-            <h3 class="lacuna-title">O cliente não vê a diferença</h3>
-            <p class="lacuna-desc">Você sabe o que torna seu produto especial. O cliente não. Se a diferença não está visível na embalagem, no nome e na apresentação, ela não existe na cabeça de quem compra. <strong>70% das decisões de compra acontecem antes da primeira mordida.</strong></p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <div class="reveal" style="background:var(--bg);border-radius:16px;padding:28px 22px;text-align:center;border:1px solid rgba(181,86,58,0.1);position:relative;overflow:hidden">
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#B5563A,#D4845A)"></div>
+            <div style="margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.5" style="width:36px;height:36px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <p style="font-family:var(--heading-font);font-weight:700;font-size:1rem;color:var(--heading);margin-bottom:8px">O cliente não vê a diferença</p>
+            <p style="font-size:0.82rem;color:var(--text-2);line-height:1.6">Se a diferença não está na embalagem e na apresentação, ela não existe na cabeça de quem compra.</p>
+            <p style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-top:12px">70% das decisões de compra são visuais</p>
           </div>
-          <div class="lacuna-card reveal reveal-d1">
-            <div class="lacuna-number">Problema 2</div>
-            <h3 class="lacuna-title">O preço não tem história</h3>
-            <p class="lacuna-desc">Cobrar R$45 num pote de geleia não é caro, se o cliente entende por que vale R$45. Mas sem uma história clara por trás, qualquer preço acima do industrial parece abuso. <strong>75% dos consumidores dizem que pagam mais por artesanal, quando entendem o que estão levando.</strong></p>
+          <div class="reveal reveal-d1" style="background:var(--bg);border-radius:16px;padding:28px 22px;text-align:center;border:1px solid rgba(181,86,58,0.1);position:relative;overflow:hidden">
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#B5563A,#D4845A)"></div>
+            <div style="margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.5" style="width:36px;height:36px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <p style="font-family:var(--heading-font);font-weight:700;font-size:1rem;color:var(--heading);margin-bottom:8px">O preço não tem história</p>
+            <p style="font-size:0.82rem;color:var(--text-2);line-height:1.6">Sem uma história clara, qualquer preço acima do industrial parece abuso.</p>
+            <p style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-top:12px">75% pagam mais quando entendem o valor</p>
           </div>
-          <div class="lacuna-card reveal reveal-d2">
-            <div class="lacuna-number">Problema 3</div>
-            <h3 class="lacuna-title">Você só vende pra quem passa</h3>
-            <p class="lacuna-desc">Feira de sábado tem teto. Instagram orgânico tem teto. Enquanto seu produto não estiver em empórios, restaurantes e lojas especializadas, você está vendendo pra quem passa na rua, não pra quem procura o que você faz. <strong>O brasileiro gasta R$85 por mês em condimentos, mas esse dinheiro vai pra quem está no lugar certo.</strong></p>
+          <div class="reveal reveal-d2" style="background:var(--bg);border-radius:16px;padding:28px 22px;text-align:center;border:1px solid rgba(181,86,58,0.1);position:relative;overflow:hidden">
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#B5563A,#D4845A)"></div>
+            <div style="margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="#B5563A" stroke-width="1.5" style="width:36px;height:36px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <p style="font-family:var(--heading-font);font-weight:700;font-size:1rem;color:var(--heading);margin-bottom:8px">Você vende no lugar errado</p>
+            <p style="font-size:0.82rem;color:var(--text-2);line-height:1.6">Feira tem teto. Enquanto não estiver em empórios e restaurantes, vende pra quem passa, não pra quem procura.</p>
+            <p style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-top:12px">R$ 85/mês em condimentos — vai pra quem está lá</p>
           </div>
         </div>
 
@@ -1573,73 +1547,47 @@
     </section>
 
     <!-- ANTES/DEPOIS SLIDER -->
-    <section class="section comparison-section" id="transformacao">
+    <section class="section" id="transformacao" style="padding:40px 24px">
       <div class="container">
-        <div class="section-eyebrow reveal" style="justify-content:center"><span class="num">↔</span> Prova real</div>
-        <h2 class="section-title reveal">O poder da <em>apresentação profissional</em></h2>
-        <p class="comparison-sub reveal">Arraste para ver a transformação real da Chilli & Pig após aplicar as estratégias deste ebook</p>
+        <div class="section-eyebrow reveal" style="justify-content:center"><span class="num">↔</span> Transformação</div>
+        <h2 class="section-title reveal" style="text-align:center">O que muda quando você aplica <em>o que está no guia.</em></h2>
 
-        <div class="comparison-wrap reveal" id="compSlider">
-          <img class="cmp-after" src="chilliepig-depois.jpg" alt="Depois: rótulo profissional e cenografia premium">
-          <img class="cmp-before" src="chilliepig-antes.jpg" alt="Antes: rótulo simples e foto caseira">
-          <span class="cmp-label cmp-label-antes" id="cmpLabelAntes">Antes</span>
-          <span class="cmp-label cmp-label-depois" id="cmpLabelDepois">Depois</span>
-          <div class="cmp-line" id="cmpLine"></div>
-          <div class="cmp-handle" id="cmpHandle">
-            <svg viewBox="0 0 24 24"><path d="M8.5 5l-5 7 5 7M15.5 5l5 7-5 7"/></svg>
+        <div style="max-width:740px;margin:20px auto 0;display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:stretch" class="reveal">
+          
+          <div style="background:rgba(0,0,0,0.03);border-radius:16px 0 0 16px;padding:28px 24px">
+            <p style="font-family:var(--heading-font);font-weight:700;font-size:0.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:20px">Antes do guia</p>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#8A7A68" stroke-width="1.5" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M7 7l6 6M13 7l-6 6"/></svg><span style="font-size:0.88rem;color:var(--text-2);line-height:1.5">Vende por <strong>R$ 12 o pote</strong> achando que tá lucrando</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#8A7A68" stroke-width="1.5" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M7 7l6 6M13 7l-6 6"/></svg><span style="font-size:0.88rem;color:var(--text-2);line-height:1.5">Vende só pra <strong>amigos e vizinhos</strong></span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#8A7A68" stroke-width="1.5" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M7 7l6 6M13 7l-6 6"/></svg><span style="font-size:0.88rem;color:var(--text-2);line-height:1.5">Ouve <strong>"tá caro"</strong> de quem paga R$ 30 no supermercado</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#8A7A68" stroke-width="1.5" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M7 7l6 6M13 7l-6 6"/></svg><span style="font-size:0.88rem;color:var(--text-2);line-height:1.5">Rótulo <strong>sem as informações obrigatórias</strong> e que não impressiona na prateleira</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#8A7A68" stroke-width="1.5" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M7 7l6 6M13 7l-6 6"/></svg><span style="font-size:0.88rem;color:var(--text-2);line-height:1.5">Não sabe como <strong>chegar em empório ou restaurante</strong></span></div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,0.03),rgba(181,86,58,0.06))">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" style="width:24px;height:24px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+
+          <div style="background:rgba(181,86,58,0.06);border:1px solid rgba(181,86,58,0.1);border-radius:0 16px 16px 0;padding:28px 24px">
+            <p style="font-family:var(--heading-font);font-weight:700;font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:20px">Depois do guia</p>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#5A8A3A" stroke-width="2" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg><span style="font-size:0.88rem;color:var(--text-1);line-height:1.5">Cobra <strong>R$ 28-35</strong> e o cliente agradece</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#5A8A3A" stroke-width="2" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg><span style="font-size:0.88rem;color:var(--text-1);line-height:1.5">Fornece pra <strong>empórios e restaurantes</strong></span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#5A8A3A" stroke-width="2" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg><span style="font-size:0.88rem;color:var(--text-1);line-height:1.5">Cliente diz <strong>"vale cada centavo"</strong></span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#5A8A3A" stroke-width="2" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg><span style="font-size:0.88rem;color:var(--text-1);line-height:1.5">Rótulo <strong>completo, legalizado</strong> e que vende sozinho na prateleira</span></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><svg viewBox="0 0 20 20" fill="none" stroke="#5A8A3A" stroke-width="2" style="width:16px;height:16px;flex-shrink:0;margin-top:2px"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg><span style="font-size:0.88rem;color:var(--text-1);line-height:1.5">Sabe exatamente <strong>como abordar e negociar</strong></span></div>
+            </div>
           </div>
         </div>
 
-        <div class="cmp-bullets reveal">
-          <div class="cmp-col cmp-antes">
-            <h3>Antes</h3>
-            <ul>
-              <li>Rótulo genérico em fundo preto</li>
-              <li>Foto caseira com parede de tijolo</li>
-              <li>Sem identidade visual marcante</li>
-              <li>Produto parece igual a qualquer outro</li>
-            </ul>
-          </div>
-          <div class="cmp-col cmp-depois">
-            <h3>Depois</h3>
-            <ul>
-              <li>Rótulo artesanal com tipografia premium</li>
-              <li>Cenografia profissional com ingredientes</li>
-              <li>Identidade visual única e memorável</li>
-              <li>Produto que justifica preço maior</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="cmp-cta reveal"><strong>Mesmo produto. Mesma receita.</strong> A diferença está na apresentação, posicionamento e na percepção de valor. É exatamente isso que você vai aprender no ebook, além de muitos outros conceitos aplicáveis no seu produto.</p>
+        <p style="text-align:center;font-size:0.85rem;color:var(--text-3);margin-top:20px;font-style:italic" class="reveal"><strong>Mesmo produto. Mesma receita.</strong> A diferença está na estratégia.</p>
       </div>
     </section>
 
     <!-- DEPOIMENTOS — adicionar quando tiver os prints dos compradores -->
     <!--
-    <section class="section" id="depoimentos">
-      <div class="container">
-        <div class="section-eyebrow reveal" style="justify-content:center"><span class="num">★</span> Quem já aplicou</div>
-        <h2 class="section-title reveal" style="max-width:100%;text-align:center;margin-left:auto;margin-right:auto">O que produtores estão dizendo <em>depois de ler o guia.</em></h2>
-
-        <div class="audience-grid" style="grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px">
-          <div class="bonus-card reveal" style="text-align:left">
-            <p style="font-size:0.9rem;color:var(--text-1);line-height:1.6;font-style:italic">"[DEPOIMENTO 1]"</p>
-            <p style="font-size:0.8rem;color:var(--accent);font-weight:600;margin-top:12px">— [Nome], [produto]</p>
-          </div>
-          <div class="bonus-card reveal reveal-d1" style="text-align:left">
-            <p style="font-size:0.9rem;color:var(--text-1);line-height:1.6;font-style:italic">"[DEPOIMENTO 2]"</p>
-            <p style="font-size:0.8rem;color:var(--accent);font-weight:600;margin-top:12px">— [Nome], [produto]</p>
-          </div>
-          <div class="bonus-card reveal reveal-d2" style="text-align:left">
-            <p style="font-size:0.9rem;color:var(--text-1);line-height:1.6;font-style:italic">"[DEPOIMENTO 3]"</p>
-            <p style="font-size:0.8rem;color:var(--accent);font-weight:600;margin-top:12px">— [Nome], [produto]</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    -->
-
+    
     <!-- ENTREGÁVEIS -->
     <section class="section" id="entregaveis">
       <div class="container">
@@ -1672,72 +1620,90 @@
           </div>
         </div>
 
-        <p class="section-transition reveal">E pra você ter resultado rápido, antes mesmo de terminar de ler, <strong>o ebook vem com três bônus práticos:</strong></p>
-      </div>
-    </section>
+        <p class="section-transition reveal" style="border:none;padding:0;margin-top:24px">E pra você ter resultado rápido, <strong>o ebook vem com três bônus:</strong></p>
 
-    <!-- BÔNUS (LIGHT) -->
-    <section class="section section--light value-stack" id="bonus">
-      <div class="container">
-        <div class="section-eyebrow reveal"><span class="num">04</span> Bônus Exclusivos</div>
-        <h2 class="section-title reveal">Incluso no ebook, <em>sem custo extra</em></h2>
-
-        <div class="stack-grid" style="grid-template-columns: repeat(3, 1fr);">
-          <div class="bonus-card reveal">
-            <span class="bonus-badge">Bônus 1</span>
-            <img class="bonus-img" src="bonus-rotulo.jpg" alt="Guia de Rótulo" loading="lazy">
-            <h3 class="bonus-name">Guia de Rótulo: Informações Obrigatórias</h3>
-            <p class="bonus-desc">Todas as informações que a legislação exige no rótulo do seu produto artesanal, atualizadas. Pra você não errar, não tomar multa e não perder lote por falta de um dado obrigatório.</p>
-            <span class="bonus-value"><s>R$ 47</s> GRÁTIS</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px" class="reveal">
+          <div style="background:rgba(181,86,58,0.06);border:1px solid rgba(181,86,58,0.12);border-radius:12px;padding:16px;text-align:center">
+            <img src="bonus-rotulo.jpg" alt="Guia de Rótulo" style="width:100%;border-radius:8px;margin-bottom:10px" loading="lazy">
+            <p style="font-weight:700;font-size:0.85rem;color:var(--heading)">Guia de Rótulo</p>
+            <p style="font-size:0.75rem;color:var(--text-3)">Informações obrigatórias</p>
           </div>
-
-          <div class="bonus-card reveal reveal-d1">
-            <span class="bonus-badge">Bônus 2</span>
-            <img class="bonus-img" src="bonus-fornecedores.jpg" alt="Lista de Fornecedores" loading="lazy">
-            <h3 class="bonus-name">Lista de Fornecedores Verificados</h3>
-            <p class="bonus-desc">Embalagens, insumos, matérias-primas, já testados e aprovados. Pula semanas de pesquisa e ligação perdida.</p>
-            <span class="bonus-value"><s>R$ 47</s> GRÁTIS</span>
+          <div style="background:rgba(181,86,58,0.06);border:1px solid rgba(181,86,58,0.12);border-radius:12px;padding:16px;text-align:center">
+            <img src="bonus-fornecedores.jpg" alt="Lista de Fornecedores" style="width:100%;border-radius:8px;margin-bottom:10px" loading="lazy">
+            <p style="font-weight:700;font-size:0.85rem;color:var(--heading)">Fornecedores Verificados</p>
+            <p style="font-size:0.75rem;color:var(--text-3)">Lista exclusiva</p>
           </div>
-
-          <div class="bonus-card reveal reveal-d2">
-            <span class="bonus-badge">Bônus 3</span>
-            <img class="bonus-img" src="bonus-checklist.jpg" alt="Checklist 7 Ajustes" loading="lazy">
-            <h3 class="bonus-name">Checklist: 7 Ajustes que Valorizam Seu Produto Hoje</h3>
-            <p class="bonus-desc">Sem investimento, sem mudar receita. Sete ajustes que você aplica esta semana e que mudam a percepção de valor na próxima venda.</p>
-            <span class="bonus-value">NOVO · GRÁTIS</span>
+          <div style="background:rgba(181,86,58,0.06);border:1px solid rgba(181,86,58,0.12);border-radius:12px;padding:16px;text-align:center">
+            <img src="bonus-checklist.jpg" alt="Checklist 7 Ajustes" style="width:100%;border-radius:8px;margin-bottom:10px" loading="lazy">
+            <p style="font-weight:700;font-size:0.85rem;color:var(--heading)">7 Ajustes Imediatos</p>
+            <p style="font-size:0.75rem;color:var(--text-3)">Checklist prático</p>
           </div>
         </div>
-
-        <p class="section-transition reveal">Mas quem escreveu isso? <strong>Alguém que já esteve exatamente onde você está agora.</strong></p>
       </div>
     </section>
 
     <!-- CREDIBILIDADE -->
-    <section class="section" id="credibilidade">
-      <div class="container">
-        <div class="section-eyebrow reveal"><span class="num">05</span> Credibilidade</div>
-        <h2 class="section-title reveal">Quem escreveu isso já vendeu molho a R$8 <em>achando que tava lucrando.</em></h2>
+    
 
-        <div class="credibilidade-grid reveal">
-          <div class="credibilidade-foto">
-            <img src="gabriel-foto.jpg" alt="Gabriel Petelinkar" loading="lazy">
+    <!-- CREDIBILIDADE -->
+    <section class="section" id="credibilidade" style="padding:40px 24px">
+      <div class="container">
+        <div style="max-width:800px;margin:0 auto;background:linear-gradient(135deg,rgba(181,86,58,0.04),rgba(181,86,58,0.08));border:1px solid rgba(181,86,58,0.12);border-radius:20px;padding:36px;display:flex;gap:28px;align-items:center" class="reveal">
+          
+          <div style="flex:0 0 140px">
+            <img src="gabriel-foto.jpg" alt="Gabriel Petelinkar" loading="lazy" style="width:140px;height:140px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid rgba(181,86,58,0.2);box-shadow:0 4px 20px rgba(61,43,31,0.15)">
           </div>
-          <div class="credibilidade-texto">
-            <p>Gabriel é produtor artesanal. Fundou a Chilliepig, marca própria de molhos, há mais de 12 anos e pagou caro pra aprender o que está neste guia.</p>
-            <p>Errou rótulo e perdeu lote inteiro. Precificou errado e trabalhou de graça por meses. Ouviu "tá caro" de cliente que pagava o triplo no supermercado por um produto pior.</p>
-            <p>Cada erro custou dinheiro, tempo e vontade de continuar. Mas em vez de aceitar, ele foi atrás de entender por que produtos iguais ou piores vendiam mais caro que o dele.</p>
-            <p>Não só com a experiência mas com formação na área, ele é Engenheiro Agrônomo e acompanha o processo desde a matéria prima até o produto final. Além de consultor de agroindústrias, mentor de empreendedores de alimentos artesanais é também jurado do maior prêmio de alimentos artesanais do Brasil.</p>
-            <p><strong>A resposta não estava na receita. Estava na embalagem, na história e no lugar certo pra vender.</strong></p>
+
+          <div style="flex:1">
+            <p style="font-family:var(--heading-font);font-size:1.1rem;font-weight:700;color:var(--heading);margin-bottom:8px">Gabriel Petelinkar</p>
+            <p style="font-size:0.82rem;color:var(--accent);font-weight:600;margin-bottom:12px">Fundador da Chilliepig · Eng. Agrônomo · Mentor de produtores artesanais</p>
+            <p style="font-size:0.88rem;color:var(--text-2);line-height:1.6;margin-bottom:10px">12 anos como produtor artesanal. Errou rótulo, precificou errado, trabalhou de graça. Transformou cada erro em aprendizado e compilou tudo neste guia.</p>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px">
+              <span style="font-size:0.72rem;background:rgba(181,86,58,0.1);color:var(--accent);padding:4px 10px;border-radius:20px;font-weight:600">🏆 Jurado do maior prêmio de alimentos artesanais do Brasil</span>
+              <span style="font-size:0.72rem;background:rgba(181,86,58,0.1);color:var(--accent);padding:4px 10px;border-radius:20px;font-weight:600">🎓 Consultor de agroindústrias</span>
+            </div>
           </div>
         </div>
-
-        <p class="section-transition reveal"><strong>O que custou anos e dinheiro pra ele, você lê em uma tarde.</strong></p>
-        <p class="section-transition reveal" style="border:none; margin-top:8px; padding-top:0;">Tudo isso por menos do que você cobra (ou pelo menos deveria cobrar) num pote de geleia.</p>
+        
+        <p style="text-align:center;font-size:0.88rem;color:var(--text-2);margin-top:16px;font-style:italic" class="reveal"><strong>O que custou anos pra ele, você lê em uma tarde.</strong></p>
       </div>
     </section>
 
     <!-- OFERTA -->
-    <section class="section section--light" id="oferta" style="text-align:center">
+    
+    <section class="section" id="prova-social" style="padding:35px 24px">
+      <div class="container">
+        <!-- PROVA SOCIAL -->
+        <div style="margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto">
+          <h3 style="text-align:center;font-family:var(--heading-font);font-size:1.3rem;color:var(--heading);margin-bottom:16px">O que nossos alunos estão dizendo</h3>
+          
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <!-- Depoimento 1: Amélia -->
+            <div style="background:rgba(181,86,58,0.05);border:1px solid rgba(181,86,58,0.12);border-radius:12px;padding:16px;text-align:center">
+              <img src="depoimento-amelia.jpg" alt="Depoimento Amélia Doces Artesanais" style="width:100%;border-radius:8px;margin-bottom:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08)" loading="lazy">
+              <p style="font-weight:700;font-size:0.9rem;color:var(--heading);margin-bottom:2px">Amélia Doces Artesanais</p>
+              <p style="font-size:0.78rem;color:var(--text-3)">Mirandópolis, SP</p>
+            </div>
+
+            <!-- Depoimento 2: Lumiar -->
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="background:rgba(181,86,58,0.05);border:1px solid rgba(181,86,58,0.12);border-radius:12px;padding:12px;text-align:center;flex:1">
+                <img src="depoimento-lumiar1.jpg" alt="Depoimento Lumiar Cestar" style="width:100%;border-radius:8px;margin-bottom:8px;box-shadow:0 2px 12px rgba(0,0,0,0.08)" loading="lazy">
+              </div>
+              <div style="background:rgba(181,86,58,0.05);border:1px solid rgba(181,86,58,0.12);border-radius:12px;padding:12px;text-align:center;flex:1">
+                <img src="depoimento-lumiar2.jpg" alt="Depoimento Lumiar Cestar" style="width:100%;border-radius:8px;margin-bottom:8px;box-shadow:0 2px 12px rgba(0,0,0,0.08)" loading="lazy">
+                <p style="font-weight:700;font-size:0.9rem;color:var(--heading);margin-bottom:2px">Lumiar Cestar</p>
+                <p style="font-size:0.78rem;color:var(--text-3)">Brasília, DF</p>
+              </div>
+            </div>
+          </div>
+
+          <p style="text-align:center;font-size:0.78rem;color:var(--text-3);margin-top:12px;font-style:italic">Depoimentos reais de alunos do ebook</p>
+        </div>
+      </div>
+    </section>
+
+<section class="section section--light" id="oferta" style="text-align:center">
       <div class="container reveal">
         <div class="section-eyebrow" style="justify-content:center"><span class="num">06</span> Oferta</div>
 
@@ -1758,7 +1724,9 @@
           <p style="font-size:0.78rem;color:var(--text-3);margin-top:8px;font-style:italic">Preço promocional — pode mudar a qualquer momento.</p>
         </div>
 
-        <div style="margin-top:36px">
+        
+
+        <div style="margin-top:20px">
           <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" rel="noopener noreferrer" style="background:#B5563A;color:#FAF5EB;font-size:1rem;padding:18px 36px">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Quero Cobrar o Que Meu Produto Vale
@@ -1768,19 +1736,7 @@
     </section>
 
     <!-- CTA FINAL + DESPEDIDA -->
-    <section class="cta-section" id="cta">
-      <div class="container reveal">
-        <h2 class="cta-title">Seu produto já é incrível.<br><span>Agora o preço precisa contar essa história.</span></h2>
-        <p class="cta-desc">Você pode continuar cobrando barato por um produto que merece mais. Ou pode ler este guia numa tarde e mudar o jeito que o cliente enxerga o que você faz.</p>
-        <p class="cta-desc" style="margin-top:-24px;font-size:0.9rem">Ebook + 3 bônus. Acesso imediato. Lê no celular. Garantia de 7 dias.</p>
-        <div class="cta-price">R$ 57</div>
-        <a href="https://pay.hotmart.com/D105263783H?off=q90ec1wq&checkoutMode=10&bid=1777427478389" class="btn btn-primary" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Quero Cobrar o Que Meu Produto Vale
-        </a>
-        <p class="cta-guarantee">Garantia incondicional de 7 dias. Se não fizer sentido, devolvemos cada centavo.</p>
-      </div>
-    </section>
+    
 
     <!-- FAQ -->
     <section class="section" id="faq">
