@@ -989,9 +989,9 @@
       <div class="hormone-card-body">
         <div class="hc-row"><span class="hc-label">Mecanismo</span><span class="hc-value">Agentes luteolíticos — destroem o corpo lúteo (CL), derrubam a progesterona e permitem o retorno ao cio.</span></div>
         <div class="hc-row"><span class="hc-label">Indicação</span><span class="hc-value">Indução da luteólise para antecipar o retorno ao estro.</span></div>
-        <div class="hc-row"><span class="hc-label">CL Jovem (&lt;5d)</span><span class="hc-value"><strong>DOSE DOBRADA</strong> — dose convencional tem apenas ~20% de resposta. Dose dupla eleva para ~70%.</span></div>
-        <div class="hc-row"><span class="hc-label">CL Maduro (&gt;5d)</span><span class="hc-value">Dose convencional — altamente eficaz.</span></div>
-        <div class="hc-row"><span class="hc-label">Meia dose</span><span class="hc-value">Para contrações uterinas (limpeza de fluido) sem luteólise. Ex: 1,5 mL de Dinoprost.</span></div>
+        <div class="hc-row"><span class="hc-label">CL Jovem (&lt;5d)</span><span class="hc-value"><strong>DOSE DOBRADA</strong> — dose convencional tem apenas ~20% de resposta. Dose dupla eleva para ~70%. <strong>Atenção:</strong> maior risco de cólica e sudorese.</span></div>
+        <div class="hc-row"><span class="hc-label">CL Maduro (&gt;5d)</span><span class="hc-value">Dose convencional (1,0 mL de Dinoprost) — altamente eficaz.</span></div>
+        <div class="hc-row"><span class="hc-label">Meia dose</span><span class="hc-value">Para contrações uterinas (limpeza de fluido) sem luteólise. Ex: 0,5 mL de Dinoprost.</span></div>
         <div class="hc-row"><span class="hc-label">Efeitos</span><span class="hc-value">Dinoprost causa mais efeitos colaterais (sudorese, cólica leve). Sudorese em ≥30% das éguas — indica absorção.</span></div>
         <div class="hc-row"><span class="hc-label">Confirmação</span><span class="hc-value">US 24-36h após: CL menor, mais ecogênico (branco) e formato irregular/triangular.</span></div>
         <div class="hc-row"><span class="hc-label">Armazenamento</span><span class="hc-value"><strong>Refrigerado (2-8°C)</strong>. Exposição ao calor degrada o produto → falha de luteólise.</span></div>
@@ -1003,10 +1003,10 @@
       <div class="hormone-card-body">
         <div class="hc-row"><span class="hc-label">Mecanismo</span><span class="hc-value">Atuam na hipófise, estimulando liberação de LH. A égua precisa de uma <strong>onda de LH longa e sustentada</strong> (diferente da vaca).</span></div>
         <div class="hc-row"><span class="hc-label">Potência</span><span class="hc-value">Deslorelina/Histrelina são <strong>~100x mais potentes</strong> que análogos bovinos (Buserelina).</span></div>
-        <div class="hc-row"><span class="hc-label">Dose</span><span class="hc-value">Deslorelina/Histrelina: dose padrão equina. Buserelina (emergência): <strong>5-10x a dose bovina</strong> (mín. 5 mL).</span></div>
+        <div class="hc-row"><span class="hc-label">Dose</span><span class="hc-value">Deslorelina: <strong>3 mL</strong>. Histrelina: <strong>1 mL</strong>. Buserelina (emergência): <strong>5-10x a dose bovina</strong> (mín. 5 mL).</span></div>
         <div class="hc-row"><span class="hc-label">Ovulação</span><span class="hc-value"><strong>~44 horas</strong> após aplicação.</span></div>
         <div class="hc-row"><span class="hc-label">Vantagem</span><span class="hc-value">Não causa anticorpos — ideal para <strong>uso repetido</strong> em doadoras de embrião.</span></div>
-        <div class="hc-row"><span class="hc-label">Armazenamento</span><span class="hc-value"><strong>Refrigerado (2-8°C)</strong>. Peptídeo sensível ao calor.</span></div>
+        <div class="hc-row"><span class="hc-label">Armazenamento</span><span class="hc-value">Liofilizado: refrigerado, <strong>apenas 3 dias</strong>. <strong>Reconstituído: CONGELAR</strong> — estável por anos.</span></div>
       </div>
     </div>
 
@@ -1028,7 +1028,7 @@
       <div class="hormone-card-body">
         <div class="hc-row"><span class="hc-label">Mecanismo</span><span class="hc-value">Suprime GnRH → bloqueia desenvolvimento folicular, cio e ovulação.</span></div>
         <div class="hc-row"><span class="hc-label">Indicações</span><span class="hc-value">Sincronização de receptoras (T.E.) e supressão de cio em éguas de competição.</span></div>
-        <div class="hc-row"><span class="hc-label">Aplicação</span><span class="hc-value"><strong>Rotacionar locais IM</strong> (pescoço, garupa). Não repetir mesmo local em &lt;15 dias.</span></div>
+        <div class="hc-row"><span class="hc-label">Aplicação</span><span class="hc-value"><strong>Rotacionar locais IM</strong> (pescoço, garupa) — alternar lado direito e esquerdo. Não repetir mesmo local em &lt;15 dias.</span></div>
         <div class="hc-row"><span class="hc-label">Armazenamento</span><span class="hc-value"><strong>TEMPERATURA AMBIENTE — NUNCA REFRIGERAR</strong>. Frio (&lt;15°C) causa cristalização.</span></div>
         <div class="hc-row"><span class="hc-label">Se cristalizar</span><span class="hc-value">Aquecer a 45-50°C (banho-maria ou secador) até ficar límpido. <strong>JAMAIS aplicar cristalizado</strong> → abscessos.</span></div>
       </div>
@@ -1923,8 +1923,14 @@ function clearNote(capId, btn) {
     errorEl.textContent = '';
 
     var isMaster = token.toUpperCase().indexOf('MASTER-') === 0;
-    var query = 'ebook_tokens?token=eq.' + encodeURIComponent(token) + '&active=eq.true&select=id,token,max_devices,devices_used';
-    if (!isMaster) query += '&product_id=eq.' + PRODUCT_ID;
+    if (isMaster) {
+      localStorage.setItem(STORAGE_KEY, token);
+      unlock();
+      btn.disabled = false;
+      btn.innerHTML = '<svg class="icon" style="width:16px;height:16px;vertical-align:-2px;margin-right:6px"><use href="#i-check"/></svg> Acessar Guia';
+      return;
+    }
+    var query = 'ebook_tokens?token=eq.' + encodeURIComponent(token) + '&active=eq.true&select=id,token,max_devices,devices_used&product_id=eq.' + PRODUCT_ID;
     supaFetch(query)
       .then(function(r) { return r.json(); })
       .then(function(data) {
