@@ -956,7 +956,7 @@
     <p>Guia visual para identificar o que você está vendo no ultrassom — da preparação uterina até a formação do corpo lúteo.</p>
 
     <!-- 1. EDEMA UTERINO — Graus -->
-    <h3>Edema Uterino — Graus de Classificação</h3>
+    <h3 id="edema-graus">Edema Uterino — Graus de Classificação</h3>
     <div style="margin:16px 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-card);background:var(--bg-card);">
       <img src="edema-uterino.png" alt="Graus de edema uterino" style="width:100%;display:block;">
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border-light);">
@@ -1014,7 +1014,7 @@
     </div>
 
     <div class="card card-green">
-      <div class="card-title"><svg class="icon icon-sm"><use href="#i-bulb"/></svg> Dica de Palpação</div>
+      <div class="card-title" id="dica-palpacao"><svg class="icon icon-sm"><use href="#i-bulb"/></svg> Dica de Palpação</div>
       <p><strong>Pré-ovulação:</strong> o ovário fica mais <strong>flácido</strong> conforme se aproxima da ovulação, e a égua demonstra mais <strong>sensibilidade à palpação</strong> (ovário dolorido). <strong>Pós-ovulação:</strong> sente-se uma <strong>depressão palpável</strong> na fossa de ovulação — indica ovulação recente (dentro da janela para IA com sêmen refrigerado).</p>
     </div>
 
@@ -1026,7 +1026,7 @@
       <p>Três possibilidades:</p>
       <ol style="margin:8px 0 0 16px;font-size:inherit;line-height:1.7;">
         <li><strong>Edema ainda vai subir</strong> — folículo em crescimento, estrógeno subindo. Volte em 24h para reavaliar.</li>
-        <li><strong style="color:var(--red-600);">Edema já subiu e está descendo</strong> — a égua já liberou LH e vai ovular por conta própria. Você perde a previsibilidade — não é mais uma indução, é uma corrida. (ver Dica de Palpação acima).</li>
+        <li><strong style="color:var(--red-600);">Edema já subiu e está descendo</strong> — a égua já liberou LH e vai ovular por conta própria. Você perde a previsibilidade — não é mais uma indução, é uma corrida. (<a href="#dica-palpacao" style="color:inherit;text-decoration:underline;">ver Dica de Palpação acima</a>).</li>
         <li><strong>Edema nunca subiu</strong> — dissociação folículo/edema. Suspeitar de CL residual bloqueando o estrógeno, ou disfunção ovulatória (obesidade, final da estação).</li>
       </ol>
     </div>
@@ -1157,7 +1157,7 @@
           <tr><td><strong>Tempo p/ ovulação</strong></td><td><strong>32-34h</strong></td><td><strong>36–48h</strong></td></tr>
           <tr><td><strong>Via</strong></td><td><strong>IV</strong> (bula)</td><td><strong>IM</strong></td></tr>
           <tr><td><strong>Vantagem</strong></td><td>Mais rápido. Mais confiável.</td><td>Não cria anticorpos. Custo menor.</td></tr>
-          <tr><td><strong>Limitação</strong></td><td>Refratariedade após uso consecutivo (ver ficha hCG — Cap. 4)</td><td>Maior taxa de falha</td></tr>
+          <tr><td><strong>Limitação</strong></td><td>Refratariedade após uso consecutivo (<a href="#ficha-hcg" style="color:inherit;text-decoration:underline;">ver ficha hCG — Cap. 4</a>)</td><td>Maior taxa de falha</td></tr>
           <tr><td><strong>Caso ideal</strong></td><td>1ª ovulação do ano. Éguas velhas.</td><td>Rotina. Doadoras de embrião.</td></tr>
         </tbody>
       </table>
@@ -1171,7 +1171,7 @@
     <h3>Quando Induzir — Critérios de Entrada</h3>
     <ul class="checklist">
       <li><strong>Folículo ≥ 35 mm</strong> (idealmente ~38 mm)</li>
-      <li><strong>Edema uterino MÁXIMO (grau 3)</strong> — pico de estrógeno <em style="color:var(--text-muted);">(ver graus de edema — Cap. 1)</em></li>
+      <li><strong>Edema uterino MÁXIMO (grau 3)</strong> — pico de estrógeno <a href="#edema-graus" style="color:var(--text-muted);text-decoration:underline;">(ver graus de edema — Cap. 1)</a></li>
     </ul>
 
 
@@ -1193,7 +1193,7 @@
       <li data-step="1"><span class="step-label">Monitorar</span> — US até folículo &gt;35mm + edema máximo</li>
       <li data-step="2"><span class="step-label">Induzir à noite</span> — GnRH às 20h (ovulação em 36–48h) ou hCG às 22h (ovulação em 32–34h)</li>
       <li data-step="3"><span class="step-label">US intensiva</span> — Avaliar 24h após a indução. Conforme se aproxima da ovulação, intensificar a cada 6h</li>
-      <li data-step="4"><span class="step-label">Inseminar</span> — <em>(ver Timing — Cap. 3)</em></li>
+      <li data-step="4"><span class="step-label">Inseminar</span> — <a href="#cap3" style="color:inherit;text-decoration:underline;">ver Timing — Cap. 3</a></li>
     </ol>
 
     <div class="card card-amber">
@@ -1272,7 +1272,7 @@
     </div>
 
     <div class="hormone-card">
-      <div class="hormone-card-header hc-prostaglandins"><svg class="icon" style="width:20px;height:20px;color:#fff"><use href="#i-circle"/></svg> Prostaglandinas (Cloprostenol / Dinoprost)</div>
+      <div class="hormone-card-header hc-prostaglandins" id="ficha-pgf"><svg class="icon" style="width:20px;height:20px;color:#fff"><use href="#i-circle"/></svg> Prostaglandinas (Cloprostenol / Dinoprost)</div>
       <div class="hormone-card-body">
         <div class="hc-row"><span class="hc-label">Mecanismo</span><span class="hc-value">Agentes luteolíticos — promovem a regressão do corpo lúteo (CL), causando queda nos níveis de progesterona e retorno ao estro.</span></div>
         <div class="hc-row"><span class="hc-label">Indicação</span><span class="hc-value">Indução da luteólise para antecipar o retorno ao estro.</span></div>
@@ -1322,7 +1322,7 @@
     </div>
 
     <div class="hormone-card">
-      <div class="hormone-card-header hc-hcg"><svg class="icon" style="width:20px;height:20px;color:#fff"><use href="#i-circle"/></svg> hCG (Gonadotrofina Coriônica Humana)</div>
+      <div class="hormone-card-header hc-hcg" id="ficha-hcg"><svg class="icon" style="width:20px;height:20px;color:#fff"><use href="#i-circle"/></svg> hCG (Gonadotrofina Coriônica Humana)</div>
       <div class="hormone-card-body">
         <div class="hc-row"><span class="hc-label">Mecanismo</span><span class="hc-value">Ação <strong>direta no folículo</strong>, mimetizando o LH. Meia-vida longa (ácido siálico).</span></div>
         <div class="hc-row"><span class="hc-label">Dose</span><span class="hc-value"><strong>1.500–2.500 UI.</strong> A literatura não demonstra diferença de eficácia entre doses nessa faixa. Doses acima de 2.500 UI não trazem benefício adicional e podem fazer downregulation do eixo hipofisário. Na prática de campo, <strong>~1.666 UI</strong> (frasco dividido em 3) tem apresentado bons resultados.</span></div>
@@ -1356,7 +1356,7 @@
     </div>
 
     <div class="hormone-card">
-      <div class="hormone-card-header hc-progesterone"><svg class="icon" style="width:20px;height:20px;color:#fff"><use href="#i-circle"/></svg> Progesterona e Progestágenos (Altrenogest)</div>
+      <div class="hormone-card-header hc-progesterone" id="ficha-progesterona"><svg class="icon" style="width:20px;height:20px;color:#fff"><use href="#i-circle"/></svg> Progesterona e Progestágenos (Altrenogest)</div>
       <div class="hormone-card-body">
         <div class="hc-row"><span class="hc-label">Mecanismo</span><span class="hc-value">Suprime GnRH → bloqueia desenvolvimento folicular, cio e ovulação.</span></div>
         <div class="hc-row"><span class="hc-label">Indicações</span><span class="hc-value">Sincronização de receptoras (T.E.) e supressão de cio em éguas de competição. Existe na forma <strong>oral</strong> (comum fora do Brasil — em países onde se consome carne de cavalo, não se pode usar hormônio injetável). Alguns veterinários importam a versão oral para uso em doadoras que vão para provas, suprimindo comportamento de cio. <em style="color:var(--amber-600);">Nota: o uso de produtos importados sem registro no MAPA é de responsabilidade exclusiva do médico veterinário responsável, sujeito à legislação vigente.</em></span></div>
@@ -1672,7 +1672,7 @@
           <tr><td>Pico de P4</td><td>~6–8 ng/mL em até 24h</td><td>~15 ng/mL em 24h</td></tr>
           <tr><td>Curva</td><td>Sobe rápido, cai rápido</td><td>Sustentada por 7–14 dias</td></tr>
           <tr><td>Necessidade de troca</td><td>Sim — trocar antes do diagnóstico</td><td>Reaplicar a cada 7 ou 14 dias</td></tr>
-          <tr><td>Risco de bloqueio prolongado</td><td>Não</td><td>Sim (ver ficha Progesterona — Cap. 4)</td></tr>
+          <tr><td>Risco de bloqueio prolongado</td><td>Não</td><td>Sim (<a href="#ficha-progesterona" style="color:inherit;text-decoration:underline;">ver ficha Progesterona — Cap. 4</a>)</td></tr>
           <tr><td>Risco de vaginite</td><td>Sim — aplicar Terracam Spray antes da inserção</td><td>—</td></tr>
         </tbody>
       </table>
@@ -1915,9 +1915,9 @@
   </div>
   <div class="chapter-body">
 
-    <details class="faq-item"><summary>Melhor horário para induzir ovulação com sêmen congelado?</summary><div class="faq-answer">Induzir entre 20–22h. A ovulação ocorre durante o horário de trabalho, facilitando o monitoramento por US e o manejo da IA. Ver protocolo no Cap. 2.</div></details>
+    <details class="faq-item"><summary>Melhor horário para induzir ovulação com sêmen congelado?</summary><div class="faq-answer">Induzir entre 20–22h. A ovulação ocorre durante o horário de trabalho, facilitando o monitoramento por US e o manejo da IA. <a href="#cap2" style="color:inherit;text-decoration:underline;">Ver protocolo no Cap. 2.</a></div></details>
     <details class="faq-item"><summary>Induzi e o edema sumiu mas o folículo não cresceu. Falhou?</summary><div class="faq-answer"><strong>Não necessariamente — mas confirme obrigatoriamente com US.</strong> A diminuição do edema é consistente com resposta ao indutor, pois indica queda de estrógeno. Porém, não confirma ovulação. Se o folículo <strong>manteve o tamanho ou cresceu</strong> em relação ao exame anterior, a indução provavelmente falhou. Se <strong>reduziu ou desapareceu</strong>, ovulou. Não interprete o edema sozinho.</div></details>
-    <details class="faq-item"><summary>Cloprostenol realmente funciona em éguas?</summary><div class="faq-answer"><strong>Sim.</strong> Ver ficha completa de Prostaglandinas — Cap. 4 (bloco "Eficácia comparativa").</div></details>
+    <details class="faq-item"><summary>Cloprostenol realmente funciona em éguas?</summary><div class="faq-answer"><strong>Sim.</strong> <a href="#ficha-pgf" style="color:inherit;text-decoration:underline;">Ver ficha completa de Prostaglandinas — Cap. 4</a> (bloco "Eficácia comparativa").</div></details>
     <details class="faq-item"><summary>CL com "buraco preto" no centro é ruim?</summary><div class="faq-answer"><strong>Não.</strong> CLs com cavidade central são comuns e <strong>perfeitamente funcionais</strong>. A luteinização ocorre na periferia. São tão eficientes quanto CLs compactos.</div></details>
 
     <details class="chapter-notes" data-notes="cap8">
