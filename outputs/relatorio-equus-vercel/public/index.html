@@ -847,7 +847,7 @@
     <svg class="icon" style="width:18px;height:18px"><use href="#i-arrow-down"/></svg>
     <span>Deslize para navegar</span>
   </div>
-  <span class="version">v2.0 — 2026</span>
+  <span class="version">v3.0 — 2026</span>
 </div>
 
 <!-- === NAV === -->
@@ -1419,7 +1419,7 @@
             <li>Após a inserção, lubrificar a luva de palpação e realizar <strong>palpação transretal para retirar o ar</strong></li>
           </ol>
         </div>
-        <div class="hc-row"><span class="hc-label">Implante × P4-300</span><span class="hc-value">O implante atinge ~<strong>6 ng/mL</strong> de P4 em 24h. A P4-300 atinge ~<strong>15 ng/mL</strong> no mesmo período. P4 abaixo de 6 ng/mL é <strong>risco para gestação</strong> — considerar ao escolher a via de suplementação.</span></div>
+        <div class="hc-row"><span class="hc-label">Implante × P4-300</span><span class="hc-value">O implante atinge ~<strong>6–8 ng/mL</strong> de P4 em 24h. A P4-300 atinge ~<strong>15 ng/mL</strong> no mesmo período. P4 abaixo de 6 ng/mL é <strong>risco para gestação</strong> — considerar ao escolher a via de suplementação.</span></div>
         <div class="hc-row"><span class="hc-label">P4-300 × Altrenogest × Implante</span><span class="hc-value">Se a receptora preparada com <strong>P4-300 não for utilizada</strong> (doadora sem embrião), a égua pode ficar ~40 dias sem ciclar. <strong>Altrenogest e implante não causam esse bloqueio prolongado</strong> — por isso são preferidos para sincronização de receptoras.</span></div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:12px 0 0;">
           <div style="text-align:center;">
@@ -1497,7 +1497,8 @@
 
     <div class="card card-green">
       <div class="card-title"><svg class="icon icon-sm"><use href="#i-bulb"/></svg> REGRA DE OURO</div>
-      <p><strong>Peptídeos</strong> (PGF, GnRH, Ocitocina, hCG) → <strong>GELADEIRA</strong><br>
+      <p><strong>Peptídeos</strong> (PGF, GnRH, Ocitocina) → <strong>GELADEIRA</strong><br>
+      <strong>hCG reconstituído</strong> → <strong>CONGELADOR</strong> (apenas 3 dias na geladeira)<br>
       <strong>Esteroides</strong> (Progesterona, Estrógeno) → <strong>TEMPERATURA AMBIENTE</strong></p>
     </div>
 
@@ -1507,7 +1508,7 @@
         <thead><tr><th>Hormônio</th><th>Dose</th><th>Via</th><th>Observação</th></tr></thead>
         <tbody>
           <tr><td><strong>PGF2α</strong></td><td>1,0 mL (convencional)</td><td>IM</td><td>CL &gt;5d. Meia dose (0,5 mL) p/ limpeza uterina</td></tr>
-          <tr><td><strong>PGF2α</strong> (CL jovem)</td><td>2 doses em dias diferentes ou dose dobrada</td><td>IM</td><td>CL &lt;5d (~70% vs ~20%)</td></tr>
+          <tr><td><strong>PGF2α</strong> (CL jovem)</td><td>2 doses em dias consecutivos</td><td>IM</td><td>CL &lt;5d (~70% vs ~20%)</td></tr>
           <tr><td><strong>Deslorelina</strong></td><td>1,5 mg (3 mL)</td><td>IM</td><td>Ovulação em 36–48h</td></tr>
           <tr><td><strong>Histrelina</strong></td><td>250 µg (1 mL)</td><td>IM</td><td>Ovulação em 36–48h</td></tr>
           <tr><td><strong>hCG</strong></td><td>1.500–2.500 UI</td><td>IV</td><td>Ovulação em 32–34h. Fracionamento: ~1.666 UI por seringa</td></tr>
@@ -1640,7 +1641,7 @@
         <tbody>
           <tr><td>Cíclica — CL + folículo ≥35 mm</td><td>PGF2α → aguardar ovulação da doadora → induzir</td><td><strong>Caso 4</strong></td></tr>
           <tr><td>Cíclica — CL + folículo ~14 mm</td><td>PGF2α → monitorar crescimento folicular</td><td><strong>Caso 6</strong></td></tr>
-          <tr><td>Cíclica — sem CL, folículo crescendo</td><td>Monitorar → induzir no momento certo</td><td><strong>Caso 8</strong></td></tr>
+          <tr><td>Cíclica — folículo pronto mas "atrasado" (D5+)</td><td>Indutor + P4 simultâneos</td><td><strong>Caso 8</strong></td></tr>
           <tr><td>Acíclica (sem folículo)</td><td>Protocolo completo E2 + P4</td><td><strong>Caso 5</strong></td></tr>
           <tr><td>Formou FAH</td><td>P4 exógena a partir do D0 estimado</td><td><strong>Caso 7</strong></td></tr>
           <tr><td>Ciclante com CL ativo — timing não funciona</td><td>Protocolo dia a dia — ver seção abaixo</td><td>—</td></tr>
@@ -2264,7 +2265,7 @@ function clearNote(capId, btn) {
 
 // Load saved notes on init
 (function() {
-  for (var i = 1; i <= 7; i++) {
+  for (var i = 1; i <= 8; i++) {
     var capId = 'cap' + i;
     var saved = localStorage.getItem('guia-note-' + capId);
     if (saved) {
